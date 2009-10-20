@@ -453,23 +453,19 @@ class StreamConverter(AbstractConverter):
         """
         n_pages = self.get_page_count()
         pages = range(0, n_pages)
-        print "initial pages =", pages # XXX: DEBUG
 
         # Check for missing pages
-        print n_pages % 4
         if (n_pages % 4) == 0:
             n_missing_pages = 0
         else:
             #n_missing_pages = (4 - (n_pages % 4)) / self.get_pages_in_sheet()
             n_missing_pages = 4 - (n_pages % 4)
-            # si le nombre de pages n'est pas divisible par 4,
             # XXX: afficher un warning (autre callback ?)
-        print "n_missing_pages =", n_missing_pages
+            # si le nombre de pages n'est pas divisible par 4 ?
 
         # Add reference to the missing empty pages to the pages sequence
         for missing_page in range(0, n_missing_pages):
             pages.append(None)
-        print "pages after adding blank pages =", pages # XXX: DEBUG
 
         # XXX: Document this
         def append_and_copy(list, pages):
@@ -488,7 +484,6 @@ class StreamConverter(AbstractConverter):
             append_and_copy(sequence, [pages.pop(), pages.pop(0)])
             append_and_copy(sequence, [pages.pop(0), pages.pop()])
 
-        print "sequence =", sequence # XXX: DEBUG
         return sequence
 
     def __get_sequence_for_linearize(self, booklet=True):
