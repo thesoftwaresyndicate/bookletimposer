@@ -119,7 +119,6 @@ class AbstractConverter(object):
                  conversion_type=BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
-                 orientation=PORTRAIT,
                  copy_pages=False):
         """
         XXX: Documentation
@@ -132,7 +131,6 @@ class AbstractConverter(object):
         self.set_conversion_type(conversion_type)
         self.set_layout(layout)
         self.set_output_format(format)
-        self.__set_output_orientation(orientation)
         self.set_copy_pages(copy_pages)
 
         def default_progress_callback(msg, prog):
@@ -363,14 +361,13 @@ class StreamConverter(AbstractConverter):
                  conversion_type=BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
-                 orientation=PORTRAIT,
                  copy_pages=False):
         """
         XXX: documentation
         """
 
         AbstractConverter.__init__(self, conversion_type, layout, format, 
-                                   orientation, copy_pages)
+                                   copy_pages)
 
         
 
@@ -606,7 +603,6 @@ class FileConverter(StreamConverter):
                  conversion_type=BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
-                 orientation=PORTRAIT,
                  copy_pages=False):
         
         # outfile_name is set if provided
@@ -623,8 +619,7 @@ class FileConverter(StreamConverter):
         self.input_stream = open(self.get_infile_name(), 'rb')
         self.output_stream = open(self.get_outfile_name(), 'wb')
         StreamConverter.__init__(self, self.input_stream, self.output_stream,
-                                 conversion_type, layout, format, orientation,
-                                 copy_pages)
+                                 conversion_type, layout, format, copy_pages)
 
     def __del__(self):
         """
@@ -681,58 +676,53 @@ def bookletize_on_file(input_file,
                        output_file=None,
                        layout='2x1',
                        format='A4',
-                       orientation='PORTRAIT',
                        copy_pages=False):
     """
     XXX: Doc
     """
     FileConverter(input_file, output_file, BOOKLETIZE, layout, format,
-                  orientation, copy_pages).run()
+                  copy_pages).run()
 
 def linearize_on_stream(input_stream, 
                         output_stream,
                         layout='2x1',
                         format='A4',
-                        orientation='PORTRAIT',
                         copy_pages=False):
     """
     XXX: Doc
     """
     StreamConverter(input_stream, output_stream, LINEARIZE, layout,
-                    format, orientation,copy_pages).run()
+                    format, copy_pages).run()
 
 def linearize_on_file(input_file, 
                       output_file=None,
                       layout='2x1',
                       format='A4',
-                      orientation='PORTRAIT',
                       copy_pages=False):
     """
     XXX: Doc
     """
     FileConverter(input_file, output_file, LINEARIZE, layout, format,
-                  orientation, copy_pages).run()
+                  copy_pages).run()
 
 def reduce_on_stream(input_stream, 
                      output_stream,
                      layout='2x1',
                      format='A4',
-                     orientation='PORTRAIT',
                      copy_pages=False):
     """
     XXX: Doc
     """
     StreamConverter(input_stream, output_stream, REDUCE, layout, format, 
-                    orientation, copy_pages).run()
+                    copy_pages).run()
 
 def reduce_on_file(input_file, 
                    output_file=None,
                    layout='2x1',
                    format='A4',
-                   orientation='PORTRAIT',
                    copy_pages=False):
     """
     XXX: Doc
     """
     FileConverter(input_file, output_file, REDUCE, layout, format,
-                  orientation, copy_pages).run()
+                  copy_pages).run()
