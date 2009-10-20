@@ -132,7 +132,7 @@ class AbstractConverter(object):
         self.set_conversion_type(conversion_type)
         self.set_layout(layout)
         self.set_output_format(format)
-        self.set_output_orientation(orientation)
+        self.__set_output_orientation(orientation)
         self.set_copy_pages(copy_pages)
 
         def default_progress_callback(msg, prog):
@@ -291,7 +291,7 @@ class AbstractConverter(object):
         return float(self.get_pages_in_width() * self.get_output_width()) / \
             self.get_width()
 
-    def set_output_orientation(self, output_orientation):
+    def __set_output_orientation(self, output_orientation):
         output_orientation = bool(output_orientation)
 
         w = self.get_output_width()
@@ -302,7 +302,7 @@ class AbstractConverter(object):
             self.set_output_height(w)
             self.set_output_width(h)
 
-    def get_output_orientation(self):
+    def __get_output_orientation(self):
         if self.get_output_height() > self.get_output_width():
             return PORTRAIT
         elif self.get_output_height() < self.get_output_width():
@@ -410,24 +410,24 @@ class StreamConverter(AbstractConverter):
         """
         if cmp(self.get_pages_in_width(), self.get_pages_in_height()):
             if self.get_orientation() == PORTRAIT:
-                if self.get_output_orientation() == PORTRAIT:
-                    self.set_output_orientation(LANDSCAPE)
+                if self.__get_output_orientation() == PORTRAIT:
+                    self.__set_output_orientation(LANDSCAPE)
             else: #if self.get_orientation() == LANDSCAPE:
                 raise MismachingOrientationsError("2X x X")
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
             if self.get_orientation() == LANDSCAPE:
-                if self.get_output_orientation() == LANDSCAPE:
-                    self.set_output_orientation(PORTRAIT)
+                if self.__get_output_orientation() == LANDSCAPE:
+                    self.__set_output_orientation(PORTRAIT)
             else:
                 # XXX: Localized error message
                 raise MismachingOrientationsError("X x 2X")
         else:
             if self.get_orientation() == LANDSCAPE:
-                if self.get_output_orientation() == PORTRAIT:
-                    self.set_output_orientation(LANDSCAPE)
+                if self.__get_output_orientation() == PORTRAIT:
+                    self.__set_output_orientation(LANDSCAPE)
             else:
-                if self.get_output_orientation() == LANDSCAPE:
-                    self.set_output_orientation(PORTRAIT)
+                if self.__get_output_orientation() == LANDSCAPE:
+                    self.__set_output_orientation(PORTRAIT)
 
     def __fix_page_orientation_for_booklet(self):
         """
