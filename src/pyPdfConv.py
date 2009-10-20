@@ -145,24 +145,16 @@ class AbstractConverter(object):
     # ===================
 
     def set_output_height(self, height):
-        # XXX: verify that height > width
         self.output_height = int(height)
 
     def get_output_height(self):
         return self.output_height
 
     def set_output_width(self, width):
-        # XXX: verify that height > width
         self.output_width = int(width)
 
     def get_output_width(self):
         return self.output_width
-
-    def set_output_orientation(self, output_orientation):
-        self.output_orientation = bool(output_orientation)
-
-    def get_output_orientation(self):
-        return self.output_orientation
 
     def set_pages_in_width(self, num):
         self.pages_in_width = int(num)
@@ -298,6 +290,26 @@ class AbstractConverter(object):
         """
         return float(self.get_pages_in_width() * self.get_output_width()) / \
             self.get_width()
+
+    def set_output_orientation(self, output_orientation):
+        output_orientation = bool(output_orientation)
+
+        w = self.get_output_width()
+        h = self.get_output_height()
+
+        if (output_orientation == PORTRAIT and w > h) or \
+           (output_orientation == LANDSCAPE and h > w):
+            self.set_output_height(w)
+            self.set_output_width(h)
+
+    def get_output_orientation(self):
+        if self.get_output_height() > self.get_output_width():
+            return PORTRAIT
+        elif self.get_output_height() < self.get_output_width():
+            return LANDSCAPE
+        else:
+            #XXX: is square
+            return None
 
     # CONVERSION FUNCTIONS
     # ====================
