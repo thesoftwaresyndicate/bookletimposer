@@ -30,8 +30,20 @@
 #
 ########################################################################
 
-# IMPORT REQUIRED MODULES
-# =======================
+"""
+Converts PDF documents between different page layouts.
+
+This module enables to:
+ - convert linear (page by page) PDF documents to booklets;
+ - revert booklets to linear documents;
+ - reduce multiple input PDF pages and put them on one single output page.
+
+The `StreamConverter` class works on StreamIO, while the `FileConverter`
+class works on files.
+
+Some convenience functions are also provided.
+"""
+# XXX: File should be ASCII
 
 # XXX gruge de dev
 if True:
