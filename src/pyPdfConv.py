@@ -814,6 +814,11 @@ class FileConverter(StreamConverter):
                           to fill the corresponding output page or not (see
                           set_copy_pages).
         """
+        # sets [input, output]_stream to None so we can test their presence
+        # in __del__
+        self.input_stream = None
+        self.output_stream = None
+
         # outfile_name is set if provided
         if outfile_name:
             self.__set_outfile_name(outfile_name)
@@ -831,17 +836,18 @@ class FileConverter(StreamConverter):
                                  conversion_type, layout, format, copy_pages)
 
     def __del__(self):
-        try:
-            self.input_stream.close()
-        except IOError:
-            # XXX: Do something better
-            pass
-
-        try:
-            self.output_stream.close()
-        except IOError:
-            # XXX: Do something better
-            pass
+        if self.input_stream:
+            try:
+                self.input_stream.close()
+            except IOError:
+                # XXX: Do something better
+                pass
+        if self.output_stream:
+            try:
+                self.output_stream.close()
+            except IOError:
+                # XXX: Do something better
+                pass
 
 
     # GETTERS AND SETTERS SECTION
