@@ -816,13 +816,13 @@ class FileConverter(StreamConverter):
         """
         # outfile_name is set if provided
         if outfile_name:
-            self._set_outfile_name(outfile_name)
+            self.__set_outfile_name(outfile_name)
         else:
             self.outfile_name = None
           
         # Then infile_nameis set, so if outfile_name was not provided we
         # can create it from infile_name
-        self._set_infile_name(infile_name)
+        self.__set_infile_name(infile_name)
 
         # Now initialize a streamConverter
         self.input_stream = open(self.get_infile_name(), 'rb')
@@ -847,7 +847,7 @@ class FileConverter(StreamConverter):
     # GETTERS AND SETTERS SECTION
     # ===========================
 
-    def _set_infile_name(self, name):
+    def __set_infile_name(self, name):
         self.infile_name = name
 
         if not self.outfile_name:
@@ -865,7 +865,7 @@ class FileConverter(StreamConverter):
         """
         return self.infile_name
 
-    def _set_outfile_name(self, name):
+    def __set_outfile_name(self, name):
         self.outfile_name = name
 
     def get_outfile_name(self):
