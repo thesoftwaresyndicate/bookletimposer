@@ -262,8 +262,13 @@ class AbstractConverter(object):
         Returns the page format of the input PDF file (eg. A4)
 
         """
+        width, height = self.get_size()
+        if self.get_orientation() == LANDSCAPE:
+            size = height, width
+        else:
+            size = width, height
         for k in self.page_formats.keys():
-            if self.page_formats[k] == self.get_size():
+            if self.page_formats[k] == size:
                 return k
 
     #@abstractmetod
