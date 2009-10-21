@@ -125,12 +125,12 @@ class AbstractConverter(object):
 
     It is an abstract class, with some abstract functions which should be
     overriden :
-     - get_input_height
-     - get_input_width
-     - get_page_count
-     - bookletize
-     - linearize
-     - reduce
+      - get_input_height
+      - get_input_width
+      - get_page_count
+      - bookletize
+      - linearize
+      - reduce
     """
 
     page_formats = {
@@ -149,14 +149,16 @@ class AbstractConverter(object):
         """
         Create an AbstractConverter instance.
 
-        @param conversion_type The type of the conversion that will be performed
-                               when caling run() (see set_converston_type).
-        @param layout The layout of input pages on one output page (see
-                      set_layout).
-        @param format The format of the output paper (see set_output_format).
-        @param copy_pages Wether the same group of input pages shoud be copied
-                          to fill the corresponding output page or not (see
-                          set_copy_pages).
+        :Parameters:
+          - `conversion_type`: The type of the conversion that will be
+            performed when caling run() (see set_converston_type).
+          - `layout`: The layout of input pages on one output page
+            (see set_layout).
+          - `format`: The format of the output paper (see
+            set_output_format).
+          - `copy_pages`: Wether the same group of input pages
+            shoud be copied to fill the corresponding output page or not
+            (see set_copy_pages).
         """
         self.conversion_type = None
         self.layout = None
@@ -180,7 +182,9 @@ class AbstractConverter(object):
         """
         Set the height of the output page.
 
-        @param height The height of the output page in defalut user space units.
+        :Parameters:
+          - `height`: The height of the output page in defalut user
+            space units.
         """
         self.__output_height = int(height)
 
@@ -188,7 +192,8 @@ class AbstractConverter(object):
         """
         Get the height of the output page.
 
-        @return The height of the output page in defalut user space units.
+        :Returns:
+            The height of the output page in defalut user space units.
         """
         return self.__output_height
 
@@ -196,7 +201,7 @@ class AbstractConverter(object):
         """
         Set the width of the output page.
 
-        @param width The height of the output page in defalut user space units.
+          - `width`: The height of the output page in defalut user space units.
         """
         self.__output_width = int(width)
 
@@ -204,7 +209,8 @@ class AbstractConverter(object):
         """
         Get the width of the output page.
 
-        @return The width of the output page in defalut user space units.
+        :Returns:
+            The width of the output page in defalut user space units.
         """
         return self.__output_width
 
@@ -212,7 +218,8 @@ class AbstractConverter(object):
         """
         Set the number of input pages to put in the width on one output page.
 
-        @param num An integer representing the number of pages in width.
+        :Parameters:
+          - `num`: An integer representing the number of pages in width.
         """
         self.__pages_in_width = int(num)
 
@@ -220,7 +227,8 @@ class AbstractConverter(object):
         """
         Get the number of input pages to put in the width on one output page.
 
-        @return An integer representing the number of pages in width.
+        :Returns:
+            An integer representing the number of pages in width.
         """
         return self.__pages_in_width
 
@@ -228,7 +236,8 @@ class AbstractConverter(object):
         """
         Set the number of input pages to put in the height on one output page.
 
-        @param num An integer representing the number of pages in height.
+        :Parameters:
+          - `num`: An integer representing the number of pages in height.
         """
         self.__pages_in_height = int(num)
 
@@ -236,7 +245,8 @@ class AbstractConverter(object):
         """
         Get the number of input pages to put in the height on one output page.
 
-        @return An integer representing the number of pages in height.
+        :Returns:
+            An integer representing the number of pages in height.
         """
         return self.__pages_in_height
 
@@ -244,7 +254,8 @@ class AbstractConverter(object):
         """
         Set conversion that will be performed when caling run().
 
-        @param type A constant among BOOKLETIZE, LINEARIZE, REDUCE.
+        :Parameters:
+          - `type`: A constant among BOOKLETIZE, LINEARIZE, REDUCE.
         """
         assert(type == BOOKLETIZE or type == LINEARIZE or type == REDUCE)
         self.__conversion_type = type
@@ -253,7 +264,8 @@ class AbstractConverter(object):
         """
         Get conversion that will be performed when caling run().
 
-        @return A constant among BOOKLETIZE, LINEARIZE, REDUCE.
+        :Returns:
+            A constant among BOOKLETIZE, LINEARIZE, REDUCE.
         """
         return self.__conversion_type
 
@@ -262,9 +274,9 @@ class AbstractConverter(object):
         Set wether the same group of input pages shoud be copied to fill the
         corresponding output page or not.
 
-        @param copy_page True to get copies of the same group of input page
-                         on one output page. False to get diffrent groups of
-                         input pages on one output page.
+          - `copy_page`: True to get copies of the same group of input page
+            on one output page. False to get diffrent groups of
+            input pages on one output page.
         """
         self.__copy_pages = bool(copy_pages)
 
@@ -273,23 +285,25 @@ class AbstractConverter(object):
         Get wether the same group of input pages will be copied to fill the
         corresponding output page or not.
 
-        @return True if copies of the same group of input page will get
-                copied on one output page. False if diffrent groups of
-                input pages will go on one output page.
+        :Returns:
+            True if copies of the same group of input page will get
+            copied on one output page. False if diffrent groups of
+            input pages will go on one output page.
         """
         return self.__copy_pages
 
     def set_progress_callback(self, progress_callback):
         """
-	Register a progress callback function.
+        Register a progress callback function.
 
         Register a callback function that will be called to inform on the
         progress of the conversion.
-        
-        @param progress_callback The callback function which is called to
-                                 return the conversion progress. Its signature
-                                 must be : a string for the progress message;
-                                 a number in the range [0, 1] for the progress.
+
+        :Parameters:
+          - `progress_callback`: The callback function which is called to
+            return the conversion progress. Its signature
+            must be : a string for the progress message;
+            a number in the range [0, 1] for the progress.
         """
         # XXX: Fix this check
         assert(isinstance(progress_callback, type(lambda x: x)))
@@ -301,9 +315,10 @@ class AbstractConverter(object):
 
         Get the callback function that will be called to inform on the
         progress of the conversion.
-        
-        @return progress_callback The callback function which is called to
-                                  return the conversion progress.
+
+        :Returns:
+            The callback function which is called to
+            return the conversion progress.
         """
         return self.__progress_callback
 
@@ -313,8 +328,9 @@ class AbstractConverter(object):
         """
         Return the page size of the input document.
 
-        @return A tuple (width, height) representing the page size of
-                the input document expressed in default user space units.
+        :Returns:
+            A tuple (width, height) representing the page size of
+            the input document expressed in default user space units.
         """
         return (self.get_input_width(), self.get_input_height())
 
@@ -323,8 +339,9 @@ class AbstractConverter(object):
         """
         Return the page height of the input document.
 
-        @return The page height of the input document expressed in default
-                user space units.
+        :Returns:
+            The page height of the input document expressed in default
+            user space units.
         """
         pass
 
@@ -333,8 +350,9 @@ class AbstractConverter(object):
         """
         Return the page width of the input document.
 
-        @return The page width of the input document expressed in default
-                user space units.
+        :Returns:
+            The page width of the input document expressed in default
+            user space units.
         """
         pass
 
@@ -342,7 +360,8 @@ class AbstractConverter(object):
         """
         Return the page orientation of the input document.
 
-        @return A constant among PORTRAIT, LANDSCAPE or None (if square paper).
+        :Returns:
+            A constant among PORTRAIT, LANDSCAPE or None (if square paper).
         """
         if self.get_input_height() > self.get_input_width():
             return PORTRAIT
@@ -356,10 +375,11 @@ class AbstractConverter(object):
         """
         Set the layout of input pages on one output page.
 
-        @param layout A string of the form WxH, where W is the number of input
-                      pages to put on the width of the output page and H is
-                      the number of input pages to put in the height of an
-                      output page.
+        :Parameters:
+          - `layout`: A string of the form WxH, where W is the number of input
+            pages to put on the width of the output page and H is
+            the number of input pages to put in the height of an
+            output page.
         """
         pages_in_width, pages_in_height = layout.split('x')
         self.set_pages_in_width(int(pages_in_width))
@@ -369,9 +389,10 @@ class AbstractConverter(object):
         """
         Return the layout of input pages on one output page.
 
-        @return A string of the form WxH, where W is the number of input pages
-                to put on the width of the output page and H is the number of
-                input pages to put in the height of an output page.
+        :Returns:
+            A string of the form WxH, where W is the number of input pages
+            to put on the width of the output page and H is the number of
+            input pages to put in the height of an output page.
         """
         return str(self.pages_in_width) + 'x' + str(self.pages_in_height)
 
@@ -379,8 +400,9 @@ class AbstractConverter(object):
         """
         Calculate the number of input page that will be put on one output page.
 
-        @return An integer representing the number of input pages on one
-                output page.
+        :Returns:
+            An integer representing the number of input pages on one
+            output page.
         """
         return self.get_pages_in_width() * self.get_pages_in_height()
 
@@ -388,8 +410,9 @@ class AbstractConverter(object):
         """
         Set the format of the output paper.
 
-        @param format A string representing name ot the the desired paper
-                      format, among the keys of page_formats (e.g. A3, A4, A5).
+        :Parameters:
+          - `format`: A string representing name ot the the desired paper
+            format, among the keys of page_formats (e.g. A3, A4, A5).
         """
         try:
             width, height = AbstractConverter.page_formats[format]
@@ -402,8 +425,9 @@ class AbstractConverter(object):
         """
         Return the format of the output paper.
 
-        @return A string representing the name of the paper format
-                (e.g. A3, A4, A5).
+        :Returns:
+            A string representing the name of the paper format
+            (e.g. A3, A4, A5).
         """
         for output_format in AbstractConverter.page_formats.keys():
             if AbstractPdfConv.page_formats[output_format] == \
@@ -414,8 +438,9 @@ class AbstractConverter(object):
         """
         Return the format of the input paper
 
-        @return A string representing the name of the paper format
-                (e.g. A3, A4, A5).
+        :Returns:
+            A string representing the name of the paper format
+            (e.g. A3, A4, A5).
         """
         width, height = self.get_input_size()
         if self.get_input_orientation() == LANDSCAPE:
@@ -431,7 +456,8 @@ class AbstractConverter(object):
         """
         Return the number of pages of the input document.
 
-        @return The number of pages of the input document.
+        :Returns:
+            The number of pages of the input document.
         """
         pass
 
@@ -439,8 +465,9 @@ class AbstractConverter(object):
         """
         Calculate the reduction factor.
 
-        @return The reduction factor to be applied to an input page to
-                obtain its size on the output page.
+        :Returns:
+            The reduction factor to be applied to an input page to
+            obtain its size on the output page.
         """
         return float(self.get_output_width()) / \
             (self.get_pages_in_width() * self.get_input_width())
@@ -449,8 +476,9 @@ class AbstractConverter(object):
         """
         Calculate the increasing factor.
 
-        @return The increasing factor to be applied to an input page to
-                obtain its size on the output page.
+        :Returns:
+            The increasing factor to be applied to an input page to
+            obtain its size on the output page.
         """
         return float(self.get_pages_in_width() * self.get_output_width()) / \
             self.get_input_width()
@@ -463,8 +491,9 @@ class AbstractConverter(object):
         output paper may be automatically adjusted, even if ti was set
         manually.
 
-        @param output_orientation A constant among PORTRAIT, LANDSCAPE
-                                  or None (if square paper).
+        :Parameters:
+          - `output_orientation`: A constant among PORTRAIT, LANDSCAPE
+            or None (if square paper).
         """
         output_orientation = bool(output_orientation)
 
@@ -484,7 +513,8 @@ class AbstractConverter(object):
         output paper may be automatically adjusted, even if ti was set
         manually.
 
-        @return A constant among PORTRAIT, LANDSCAPE or None (if square paper).
+        :Returns:
+            A constant among PORTRAIT, LANDSCAPE or None (if square paper).
         """
         if self.get_output_height() > self.get_output_width():
             return PORTRAIT
@@ -514,7 +544,7 @@ class AbstractConverter(object):
     #@abstractmethod
     def bookletize(self):
         """
-	Convert a linear document to a booklet.
+        Convert a linear document to a booklet.
 
         Convert a linear document to a booklet, arranging the pages as
         required.
@@ -555,18 +585,19 @@ class StreamConverter(AbstractConverter):
         """
         Create a StreamConverter.
 
-        @param input_stream The file-like object from which tne input PDF
-                            document should be read.
-        @param output_stream The file-like object to which tne output PDF
-                             document should be written.
-        @param conversion_type The type of the conversion that will be performed
-                               when caling run() (see set_converston_type).
-        @param layout The layout of input pages on one output page (see
-                      set_layout).
-        @param format The format of the output paper (see set_output_format).
-        @param copy_pages Wether the same group of input pages shoud be copied
-                          to fill the corresponding output page or not (see
-                          set_copy_pages).
+        :Parameters:
+          - `input_stream`: The file-like object from which tne input PDF
+            document should be read.
+          - `output_stream`: The file-like object to which tne output PDF
+            document should be written.
+          - `conversion_type`: The type of the conversion that will be performed
+            when caling run() (see set_converston_type).
+          - `layout`: The layout of input pages on one output page (see
+            set_layout).
+          - `format`: The format of the output paper (see set_output_format).
+          - `copy_pages`: Wether the same group of input pages shoud be copied
+            to fill the corresponding output page or not (see
+            set_copy_pages).
         """
 
         AbstractConverter.__init__(self, conversion_type, layout, format, 
@@ -596,9 +627,10 @@ class StreamConverter(AbstractConverter):
         """
         Adapt the output page orientation.
 
-        @param cmp A comparator function. Takes: number of pages on one
-                   direction (int), number of pages on the other direction
-                   (int). Must return: the boolean result of the comparaison.
+        :Parameters:
+          - `cmp`: A comparator function. Takes: number of pages on one
+            direction (int), number of pages on the other direction
+            (int). Must return: the boolean result of the comparaison.
         """
         if cmp(self.get_pages_in_width(), self.get_pages_in_height()):
             if self.get_input_orientation() == PORTRAIT:
@@ -813,18 +845,19 @@ class FileConverter(StreamConverter):
         """
         Create a FileConverter.
 
-        @param infile_name The name to the input PDF file.
-        @param outfile_name The name of the file where the output PDF
-                            should de written. If ommited, defaults to the
-                            name of the input PDF postponded by '-conv'.
-        @param conversion_type The type of the conversion that will be performed
-                               when caling run() (see set_converston_type).
-        @param layout The layout of input pages on one output page (see
-                      set_layout).
-        @param format The format of the output paper (see set_output_format).
-        @param copy_pages Wether the same group of input pages shoud be copied
-                          to fill the corresponding output page or not (see
-                          set_copy_pages).
+        :Parameters:
+          - `infile_name`: The name to the input PDF file.
+          - `outfile_name`: The name of the file where the output PDF
+            should de written. If ommited, defaults to the
+            name of the input PDF postponded by '-conv'.
+          - `conversion_type`: The type of the conversion that will be performed
+            when caling run() (see set_converston_type).
+          - `layout`: The layout of input pages on one output page (see
+            set_layout).
+          - `format`: The format of the output paper (see set_output_format).
+          - `copy_pages`: Wether the same group of input pages shoud be copied
+            to fill the corresponding output page or not (see
+            set_copy_pages).
         """
         # sets [input, output]_stream to None so we can test their presence
         # in __del__
@@ -879,7 +912,8 @@ class FileConverter(StreamConverter):
         """
         Get the name of the input PDF file.
 
-        @return The name of the input PDF file.
+        :Returns:
+            The name of the input PDF file.
         """
         return self.__infile_name
 
@@ -890,7 +924,8 @@ class FileConverter(StreamConverter):
         """
         Get the name of the output PDF file.
 
-        @return The name of the output PDF file.
+        :Returns:
+            The name of the output PDF file.
         """
         return self.__outfile_name
 
@@ -912,16 +947,17 @@ def bookletize_on_stream(input_stream,
 
     This is a convenience function around StreamConverter
 
-    @param input_stream The file-like object from which tne input PDF
-                        document should be read.
-    @param output_stream The file-like object to which tne output PDF
-                         document should be written.
-    @param layout The layout of input pages on one output page (see
-                  set_layout).
-    @param format The format of the output paper (see set_output_format).
-    @param copy_pages Wether the same group of input pages shoud be copied
-                      to fill the corresponding output page or not (see
-                      set_copy_pages).
+    :Parameters:
+      - `input_stream`: The file-like object from which tne input PDF
+        document should be read.
+      - `output_stream`: The file-like object to which tne output PDF
+        document should be written.
+      - `layout`: The layout of input pages on one output page (see
+        set_layout).
+      - `output_format`: The format of the output paper (see set_output_format).
+      - `copy_pages`: Wether the same group of input pages shoud be copied
+        to fill the corresponding output page or not (see
+        set_copy_pages).
     """
     StreamConverter(BOOKLETIZE, layout, format, orientation, copy_pages,
                     input_stream, output_stream()).run()
@@ -939,16 +975,17 @@ def bookletize_on_file(input_file,
 
     This is a convenience function around FileConverter
 
-    @param infile_name The name to the input PDF file.
-    @param outfile_name The name of the file where the output PDF
-                        should de written. If ommited, defaults to the
-                        name of the input PDF postponded by '-conv'.
-    @param layout The layout of input pages on one output page (see
-                  set_layout).
-    @param format The format of the output paper (see set_output_format).
-    @param copy_pages Wether the same group of input pages shoud be copied
-                      to fill the corresponding output page or not (see
-                      set_copy_pages).
+    :Parameters:
+      - `input_file`: The name to the input PDF file.
+      - `output_file`: The name of the file where the output PDF
+        should de written. If ommited, defaults to the
+        name of the input PDF postponded by '-conv'.
+      - `layout`: The layout of input pages on one output page (see
+        set_layout).
+      - `format`: The format of the output paper (see set_output_format).
+      - `copy_pages`: Wether the same group of input pages shoud be copied
+        to fill the corresponding output page or not (see
+        set_copy_pages).
     """
     FileConverter(input_file, output_file, BOOKLETIZE, layout, format,
                   copy_pages).run()
@@ -966,16 +1003,17 @@ def linearize_on_stream(input_stream,
 
     This is a convenience function around StreamConverter
 
-    @param input_stream The file-like object from which tne input PDF
-                        document should be read.
-    @param output_stream The file-like object to which tne output PDF
-                         document should be written.
-    @param layout The layout of output pages on one input page (see
-                  set_layout).
-    @param format The format of the output paper (see set_output_format).
-    @param copy_pages Wether the same group of input pages shoud be copied
-                      to fill the corresponding output page or not (see
-                      set_copy_pages).
+    :Parameters:
+      - `input_stream`: The file-like object from which tne input PDF
+        document should be read.
+      - `output_stream`: The file-like object to which tne output PDF
+        document should be written.
+      - `layout`: The layout of output pages on one input page (see
+        set_layout).
+      - `format`: The format of the output paper (see set_output_format).
+      - `copy_pages`: Wether the same group of input pages shoud be copied
+        to fill the corresponding output page or not (see
+        set_copy_pages).
     """
     StreamConverter(input_stream, output_stream, LINEARIZE, layout,
                     format, copy_pages).run()
@@ -993,16 +1031,17 @@ def linearize_on_file(input_file,
 
     This is a convenience function around FileConverter
 
-    @param infile_name The name to the input PDF file.
-    @param outfile_name The name of the file where the output PDF
-                        should de written. If ommited, defaults to the
-                        name of the input PDF postponded by '-conv'.
-    @param layout The layout of input pages on one output page (see
-                  set_layout).
-    @param format The format of the output paper (see set_output_format).
-    @param copy_pages Wether the same group of input pages shoud be copied
-                      to fill the corresponding output page or not (see
-                      set_copy_pages).
+    :Parameters:
+      - `input_file`: The name to the input PDF file.
+      - `output_file`: The name of the file where the output PDF
+        should de written. If ommited, defaults to the
+        name of the input PDF postponded by '-conv'.
+      - `layout`: The layout of input pages on one output page (see
+        set_layout).
+      - `format`: The format of the output paper (see set_output_format).
+      - `copy_pages`: Wether the same group of input pages shoud be copied
+        to fill the corresponding output page or not (see
+        set_copy_pages).
     """
     FileConverter(input_file, output_file, LINEARIZE, layout, format,
                   copy_pages).run()
@@ -1017,16 +1056,17 @@ def reduce_on_stream(input_stream,
 
     This is a convenience function around StreamConverter
 
-    @param input_stream The file-like object from which tne input PDF
-                        document should be read.
-    @param output_stream The file-like object to which tne output PDF
-                         document should be written.
-    @param layout The layout of input pages on one output page (see
-                  set_layout).
-    @param format The format of the output paper (see set_output_format).
-    @param copy_pages Wether the same group of input pages shoud be copied
-                      to fill the corresponding output page or not (see
-                      set_copy_pages).
+    :Parameters:
+      - `input_stream`: The file-like object from which tne input PDF
+        document should be read.
+      - `output_stream`: The file-like object to which tne output PDF
+        document should be written.
+      - `layout`: The layout of input pages on one output page (see
+        set_layout).
+      - `format`: The format of the output paper (see set_output_format).
+      - `copy_pages`: Wether the same group of input pages shoud be copied
+        to fill the corresponding output page or not (see
+        set_copy_pages).
     """
     StreamConverter(input_stream, output_stream, REDUCE, layout, format, 
                     copy_pages).run()
@@ -1041,16 +1081,17 @@ def reduce_on_file(input_file,
 
     This is a convenience function around FileConverter
 
-    @param infile_name The name to the input PDF file.
-    @param outfile_name The name of the file where the output PDF
-                        should de written. If ommited, defaults to the
-                        name of the input PDF postponded by '-conv'.
-    @param layout The layout of input pages on one output page (see
-                  set_layout).
-    @param format The format of the output paper (see set_output_format).
-    @param copy_pages Wether the same group of input pages shoud be copied
-                      to fill the corresponding output page or not (see
-                      set_copy_pages).
+    :Parameters:
+      - `input_file`: The name to the input PDF file.
+      - `output_file`: The name of the file where the output PDF
+        should de written. If ommited, defaults to the
+        name of the input PDF postponded by '-conv'.
+      - `layout`: The layout of input pages on one output page (see
+        set_layout).
+      - `format`: The format of the output paper (see set_output_format).
+      - `copy_pages`: Wether the same group of input pages shoud be copied
+        to fill the corresponding output page or not (see
+        set_copy_pages).
     """
     FileConverter(input_file, output_file, REDUCE, layout, format,
                   copy_pages).run()
