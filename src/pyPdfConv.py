@@ -3,7 +3,7 @@
 
 ########################################################################
 # 
-# PyPdfConv - Utility to convert PDF files between diffrents page layouts
+# pypdfconv - Convert PDF documents between diffrents page layouts
 # Copyright (C) 2008-2009 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
 # 
 # This program is  free software; you can redistribute  it and/or modify
@@ -23,10 +23,10 @@
 
 ########################################################################
 #
-# pyPdfConv.py
+# pypdfconv.py
 #
 # This python module enables to change PDF page layout. It is the backend
-# of pyPdfConv.
+# of pypdfconv.
 #
 ########################################################################
 
@@ -172,7 +172,6 @@ class AbstractConverter(object):
             print "%s (%i%%)" % (msg, prog*100)
 
         self.set_progress_callback(default_progress_callback)
-
 
     # GETTERS AND SETTERS
     # ===================
@@ -893,6 +892,10 @@ class FileConverter(StreamConverter):
         @return The name of the output PDF file.
         """
         return self.outfile_name
+
+
+# Convenience fucntions
+# =====================
 
 def bookletize_on_stream(input_stream, 
                          output_stream,
