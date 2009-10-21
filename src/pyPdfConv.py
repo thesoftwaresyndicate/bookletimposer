@@ -98,7 +98,11 @@ class UnknownFormatError(PyPdfError):
     """
     This exception is raised when the user tries to set an unknown page
     format.
+
+    The attribute "message" contains the problematic format.
     """
+    def __str__(self):
+        _('The page format "%s" is unknown') % message
 
 ########################################################################
 
