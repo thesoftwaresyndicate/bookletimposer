@@ -490,17 +490,21 @@ class StreamConverter(AbstractConverter):
         """
         XXX: Doc
         """
-        # XXX: We assume copy_pages = False
         # XXX: booklet argument is not useful ?
+
+        def append_and_remove_copies(list, pages):
+            sequence.extend(pages)
+            if self.get_copy_pages():
+                for copy in range(self.get_pages_in_sheet() - len(pages)):
+                    sequence.append(None)
+
         if booklet:
             sequence = []
             try :
                 for i in range(0, self.get_page_count() *
                                self.get_pages_in_sheet(), 4):
-                    sequence.append(i/2)
-                    sequence.append(i/2)
-                    sequence.append(i/2+1)
-                    sequence.append(i/2+2)
+                    append_and_remove_copies(sequence, [i / 2, i / 2])
+                    append_and_remove_copies(sequence, [i / 2 + 1, i / 2 + 2])
             except IndexError :
                 # XXX: Print a warning
                 pass
@@ -592,20 +596,21 @@ class StreamConverter(AbstractConverter):
         for input_page in range(0, self.get_page_count()):
             for vert_pos in range(0, self.get_pages_in_height()):
                 for horiz_pos in range(0, self.get_pages_in_width()):
-                    self.progress_callback(
-                        _("extracting page %i") % (output_page + 1),
-                        float(output_page) / len(sequence))
-                    page = outpdf.insertBlankPage(self.get_output_width(),
-                                                  self.get_output_height(),
-                                                  sequence[output_page])
-                    page.mergeScaledTranslatedPage(
-                        self.inpdf.getPage(input_page),
-                        self.get_increasing_factor (), 
-                        - horiz_pos * self.get_output_width(),
-                        (vert_pos - self.get_pages_in_height() + 1) * \
-                            self.get_output_height ()
-                        )
-                    page.compressContentStreams()
+                    if sequence[output_page] is not None:
+                        self.progress_callback(
+                            _("extracting page %i") % (output_page + 1),
+                            float(output_page) / len(sequence))
+                        page = outpdf.insertBlankPage(self.get_output_width(),
+                                                      self.get_output_height(),
+                                                      sequence[output_page])
+                        page.mergeScaledTranslatedPage(
+                            self.inpdf.getPage(input_page),
+                            self.get_increasing_factor (),
+                            - horiz_pos * self.get_output_width(),
+                            (vert_pos - self.get_pages_in_height() + 1) * \
+                                self.get_output_height ()
+                            )
+                        page.compressContentStreams()
                     output_page += 1
         self.__write_output_stream(outpdf)
 
