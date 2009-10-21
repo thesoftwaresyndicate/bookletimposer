@@ -508,6 +508,11 @@ class StreamConverter(AbstractConverter):
             sequence = range(0, npages * self.get_pages_in_sheet())
         return sequence
 
+    def __write_output_stream(self, outpdf):
+        self.progress_callback(_("writing converted file"), 1)
+        outpdf.write(self.output_stream)
+        self.progress_callback(_("done"), 1)
+
     def bookletize(self):
         """
         Converts a linear PDF to a booklet.
@@ -544,9 +549,7 @@ class StreamConverter(AbstractConverter):
                             )
                     current_page += 1
             page.compressContentStreams()
-        self.progress_callback(_("writing converted file"), 1)
-        outpdf.write(self.output_stream)
-        self.progress_callback(_("done"), 1)
+        self.__write_output_stream(outpdf)
 
     def linearize(self, booklet=True):
         """
@@ -580,10 +583,7 @@ class StreamConverter(AbstractConverter):
                         )
                     page.compressContentStreams()
                     output_page += 1
-          
-        self.progress_callback(_("writing converted file..."), 1)
-        outpdf.write(self.output_stream)
-        self.progress_callback(_("done"), 1)
+        self.__write_output_stream(outpdf)
 
 ########################################################################
 
