@@ -201,14 +201,14 @@ class AbstractConverter(object):
 
     # SOME GETTERS THAT CALCULATE THE VALUE THEY RETURN FROM OTHER VALUES
     # ===================================================================
-    def get_size(self):
+    def get_input_size(self):
         """
         Returns the page size of the input PDF file, expressed in default user space units
         """
-        return (self.get_width(), self.get_height())
+        return (self.get_input_width(), self.get_input_height())
 
     #@abstractmetod
-    def get_height(self):
+    def get_input_height(self):
         """
         Returns the height of the input PDF file, expressed in default user space units
 
@@ -216,17 +216,17 @@ class AbstractConverter(object):
         pass
 
     #@abstractmetod
-    def get_width(self):
+    def get_input_width(self):
         """
         Returns the width of the input PDF file, expressed in pts
 
         """
         pass
 
-    def get_orientation(self):
-        if self.get_height() > self.get_width():
+    def get_input_orientation(self):
+        if self.get_input_height() > self.get_input_width():
             return PORTRAIT
-        elif self.get_height() < self.get_width():
+        elif self.get_input_height() < self.get_input_width():
             return LANDSCAPE
         else:
             #XXX: is square
@@ -257,13 +257,13 @@ class AbstractConverter(object):
                 (self.get_output_width, self.get_output_height):
                 return output_format
 
-    def get_page_format(self):
+    def get_input_format(self):
         """
         Returns the page format of the input PDF file (eg. A4)
 
         """
-        width, height = self.get_size()
-        if self.get_orientation() == LANDSCAPE:
+        width, height = self.get_input_size()
+        if self.get_input_orientation() == LANDSCAPE:
             size = height, width
         else:
             size = width, height
@@ -286,7 +286,7 @@ class AbstractConverter(object):
         @return the reduction factor
         """
         return float(self.get_output_width()) / \
-            (self.get_pages_in_width() * self.get_width())
+            (self.get_pages_in_width() * self.get_input_width())
 
     def get_increasing_factor(self):
         """
@@ -295,7 +295,7 @@ class AbstractConverter(object):
         @return the increasing factor
         """
         return float(self.get_pages_in_width() * self.get_output_width()) / \
-            self.get_width()
+            self.get_input_width()
 
     def set_output_orientation(self, output_orientation):
         output_orientation = bool(output_orientation)
@@ -384,7 +384,7 @@ class StreamConverter(AbstractConverter):
 
         self.inpdf = pyPdf.PdfFileReader(input_stream)
 
-    def get_height(self):
+    def get_input_height(self):
         """
         Returns the height of the input PDF file, expressed in default user space units
 
@@ -393,7 +393,7 @@ class StreamConverter(AbstractConverter):
         height = page.mediaBox.getHeight()
         return int(height)
 
-    def get_width(self):
+    def get_input_width(self):
         """
         Returns the width of the 1st page of the input PDF file, expressed in pts
         
@@ -414,20 +414,20 @@ class StreamConverter(AbstractConverter):
         Adapt the output page orientation
         """
         if cmp(self.get_pages_in_width(), self.get_pages_in_height()):
-            if self.get_orientation() == PORTRAIT:
+            if self.get_input_orientation() == PORTRAIT:
                 if self.get_output_orientation() == PORTRAIT:
                     self.set_output_orientation(LANDSCAPE)
-            else: #if self.get_orientation() == LANDSCAPE:
+            else: #if self.get_input_orientation() == LANDSCAPE:
                 raise MismachingOrientationsError(self.get_layout)
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
-            if self.get_orientation() == LANDSCAPE:
+            if self.get_input_orientation() == LANDSCAPE:
                 if self.get_output_orientation() == LANDSCAPE:
                     self.set_output_orientation(PORTRAIT)
             else:
                 # XXX: Localized error message
                 raise MismachingOrientationsError(self.get_layout)
         else:
-            if self.get_orientation() == LANDSCAPE:
+            if self.get_input_orientation() == LANDSCAPE:
                 if self.get_output_orientation() == PORTRAIT:
                     self.set_output_orientation(LANDSCAPE)
             else:
