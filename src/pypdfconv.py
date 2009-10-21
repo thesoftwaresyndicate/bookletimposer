@@ -454,7 +454,7 @@ class AbstractConverter(object):
         return float(self.get_pages_in_width() * self.get_output_width()) / \
             self.get_input_width()
 
-    def set_output_orientation(self, output_orientation):
+    def _set_output_orientation(self, output_orientation):
         """
         Set the orientation of the output paper.
 
@@ -475,7 +475,7 @@ class AbstractConverter(object):
             self.set_output_height(w)
             self.set_output_width(h)
 
-    def get_output_orientation(self):
+    def _get_output_orientation(self):
         """
         Return the orientation of the output paper.
 
@@ -601,24 +601,24 @@ class StreamConverter(AbstractConverter):
         """
         if cmp(self.get_pages_in_width(), self.get_pages_in_height()):
             if self.get_input_orientation() == PORTRAIT:
-                if self.get_output_orientation() == PORTRAIT:
-                    self.set_output_orientation(LANDSCAPE)
+                if self._get_output_orientation() == PORTRAIT:
+                    self._set_output_orientation(LANDSCAPE)
             else: #if self.get_input_orientation() == LANDSCAPE:
                 raise MismachingOrientationsError(self.get_layout)
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
             if self.get_input_orientation() == LANDSCAPE:
-                if self.get_output_orientation() == LANDSCAPE:
-                    self.set_output_orientation(PORTRAIT)
+                if self._get_output_orientation() == LANDSCAPE:
+                    self._set_output_orientation(PORTRAIT)
             else:
                 # XXX: Localized error message
                 raise MismachingOrientationsError(self.get_layout)
         else:
             if self.get_input_orientation() == LANDSCAPE:
-                if self.get_output_orientation() == PORTRAIT:
-                    self.set_output_orientation(LANDSCAPE)
+                if self._get_output_orientation() == PORTRAIT:
+                    self._set_output_orientation(LANDSCAPE)
             else:
-                if self.get_output_orientation() == LANDSCAPE:
-                    self.set_output_orientation(PORTRAIT)
+                if self._get_output_orientation() == LANDSCAPE:
+                    self._set_output_orientation(PORTRAIT)
 
     def __fix_page_orientation_for_booklet(self):
         """
