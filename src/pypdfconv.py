@@ -605,14 +605,14 @@ class StreamConverter(AbstractConverter):
                 if self._get_output_orientation() == PORTRAIT:
                     self._set_output_orientation(LANDSCAPE)
             else: #if self.get_input_orientation() == LANDSCAPE:
-                raise MismachingOrientationsError(self.get_layout)
+                raise MismachingOrientationsError(self.get_layout())
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
             if self.get_input_orientation() == LANDSCAPE:
                 if self._get_output_orientation() == LANDSCAPE:
                     self._set_output_orientation(PORTRAIT)
             else:
                 # XXX: Localized error message
-                raise MismachingOrientationsError(self.get_layout)
+                raise MismachingOrientationsError(self.get_layout())
         else:
             if self.get_input_orientation() == LANDSCAPE:
                 if self._get_output_orientation() == PORTRAIT:
