@@ -297,7 +297,7 @@ class AbstractConverter(object):
 
     def get_progress_callback(self):
         """
-	Get the progress callback function.
+        Get the progress callback function.
 
         Get the callback function that will be called to inform on the
         progress of the conversion.
