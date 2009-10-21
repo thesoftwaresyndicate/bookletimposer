@@ -361,7 +361,7 @@ class AbstractConverter(object):
                       the number of input pages to put in the height of an
                       output page.
         """
-        pages_in_width, pages_in_height = num.split('x')
+        pages_in_width, pages_in_height = layout.split('x')
         self.set_pages_in_width(int(pages_in_width))
         self.set_pages_in_height(int(pages_in_height))
 
