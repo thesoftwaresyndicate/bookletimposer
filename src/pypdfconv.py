@@ -182,7 +182,7 @@ class AbstractConverter(object):
 
         @param height The height of the output page in defalut user space units.
         """
-        self.output_height = int(height)
+        self.__output_height = int(height)
 
     def get_output_height(self):
         """
@@ -190,7 +190,7 @@ class AbstractConverter(object):
 
         @return The height of the output page in defalut user space units.
         """
-        return self.output_height
+        return self.__output_height
 
     def set_output_width(self, width):
         """
@@ -198,7 +198,7 @@ class AbstractConverter(object):
 
         @param width The height of the output page in defalut user space units.
         """
-        self.output_width = int(width)
+        self.__output_width = int(width)
 
     def get_output_width(self):
         """
@@ -206,7 +206,7 @@ class AbstractConverter(object):
 
         @return The width of the output page in defalut user space units.
         """
-        return self.output_width
+        return self.__output_width
 
     def set_pages_in_width(self, num):
         """
@@ -214,7 +214,7 @@ class AbstractConverter(object):
 
         @param num An integer representing the number of pages in width.
         """
-        self.pages_in_width = int(num)
+        self.__pages_in_width = int(num)
 
     def get_pages_in_width(self):
         """
@@ -222,7 +222,7 @@ class AbstractConverter(object):
 
         @return An integer representing the number of pages in width.
         """
-        return self.pages_in_width
+        return self.__pages_in_width
 
     def set_pages_in_height(self, num):
         """
@@ -230,7 +230,7 @@ class AbstractConverter(object):
 
         @param num An integer representing the number of pages in height.
         """
-        self.pages_in_height = int(num)
+        self.__pages_in_height = int(num)
 
     def get_pages_in_height(self):
         """
@@ -238,7 +238,7 @@ class AbstractConverter(object):
 
         @return An integer representing the number of pages in height.
         """
-        return self.pages_in_height
+        return self.__pages_in_height
 
     def set_conversion_type(self, type):
         """
@@ -247,7 +247,7 @@ class AbstractConverter(object):
         @param type A constant among BOOKLETIZE, LINEARIZE, REDUCE.
         """
         assert(type == BOOKLETIZE or type == LINEARIZE or type == REDUCE)
-        self.conversion_type = type
+        self.__conversion_type = type
 
     def get_conversion_type(self):
         """
@@ -255,7 +255,7 @@ class AbstractConverter(object):
 
         @return A constant among BOOKLETIZE, LINEARIZE, REDUCE.
         """
-        return self.conversion_type
+        return self.__conversion_type
 
     def set_copy_pages(self, copy_pages):
         """
@@ -266,7 +266,7 @@ class AbstractConverter(object):
                          on one output page. False to get diffrent groups of
                          input pages on one output page.
         """
-        self.copy_pages = bool(copy_pages)
+        self.__copy_pages = bool(copy_pages)
 
     def get_copy_pages(self):
         """
@@ -277,7 +277,7 @@ class AbstractConverter(object):
                 copied on one output page. False if diffrent groups of
                 input pages will go on one output page.
         """
-        return self.copy_pages
+        return self.__copy_pages
 
     def set_progress_callback(self, progress_callback):
         """
@@ -293,7 +293,7 @@ class AbstractConverter(object):
         """
         # XXX: Fix this check
         assert(isinstance(progress_callback, type(lambda x: x)))
-        self.progress_callback = progress_callback
+        self.__progress_callback = progress_callback
 
     def get_progress_callback(self):
         """
@@ -305,6 +305,7 @@ class AbstractConverter(object):
         @return progress_callback The callback function which is called to
                                   return the conversion progress.
         """
+        return self.__progress_callback
 
     # SOME GETTERS THAT CALCULATE THE VALUE THEY RETURN FROM OTHER VALUES
     # ===================================================================
@@ -381,7 +382,7 @@ class AbstractConverter(object):
         @return An integer representing the number of input pages on one
                 output page.
         """
-        return self.pages_in_width * self.pages_in_height
+        return self.get_pages_in_width() * self.get_pages_in_height()
 
     def set_output_format(self, format):
         """
@@ -503,11 +504,11 @@ class AbstractConverter(object):
         This method launches the actual conversion, using the parameters set
         before.
         """
-        if self.conversion_type == BOOKLETIZE:
+        if self.get_conversion_type() == BOOKLETIZE:
             self.bookletize()
-        elif self.conversion_type == LINEARIZE:
+        elif self.get_conversion_type() == LINEARIZE:
             self.linearize()
-        elif self.conversion_type == REDUCE:
+        elif self.get_conversion_type() == REDUCE:
             self.reduce()
 
     #@abstractmethod
@@ -573,23 +574,23 @@ class StreamConverter(AbstractConverter):
 
         
 
-        self.output_stream = output_stream
-        self.input_stream = input_stream
+        self._output_stream = output_stream
+        self._input_stream = input_stream
 
-        self.inpdf = pyPdf.PdfFileReader(input_stream)
+        self._inpdf = pyPdf.PdfFileReader(input_stream)
 
     def get_input_height(self):
-        page = self.inpdf.getPage(0)
+        page = self._inpdf.getPage(0)
         height = page.mediaBox.getHeight()
         return int(height)
 
     def get_input_width(self):
-        page = self.inpdf.getPage(0)
+        page = self._inpdf.getPage(0)
         width = page.mediaBox.getWidth()
         return int(width)
 
     def get_page_count(self):
-        return self.inpdf.getNumPages()
+        return self._inpdf.getNumPages()
 
     def __fix_page_orientation(self, cmp):
         """
@@ -724,9 +725,9 @@ class StreamConverter(AbstractConverter):
         return sequence
 
     def __write_output_stream(self, outpdf):
-        self.progress_callback(_("writing converted file"), 1)
-        outpdf.write(self.output_stream)
-        self.progress_callback(_("done"), 1)
+        self.get_progress_callback()(_("writing converted file"), 1)
+        outpdf.write(self._output_stream)
+        self.get_progress_callback()(_("done"), 1)
 
     def __do_reduce(self, sequence):
         self.__fix_page_orientation_for_booklet()
@@ -734,7 +735,7 @@ class StreamConverter(AbstractConverter):
 
         current_page = 0
         while current_page < len(sequence):
-            self.progress_callback(
+            self.get_progress_callback()(
                 _("creating page %i") %
                     ((current_page + self.get_pages_in_sheet()) /
                         self.get_pages_in_sheet()),
@@ -746,7 +747,7 @@ class StreamConverter(AbstractConverter):
                 for horiz_pos in range(0, self.get_pages_in_width()):
                     if sequence[current_page] is not None:
                         page.mergeScaledTranslatedPage(
-                            self.inpdf.getPage(sequence[current_page]),
+                            self._inpdf.getPage(sequence[current_page]),
                             self.get_reduction_factor(), 
                             horiz_pos*self.get_output_width() / \
                                 self.get_pages_in_width(),
@@ -778,14 +779,14 @@ class StreamConverter(AbstractConverter):
             for vert_pos in range(0, self.get_pages_in_height()):
                 for horiz_pos in range(0, self.get_pages_in_width()):
                     if sequence[output_page] is not None:
-                        self.progress_callback(
+                        self.get_progress_callback()(
                             _("extracting page %i") % (output_page + 1),
                             float(output_page) / len(sequence))
                         page = outpdf.insertBlankPage(self.get_output_width(),
                                                       self.get_output_height(),
                                                       sequence[output_page])
                         page.mergeScaledTranslatedPage(
-                            self.inpdf.getPage(input_page),
+                            self._inpdf.getPage(input_page),
                             self.get_increasing_factor(),
                             - horiz_pos * self.get_output_width(),
                             (vert_pos - self.get_pages_in_height() + 1) * \
@@ -827,35 +828,35 @@ class FileConverter(StreamConverter):
         """
         # sets [input, output]_stream to None so we can test their presence
         # in __del__
-        self.input_stream = None
-        self.output_stream = None
+        self._input_stream = None
+        self._output_stream = None
 
         # outfile_name is set if provided
         if outfile_name:
             self.__set_outfile_name(outfile_name)
         else:
-            self.outfile_name = None
+            self.__set_outfile_name(None)
           
         # Then infile_nameis set, so if outfile_name was not provided we
         # can create it from infile_name
         self.__set_infile_name(infile_name)
 
         # Now initialize a streamConverter
-        self.input_stream = open(self.get_infile_name(), 'rb')
-        self.output_stream = open(self.get_outfile_name(), 'wb')
-        StreamConverter.__init__(self, self.input_stream, self.output_stream,
+        self._input_stream = open(self.get_infile_name(), 'rb')
+        self._output_stream = open(self.get_outfile_name(), 'wb')
+        StreamConverter.__init__(self, self._input_stream, self._output_stream,
                                  conversion_type, layout, format, copy_pages)
 
     def __del__(self):
-        if self.input_stream:
+        if self._input_stream:
             try:
-                self.input_stream.close()
+                self._input_stream.close()
             except IOError:
                 # XXX: Do something better
                 pass
-        if self.output_stream:
+        if self._output_stream:
             try:
-                self.output_stream.close()
+                self._output_stream.close()
             except IOError:
                 # XXX: Do something better
                 pass
@@ -865,14 +866,14 @@ class FileConverter(StreamConverter):
     # ===========================
 
     def __set_infile_name(self, name):
-        self.infile_name = name
+        self.__infile_name = name
 
-        if not self.outfile_name:
+        if not self.__outfile_name:
             result = re.search("(.+)\.\w*$", name)
             if result:
-                self.outfile_name = result.group(1) + '-conv.pdf'
+                self.__outfile_name = result.group(1) + '-conv.pdf'
             else:
-                self.outfile_name = name + '-conv.pdf'
+                self.__outfile_name = name + '-conv.pdf'
 
     def get_infile_name(self):
         """
@@ -880,10 +881,10 @@ class FileConverter(StreamConverter):
 
         @return The name of the input PDF file.
         """
-        return self.infile_name
+        return self.__infile_name
 
     def __set_outfile_name(self, name):
-        self.outfile_name = name
+        self.__outfile_name = name
 
     def get_outfile_name(self):
         """
@@ -891,7 +892,7 @@ class FileConverter(StreamConverter):
 
         @return The name of the output PDF file.
         """
-        return self.outfile_name
+        return self.__outfile_name
 
 
 # Convenience fucntions
