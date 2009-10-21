@@ -68,10 +68,10 @@ LANDSCAPE = True
 
 class PyPdfError(Exception):
     """
-    This class defines the exceptions raised by PyPdfConv;
+    The base class for all exceptions raised by PyPdfConv.
 
     The attribute "message" contains a message explaining the cause of the
-    error
+    error.
     """
     def __init__(self, message):
         self.message = message
