@@ -83,11 +83,14 @@ class PyPdfError(Exception):
 
 class MismachingOrientationsError(PyPdfError):
     """
-    This exception is raised if the output page orientation is incompatible
-    with the input page orientation.
+    This exception is raised if the required layout is incompatible with
+    the input page orientation.
 
-    XXX: Document the error message
+    The attribute "message" contains the problematic layout.
     """
+    def __str__(self):
+        _("The layout %s is incompatible with the input page orientation") \
+            % message
 
 ########################################################################
 
@@ -410,14 +413,14 @@ class StreamConverter(AbstractConverter):
                 if self.get_output_orientation() == PORTRAIT:
                     self.set_output_orientation(LANDSCAPE)
             else: #if self.get_orientation() == LANDSCAPE:
-                raise MismachingOrientationsError("2X x X")
+                raise MismachingOrientationsError(self.get_layout)
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
             if self.get_orientation() == LANDSCAPE:
                 if self.get_output_orientation() == LANDSCAPE:
                     self.set_output_orientation(PORTRAIT)
             else:
                 # XXX: Localized error message
-                raise MismachingOrientationsError("X x 2X")
+                raise MismachingOrientationsError(self.get_layout)
         else:
             if self.get_orientation() == LANDSCAPE:
                 if self.get_output_orientation() == PORTRAIT:
