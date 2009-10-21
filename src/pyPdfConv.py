@@ -566,13 +566,13 @@ class StreamConverter(AbstractConverter):
             for vert_pos in range(0, self.get_pages_in_height()):
                 for horiz_pos in range(0, self.get_pages_in_width()):
                     self.progress_callback(
-                        _("extracting page %i") % output_page + 1,
+                        _("extracting page %i") % (output_page + 1),
                         float(output_page) / len(sequence))
                     page = outpdf.insertBlankPage(self.get_output_width(),
                                                   self.get_output_height(),
                                                   sequence[output_page])
                     page.mergeScaledTranslatedPage(
-                        inpdf.getPage(input_page),
+                        self.inpdf.getPage(input_page),
                         self.get_increasing_factor (), 
                         - horiz_pos * self.get_output_width(),
                         (vert_pos - self.get_pages_in_height() + 1) * \
@@ -582,7 +582,7 @@ class StreamConverter(AbstractConverter):
                     output_page += 1
           
         self.progress_callback(_("writing converted file..."), 1)
-        outpdf.write(outfile)
+        outpdf.write(self.output_stream)
         self.progress_callback(_("done"), 1)
 
 ########################################################################
