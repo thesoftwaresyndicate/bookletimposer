@@ -508,21 +508,30 @@ class StreamConverter(AbstractConverter):
             sequence = range(0, npages * self.get_pages_in_sheet())
         return sequence
 
+    def __get_sequence_for_reduce(self):
+        """
+        XXX: Doc
+        """
+        if self.get_copy_pages():
+            sequence = []
+            for page in range(self.get_page_count()):
+                for copy in range(self.get_pages_in_sheet()):
+                    sequence.append(page)
+        else:
+            sequence = range(self.get_page_count())
+            if len(sequence) % self.get_pages_in_sheet() != 0:
+                for missing_page in range(self.get_pages_in_sheet() -
+                        (len(sequence) % self.get_pages_in_sheet())):
+                    sequence.append(None)
+        return sequence
+
     def __write_output_stream(self, outpdf):
         self.progress_callback(_("writing converted file"), 1)
         outpdf.write(self.output_stream)
         self.progress_callback(_("done"), 1)
 
-    def bookletize(self):
-        """
-        Converts a linear PDF to a booklet.
-
-        XXX: Doc
-        """
-        # XXX: Translated progress messages
-
+    def __do_reduce(self, sequence):
         self.__fix_page_orientation_for_booklet()
-        sequence = self.__get_sequence_for_booklet()
         outpdf = pyPdf.PdfFileWriter()
 
         current_page = 0
@@ -550,6 +559,21 @@ class StreamConverter(AbstractConverter):
                     current_page += 1
             page.compressContentStreams()
         self.__write_output_stream(outpdf)
+
+    def bookletize(self):
+        """
+        Converts a linear PDF to a booklet.
+
+        XXX: Doc
+        """
+        # XXX: Translated progress messages
+        self.__do_reduce(self.__get_sequence_for_booklet())
+
+    def reduce(self):
+        """
+        Put multiple reduced pages on one.
+        """
+        self.__do_reduce(self.__get_sequence_for_reduce())
 
     def linearize(self, booklet=True):
         """
