@@ -605,10 +605,10 @@ class StreamConverter(AbstractConverter):
                                                       sequence[output_page])
                         page.mergeScaledTranslatedPage(
                             self.inpdf.getPage(input_page),
-                            self.get_increasing_factor (),
+                            self.get_increasing_factor(),
                             - horiz_pos * self.get_output_width(),
                             (vert_pos - self.get_pages_in_height() + 1) * \
-                                self.get_output_height ()
+                                self.get_output_height()
                             )
                         page.compressContentStreams()
                     output_page += 1
