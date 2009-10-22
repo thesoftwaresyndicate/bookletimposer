@@ -1,0 +1,71 @@
+File and directory contents
+===========================
+
+* `src/` contains the source code
+
+  * `pypdfconv.py` contains the python module which forms the backend
+
+* `doc/` contains some documentation
+
+* `tests/` containts some tests scripts and their data files
+
+Coding style
+============
+
+Please try to follow PEP 8 "Style Guide for Python Code".
+
+Docstring conventions
+=====================
+
+Please add a docstring for each public object (module, function, class,
+method, data field, ...)
+
+As PEP 257 "Docstring conventions" is not so precise, please use the
+following conventions, inspired from [OpenAlea's] [1].
+
+We use reStructuredText for the docstrings, so we should add at the
+beginning of each module:
+
+    __docformat__ = "restructuredtext en"
+
+> XXX: TODO
+
+For each docsting, the first line of the docstring must be a brief synopsis.
+
+An optional longer explanation may follow.
+
+It should be followed by these sections:
+
+  - "Parameters" for a function or method which takes arguments;
+  - "Returns" for a function or method which has a return value.
+
+The syntax for the "parameters" section should be: 2 spaces, a dash, a
+space, a backquote, argument name, a backquote, a semicolon, a space,
+description.
+
+> XXX: Put this ?
+
+Then, add optional section using sphinx directives ".. todo::, ".. warnings::" etc. 
+
+Here is an example:
+
+    def example(arg1, arg2):
+        """Brief synopsis on 1 line, COMPULSORY.
+     
+        This is a longer explanation, if the function or method, which
+        is OPTIONAL.
+     
+        :Parameters:
+          - `arg1`: the first value.
+          - `arg2`: the second value.
+     
+        :Returns:
+            The return value.
+        """
+
+> XXX: Perhaps would it be best to use markdown, e.g. with
+> [python-markdown-api-builder] [2]
+
+[1]: http://openalea.gforge.inria.fr/dokuwiki/doku.php?id=documentation:doctests:how_to_document_python_api
+
+[2]: http://gitorious.org/python-markdown-api-builder
