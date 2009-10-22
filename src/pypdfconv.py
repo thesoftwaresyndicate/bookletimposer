@@ -936,8 +936,7 @@ class FileConverter(StreamConverter):
 def bookletize_on_stream(input_stream, 
                          output_stream,
                          layout='2x1',
-                         output_format='A4',
-                         output_orientation='PORTRAIT',
+                         format='A4',
                          copy_pages=False):
     """
     Convert a linear document to a booklet.
@@ -954,12 +953,12 @@ def bookletize_on_stream(input_stream,
         document should be written.
       - `layout`: The layout of input pages on one output page (see
         set_layout).
-      - `output_format`: The format of the output paper (see set_output_format).
+      - `format`: The format of the output paper (see set_output_format).
       - `copy_pages`: Wether the same group of input pages shoud be copied
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(BOOKLETIZE, layout, format, orientation, copy_pages,
+    StreamConverter(BOOKLETIZE, layout, format, copy_pages,
                     input_stream, output_stream()).run()
 
 def bookletize_on_file(input_file, 
