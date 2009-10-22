@@ -66,6 +66,8 @@ import pyPdf.pdf
 # XXX: Fix these translatable strings
 _ = lambda x: x
 
+__docformat__ = "restructuredtext"
+
 ########################################################################
 
 # XXX: I think there is a best way to define constants
