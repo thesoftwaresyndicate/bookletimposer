@@ -26,9 +26,7 @@ following conventions, inspired from [OpenAlea's] [1].
 We use reStructuredText for the docstrings, so we should add at the
 beginning of each module:
 
-    __docformat__ = "restructuredtext en"
-
-> XXX: TODO
+    __docformat__ = "restructuredtext"
 
 For each docsting, the first line of the docstring must be a brief synopsis.
 
