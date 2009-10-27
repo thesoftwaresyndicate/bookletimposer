@@ -58,6 +58,7 @@ if True:
 import re
 import sys
 import os
+import types
 
 import pyPdf
 import pyPdf.generic
@@ -307,8 +308,7 @@ class AbstractConverter(object):
             must be : a string for the progress message;
             a number in the range [0, 1] for the progress.
         """
-        # XXX: Fix this check
-        assert(isinstance(progress_callback, type(lambda x: x)))
+        assert(type(progress_callback) is types.FunctionType)
         self.__progress_callback = progress_callback
 
     def get_progress_callback(self):
