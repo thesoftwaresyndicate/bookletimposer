@@ -72,6 +72,7 @@ __docformat__ = "restructuredtext"
 ########################################################################
 
 # XXX: I think there is a best way to define constants
+# XXX: Add documentation
 BOOKLETIZE = 1
 LINEARIZE = 2
 REDUCE = 3
