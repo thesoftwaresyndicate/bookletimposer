@@ -71,14 +71,23 @@ __docformat__ = "restructuredtext"
 
 ########################################################################
 
-# XXX: I think there is a best way to define constants
-# XXX: Add documentation
-BOOKLETIZE = 1
-LINEARIZE = 2
-REDUCE = 3
+# CONSTANTS
 
-PORTRAIT = False
-LANDSCAPE = True
+class ConversionType:
+    """The conversion type constants"""
+    BOOKLETIZE = 1
+    """The conversion from a linear document to a booklet"""
+    LINEARIZE = 2
+    """The conversion from a booklet to a linear document"""
+    REDUCE = 3
+    """The conversion from multiple input pages to one output page"""
+
+class PageOrientation:
+    """The page orientation constants"""
+    PORTRAIT = False
+    """The portrait orientation"""
+    LANDSCAPE = True
+    """The lanscape orientation"""
 
 ########################################################################
 
@@ -146,7 +155,7 @@ class AbstractConverter(object):
         }
 
     def __init__(self, 
-                 conversion_type=BOOKLETIZE, 
+                 conversion_type=ConversionType.BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
                  copy_pages=False):
@@ -259,9 +268,9 @@ class AbstractConverter(object):
         Set conversion that will be performed when caling run().
 
         :Parameters:
-          - `type`: A constant among BOOKLETIZE, LINEARIZE, REDUCE.
+          - `type`: A constant from the ConversionType class.
         """
-        assert(type == BOOKLETIZE or type == LINEARIZE or type == REDUCE)
+        assert(type == ConversionType.BOOKLETIZE or type == ConversionType.LINEARIZE or type == ConversionType.REDUCE)
         self.__conversion_type = type
 
     def get_conversion_type(self):
@@ -269,7 +278,7 @@ class AbstractConverter(object):
         Get conversion that will be performed when caling run().
 
         :Returns:
-            A constant among BOOKLETIZE, LINEARIZE, REDUCE.
+            A constant from ConversionType class.
         """
         return self.__conversion_type
 
@@ -364,12 +373,12 @@ class AbstractConverter(object):
         Return the page orientation of the input document.
 
         :Returns:
-            A constant among PORTRAIT, LANDSCAPE or None (if square paper).
+            A constant from PageOrientation, or None (if square paper).
         """
         if self.get_input_height() > self.get_input_width():
-            return PORTRAIT
+            return PageOrientation.PORTRAIT
         elif self.get_input_height() < self.get_input_width():
-            return LANDSCAPE
+            return PageOrientation.LANDSCAPE
         else:
             #XXX: is square
             return None
@@ -446,7 +455,7 @@ class AbstractConverter(object):
             (e.g. A3, A4, A5).
         """
         width, height = self.get_input_size()
-        if self.get_input_orientation() == LANDSCAPE:
+        if self.get_input_orientation() == PageOrientation.LANDSCAPE:
             size = height, width
         else:
             size = width, height
@@ -495,7 +504,7 @@ class AbstractConverter(object):
         manually.
 
         :Parameters:
-          - `output_orientation`: A constant among PORTRAIT, LANDSCAPE
+          - `output_orientation`: A constant from PageOrientation,
             or None (if square paper).
         """
         output_orientation = bool(output_orientation)
@@ -503,8 +512,8 @@ class AbstractConverter(object):
         w = self.get_output_width()
         h = self.get_output_height()
 
-        if (output_orientation == PORTRAIT and w > h) or \
-           (output_orientation == LANDSCAPE and h > w):
+        if (output_orientation == PageOrientation.PORTRAIT and w > h) or \
+           (output_orientation == PageOrientation.LANDSCAPE and h > w):
             self.set_output_height(w)
             self.set_output_width(h)
 
@@ -517,12 +526,12 @@ class AbstractConverter(object):
         manually.
 
         :Returns:
-            A constant among PORTRAIT, LANDSCAPE or None (if square paper).
+            A constant among from PageOrientation, or None (if square paper).
         """
         if self.get_output_height() > self.get_output_width():
-            return PORTRAIT
+            return PageOrientation.PORTRAIT
         elif self.get_output_height() < self.get_output_width():
-            return LANDSCAPE
+            return PageOrientation.LANDSCAPE
         else:
             #XXX: is square
             return None
@@ -537,11 +546,11 @@ class AbstractConverter(object):
         This method launches the actual conversion, using the parameters set
         before.
         """
-        if self.get_conversion_type() == BOOKLETIZE:
+        if self.get_conversion_type() == ConversionType.BOOKLETIZE:
             self.bookletize()
-        elif self.get_conversion_type() == LINEARIZE:
+        elif self.get_conversion_type() == ConversionType.LINEARIZE:
             self.linearize()
-        elif self.get_conversion_type() == REDUCE:
+        elif self.get_conversion_type() == ConversionType.REDUCE:
             self.reduce()
 
     #@abstractmethod
@@ -581,7 +590,7 @@ class StreamConverter(AbstractConverter):
     def __init__(self,
                  input_stream, 
                  output_stream,
-                 conversion_type=BOOKLETIZE, 
+                 conversion_type=ConversionType.BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
                  copy_pages=False):
@@ -636,25 +645,25 @@ class StreamConverter(AbstractConverter):
             (int). Must return: the boolean result of the comparaison.
         """
         if cmp(self.get_pages_in_width(), self.get_pages_in_height()):
-            if self.get_input_orientation() == PORTRAIT:
-                if self._get_output_orientation() == PORTRAIT:
-                    self._set_output_orientation(LANDSCAPE)
-            else: #if self.get_input_orientation() == LANDSCAPE:
+            if self.get_input_orientation() == PageOrientation.PORTRAIT:
+                if self._get_output_orientation() == PageOrientation.PORTRAIT:
+                    self._set_output_orientation(PageOrientation.LANDSCAPE)
+            else: #if self.get_input_orientation() == PageOrientation.LANDSCAPE:
                 raise MismachingOrientationsError(self.get_layout())
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
-            if self.get_input_orientation() == LANDSCAPE:
-                if self._get_output_orientation() == LANDSCAPE:
-                    self._set_output_orientation(PORTRAIT)
+            if self.get_input_orientation() == PageOrientation.LANDSCAPE:
+                if self._get_output_orientation() == PageOrientation.LANDSCAPE:
+                    self._set_output_orientation(PageOrientation.PORTRAIT)
             else:
                 # XXX: Localized error message
                 raise MismachingOrientationsError(self.get_layout())
         else:
-            if self.get_input_orientation() == LANDSCAPE:
-                if self._get_output_orientation() == PORTRAIT:
-                    self._set_output_orientation(LANDSCAPE)
+            if self.get_input_orientation() == PageOrientation.LANDSCAPE:
+                if self._get_output_orientation() == PageOrientation.PORTRAIT:
+                    self._set_output_orientation(PageOrientation.LANDSCAPE)
             else:
-                if self._get_output_orientation() == LANDSCAPE:
-                    self._set_output_orientation(PORTRAIT)
+                if self._get_output_orientation() == PageOrientation.LANDSCAPE:
+                    self._set_output_orientation(PageOrientation.PORTRAIT)
 
     def __fix_page_orientation_for_booklet(self):
         """
@@ -841,7 +850,7 @@ class FileConverter(StreamConverter):
     def __init__(self,
                  infile_name,
                  outfile_name=None,
-                 conversion_type=BOOKLETIZE, 
+                 conversion_type=ConversionType.BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
                  copy_pages=False):
@@ -961,7 +970,7 @@ def bookletize_on_stream(input_stream,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(BOOKLETIZE, layout, format, copy_pages,
+    StreamConverter(ConversionType.BOOKLETIZE, layout, format, copy_pages,
                     input_stream, output_stream()).run()
 
 def bookletize_on_file(input_file, 
@@ -989,7 +998,7 @@ def bookletize_on_file(input_file,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    FileConverter(input_file, output_file, BOOKLETIZE, layout, format,
+    FileConverter(input_file, output_file, ConversionType.BOOKLETIZE, layout, format,
                   copy_pages).run()
 
 def linearize_on_stream(input_stream, 
@@ -1017,7 +1026,7 @@ def linearize_on_stream(input_stream,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(input_stream, output_stream, LINEARIZE, layout,
+    StreamConverter(input_stream, output_stream, ConversionType.LINEARIZE, layout,
                     format, copy_pages).run()
 
 def linearize_on_file(input_file, 
@@ -1045,7 +1054,7 @@ def linearize_on_file(input_file,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    FileConverter(input_file, output_file, LINEARIZE, layout, format,
+    FileConverter(input_file, output_file, ConversionType.LINEARIZE, layout, format,
                   copy_pages).run()
 
 def reduce_on_stream(input_stream, 
@@ -1070,7 +1079,7 @@ def reduce_on_stream(input_stream,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(input_stream, output_stream, REDUCE, layout, format, 
+    StreamConverter(input_stream, output_stream, ConversionType.REDUCE, layout, format, 
                     copy_pages).run()
 
 def reduce_on_file(input_file, 
@@ -1095,5 +1104,5 @@ def reduce_on_file(input_file,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    FileConverter(input_file, output_file, REDUCE, layout, format,
+    FileConverter(input_file, output_file, ConversionType.REDUCE, layout, format,
                   copy_pages).run()
