@@ -355,7 +355,7 @@ class AbstractConverter(object):
             The page height of the input document expressed in default
             user space units.
         """
-        pass
+        raise NotImplementedError("get_input_height must be implemented in a subclass.")
 
     #@abstractmetod
     def get_input_width(self):
@@ -366,7 +366,7 @@ class AbstractConverter(object):
             The page width of the input document expressed in default
             user space units.
         """
-        pass
+        raise NotImplementedError("get_input_width must be implemented in a subclass.")
 
     def get_input_orientation(self):
         """
@@ -471,7 +471,7 @@ class AbstractConverter(object):
         :Returns:
             The number of pages of the input document.
         """
-        pass
+        raise NotImplementedError("get_page_count must be implemented in a subclass.")
 
     def get_reduction_factor(self):
         """
@@ -561,7 +561,7 @@ class AbstractConverter(object):
         Convert a linear document to a booklet, arranging the pages as
         required.
         """
-        pass
+        raise NotImplementedError("bookletize must be implemented in a subclass.")
 
     #@abstractmethod
     def lineraize(self):
@@ -571,14 +571,14 @@ class AbstractConverter(object):
         Convert a booklet to a linear document, arranging the pages as
         required.
         """
-        pass
+        raise NotImplementedError("linearize must be implemented in a subclass.")
 
     #@abstractmethod
     def reduce(self):
         """
         Put multiple input pages on one output page.
         """
-        pass
+        raise NotImplementedError("reduce must be implemented in a subclass.")
 
 ########################################################################
 
