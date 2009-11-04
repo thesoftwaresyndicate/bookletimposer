@@ -420,6 +420,9 @@ class AbstractConverter(object):
         :Parameters:
           - `format`: A string representing name ot the the desired paper
             format, among the keys of page_formats (e.g. A3, A4, A5).
+
+        :Raises:
+          - UnknonwFormatError if the given paper format is not recognized.
         """
         try:
             width, height = AbstractConverter.page_formats[format]
@@ -638,6 +641,10 @@ class StreamConverter(AbstractConverter):
           - `cmp`: A comparator function. Takes: number of pages on one
             direction (int), number of pages on the other direction
             (int). Must return: the boolean result of the comparaison.
+
+        :Raises:
+          - MismachingOrientationsError if the required layout is
+            incompatible with the input page orientation.
         """
         if cmp(self.get_pages_in_width(), self.get_pages_in_height()):
             if self.get_input_orientation() == PageOrientation.PORTRAIT:
