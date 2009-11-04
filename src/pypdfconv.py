@@ -98,11 +98,6 @@ class PyPdfError(Exception):
     The attribute "message" contains a message explaining the cause of the
     error.
     """
-    def __init__(self, message):
-        self.message = message
-
-    def __str__(self):
-        return self.message
 
 ########################################################################
 
