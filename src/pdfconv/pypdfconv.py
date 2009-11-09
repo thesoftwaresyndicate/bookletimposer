@@ -73,15 +73,6 @@ __docformat__ = "restructuredtext"
 
 # CONSTANTS
 
-class ConversionType:
-    """The conversion type constants"""
-    BOOKLETIZE = 1
-    """The conversion from a linear document to a booklet"""
-    LINEARIZE = 2
-    """The conversion from a booklet to a linear document"""
-    REDUCE = 3
-    """The conversion from multiple input pages to one output page"""
-
 class PageOrientation:
     """The page orientation constants"""
     PORTRAIT = False
@@ -150,7 +141,6 @@ class AbstractConverter(object):
         }
 
     def __init__(self, 
-                 conversion_type=ConversionType.BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
                  copy_pages=False):
@@ -158,8 +148,6 @@ class AbstractConverter(object):
         Create an AbstractConverter instance.
 
         :Parameters:
-          - `conversion_type`: The type of the conversion that will be
-            performed when caling run() (see set_converston_type).
           - `layout`: The layout of input pages on one output page
             (see set_layout).
           - `format`: The format of the output paper (see
@@ -168,12 +156,10 @@ class AbstractConverter(object):
             shoud be copied to fill the corresponding output page or not
             (see set_copy_pages).
         """
-        self.conversion_type = None
         self.layout = None
         self.output_format = None
         self.output_orientation = None
 
-        self.set_conversion_type(conversion_type)
         self.set_layout(layout)
         self.set_output_format(format)
         self.set_copy_pages(copy_pages)
@@ -257,25 +243,6 @@ class AbstractConverter(object):
             An integer representing the number of pages in height.
         """
         return self.__pages_in_height
-
-    def set_conversion_type(self, type):
-        """
-        Set conversion that will be performed when caling run().
-
-        :Parameters:
-          - `type`: A constant from the ConversionType class.
-        """
-        assert(type == ConversionType.BOOKLETIZE or type == ConversionType.LINEARIZE or type == ConversionType.REDUCE)
-        self.__conversion_type = type
-
-    def get_conversion_type(self):
-        """
-        Get conversion that will be performed when caling run().
-
-        :Returns:
-            A constant from ConversionType class.
-        """
-        return self.__conversion_type
 
     def set_copy_pages(self, copy_pages):
         """
@@ -537,20 +504,6 @@ class AbstractConverter(object):
     # CONVERSION FUNCTIONS
     # ====================
 
-    def run(self):
-        """
-        Perform the actual conversion.
-
-        This method launches the actual conversion, using the parameters set
-        before.
-        """
-        if self.get_conversion_type() == ConversionType.BOOKLETIZE:
-            self.bookletize()
-        elif self.get_conversion_type() == ConversionType.LINEARIZE:
-            self.linearize()
-        elif self.get_conversion_type() == ConversionType.REDUCE:
-            self.reduce()
-
     #@abstractmethod
     def bookletize(self):
         """
@@ -588,7 +541,6 @@ class StreamConverter(AbstractConverter):
     def __init__(self,
                  input_stream, 
                  output_stream,
-                 conversion_type=ConversionType.BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
                  copy_pages=False):
@@ -600,8 +552,6 @@ class StreamConverter(AbstractConverter):
             document should be read.
           - `output_stream`: The file-like object to which tne output PDF
             document should be written.
-          - `conversion_type`: The type of the conversion that will be performed
-            when caling run() (see set_converston_type).
           - `layout`: The layout of input pages on one output page (see
             set_layout).
           - `format`: The format of the output paper (see set_output_format).
@@ -610,7 +560,7 @@ class StreamConverter(AbstractConverter):
             set_copy_pages).
         """
 
-        AbstractConverter.__init__(self, conversion_type, layout, format, 
+        AbstractConverter.__init__(self, layout, format, 
                                    copy_pages)
 
         
@@ -852,7 +802,6 @@ class FileConverter(StreamConverter):
     def __init__(self,
                  infile_name,
                  outfile_name=None,
-                 conversion_type=ConversionType.BOOKLETIZE, 
                  layout='2x1',
                  format='A4',
                  copy_pages=False):
@@ -864,8 +813,6 @@ class FileConverter(StreamConverter):
           - `outfile_name`: The name of the file where the output PDF
             should de written. If ommited, defaults to the
             name of the input PDF postponded by '-conv'.
-          - `conversion_type`: The type of the conversion that will be performed
-            when caling run() (see set_converston_type).
           - `layout`: The layout of input pages on one output page (see
             set_layout).
           - `format`: The format of the output paper (see set_output_format).
@@ -892,7 +839,7 @@ class FileConverter(StreamConverter):
         self._input_stream = open(self.get_infile_name(), 'rb')
         self._output_stream = open(self.get_outfile_name(), 'wb')
         StreamConverter.__init__(self, self._input_stream, self._output_stream,
-                                 conversion_type, layout, format, copy_pages)
+                                 layout, format, copy_pages)
 
     def __del__(self):
         if self._input_stream:
@@ -972,8 +919,8 @@ def bookletize_on_stream(input_stream,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(ConversionType.BOOKLETIZE, layout, format, copy_pages,
-                    input_stream, output_stream()).run()
+    StreamConverter(layout, format, copy_pages,
+                    input_stream, output_stream()).bookletize()
 
 def bookletize_on_file(input_file, 
                        output_file=None,
@@ -1000,8 +947,8 @@ def bookletize_on_file(input_file,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    FileConverter(input_file, output_file, ConversionType.BOOKLETIZE, layout, format,
-                  copy_pages).run()
+    FileConverter(input_file, output_file, layout, format,
+                  copy_pages).bookletize()
 
 def linearize_on_stream(input_stream, 
                         output_stream,
@@ -1028,8 +975,8 @@ def linearize_on_stream(input_stream,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(input_stream, output_stream, ConversionType.LINEARIZE, layout,
-                    format, copy_pages).run()
+    StreamConverter(input_stream, output_stream, layout,
+                    format, copy_pages).linearize()
 
 def linearize_on_file(input_file, 
                       output_file=None,
@@ -1056,8 +1003,8 @@ def linearize_on_file(input_file,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    FileConverter(input_file, output_file, ConversionType.LINEARIZE, layout, format,
-                  copy_pages).run()
+    FileConverter(input_file, output_file, layout, format,
+                  copy_pages).linearize()
 
 def reduce_on_stream(input_stream, 
                      output_stream,
@@ -1081,8 +1028,8 @@ def reduce_on_stream(input_stream,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(input_stream, output_stream, ConversionType.REDUCE, layout, format, 
-                    copy_pages).run()
+    StreamConverter(input_stream, output_stream, layout, format, 
+                    copy_pages).reduce()
 
 def reduce_on_file(input_file, 
                    output_file=None,
@@ -1106,5 +1053,5 @@ def reduce_on_file(input_file,
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    FileConverter(input_file, output_file, ConversionType.REDUCE, layout, format,
-                  copy_pages).run()
+    FileConverter(input_file, output_file, layout, format,
+                  copy_pages).reduce()
