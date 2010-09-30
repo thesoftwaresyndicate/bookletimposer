@@ -368,7 +368,7 @@ class AbstractConverter(object):
             to put on the width of the output page and H is the number of
             input pages to put in the height of an output page.
         """
-        return str(self.pages_in_width) + 'x' + str(self.pages_in_height)
+        return str(self.get_pages_in_width()) + 'x' + str(self.get_pages_in_height())
 
     def get_pages_in_sheet(self):
         """
