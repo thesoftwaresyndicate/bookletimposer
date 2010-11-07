@@ -185,7 +185,7 @@ class BookletBinderUI(object):
         self.__preferences.layout = widget.get_model().get_value(
             widget.get_active_iter())
 
-    def cb_papar_format_changed(self, widget, data=None):
+    def cb_paper_format_changed(self, widget, data=None):
         self.__preferences.layout = widget.get_model().get_value(
             widget.get_active_iter())
 

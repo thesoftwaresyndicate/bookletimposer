@@ -55,7 +55,7 @@
                             <property name="receives_default">False</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="cb_bookeltize_toggled"/>
+                            <signal name="toggled" handler="cb_bookletize_toggled"/>
                           </object>
                           <packing>
                             <property name="position">0</property>
@@ -173,7 +173,7 @@
             <child>
               <object class="GtkComboBox" id="output_paper_orientation_combobox">
                 <property name="visible">True</property>
-                <signal name="changed" handler="cp_paper_orientation_changed"/>
+                <signal name="changed" handler="cb_paper_orientation_changed"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
