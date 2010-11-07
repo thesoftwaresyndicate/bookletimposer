@@ -39,6 +39,7 @@ gobject.threads_init()
 
 import os.path
 import threading
+import traceback
 
 import backend
 import pypdfconv
@@ -225,30 +226,59 @@ class BookletBinderUI(object):
         self.__about_dialog.show()
 
     def run_conversion(self):
-        self.__label_conversion_title.set_text(_("Converting %s") % 
+        self.__main_window.set_sensitive(False)
+        self.__label_conversion_title.set_text(_("Converting %s") %
             self.__preferences.infile_name)
         self.__progressbar_conversion.set_fraction(0)
         self.__label_conversion_setp.set_text("")
-        self.__progress_dialog.show_now()
+        self.__progress_dialog.show()
 
-        def progress_callback(message, progress):
+        def exception_dialog(exception):
+            dialog = gtk.MessageDialog(parent=self.__main_window,
+                                       flags=gtk.DIALOG_MODAL,
+                                       type=gtk.MESSAGE_ERROR,
+                                       buttons=gtk.BUTTONS_CLOSE,
+                                       message_format=_("Conversion failed"))
+            dialog.format_secondary_text(str(exception))
+            def cb_close_dialog(widget, data=None):
+                widget.destroy()
+                self.__progress_dialog.hide()
+                self.__main_window.set_sensitive(True)
+                return False
+            dialog.connect("response", cb_close_dialog)
+            dialog.show()
+        try:
+            converter = self.__preferences.create_converter()
+        except Exception, e:
+            exception_dialog(e)
+            raise
+
+        def cb_update_progress(message, progress):
+            gtk.gdk.threads_enter()
             self.__progressbar_conversion.set_fraction(progress)
             self.__label_conversion_setp.set_text(message)
-            
-        converter = self.__preferences.create_converter()
-        converter.set_progress_callback(progress_callback)
-        converter_thread = threading.Thread(target=converter.run)
-        converter_thread.start()
-        def controller():
-            while gtk.events_pending():
-                gtk.main_loop()
-            converter_thread.join()
+            gtk.gdk.threads_leave()
+        converter.set_progress_callback(cb_update_progress)
+
+        def cb_process_exception(exception):
+            gtk.gdk.threads_enter()
+            exception_dialog()
+            gtk.gdk.threads_leave()
+            print traceback.format_exc()
+        def worker(exception_callback):
+            try:
+                converter.run()
+            except Exception, e:
+                exception_callback(e)
+                raise
+            gtk.gdk.threads_enter()
             self.__progress_dialog.hide()
-        control_thread = threading.Thread(target=controller)
-        control_thread.start()
-        #except Exception, e:
-        #    print(e)
-        #self.__progress_dialog.hide()
+            gtk.gdk.threads_leave()
+        converter_thread = threading.Thread(target=worker, args=[cb_process_exception])
+
+        converter_thread.start()
+
+        self.__main_window.set_sensitive(True)
 
 if __name__ == "__main__":
     ui = BookletBinderUI()
