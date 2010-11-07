@@ -55,12 +55,13 @@ class BookletBinderUI(object):
         """
         
         """
+        if preferences:
+            self.__preferences = preferences
+        else:
+            self.__preferences = backend.ConverterPreferences()
         self.__create_gui()
         if preferences:
-            self.__apply_preferences(preferences)
-        else:
-            preferences = backend.ConverterPreferences()
-        self.__preferences = preferences
+            self.__apply_preferences()
         self.__main_window.show()
 
     def __create_gui(self):
@@ -131,8 +132,8 @@ class BookletBinderUI(object):
             liststore.append([layout])
         self.__paper_orientation_combobox.set_active(0)
 
-    def __apply_preferences(self, preferences):
-        assert isinstance(preferences, backend.ConverterPreferences)
+    def __apply_preferences(self):
+        preferences = self.__preferences
         if preferences.infile_name:
             self.__input_file_chooser_button.set_filename(preferences.infile_name)
             self.__apply_button.set_sensitive(True)
