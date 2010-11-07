@@ -52,8 +52,7 @@ if True:
     print "DEBUG added custom pyPdf dir in path, which is now ", sys.path
 # XXX /gruge de dev
 
-# abstract base class (up to python 2.6.1)
-#import abc
+from abc import ABCMeta, abstractmethod
 
 import re
 import sys
@@ -118,7 +117,6 @@ class UnknownFormatError(PyPdfError):
 ########################################################################
 
 class AbstractConverter(object):
-    #__metaclass__ = abc.ABCMeta
     """
     The base class for all pyPdfConv converter classes.
 
@@ -131,6 +129,7 @@ class AbstractConverter(object):
       - linearize
       - reduce
     """
+    __metaclass__ = ABCMeta
 
     page_formats = {
         "A3":(841,1190),
@@ -308,7 +307,7 @@ class AbstractConverter(object):
         """
         return (self.get_input_width(), self.get_input_height())
 
-    #@abstractmetod
+    @abstractmethod
     def get_input_height(self):
         """
         Return the page height of the input document.
@@ -319,7 +318,7 @@ class AbstractConverter(object):
         """
         raise NotImplementedError("get_input_height must be implemented in a subclass.")
 
-    #@abstractmetod
+    @abstractmethod
     def get_input_width(self):
         """
         Return the page width of the input document.
@@ -428,7 +427,7 @@ class AbstractConverter(object):
             if self.page_formats[k] == size:
                 return k
 
-    #@abstractmetod
+    @abstractmethod
     def get_page_count(self):
         """
         Return the number of pages of the input document.
@@ -504,7 +503,7 @@ class AbstractConverter(object):
     # CONVERSION FUNCTIONS
     # ====================
 
-    #@abstractmethod
+    @abstractmethod
     def bookletize(self):
         """
         Convert a linear document to a booklet.
@@ -514,8 +513,8 @@ class AbstractConverter(object):
         """
         raise NotImplementedError("bookletize must be implemented in a subclass.")
 
-    #@abstractmethod
-    def lineraize(self):
+    @abstractmethod
+    def linearize(self):
         """
         Convert a booklet to a linear document.
 
@@ -524,7 +523,7 @@ class AbstractConverter(object):
         """
         raise NotImplementedError("linearize must be implemented in a subclass.")
 
-    #@abstractmethod
+    @abstractmethod
     def reduce(self):
         """
         Put multiple input pages on one output page.
