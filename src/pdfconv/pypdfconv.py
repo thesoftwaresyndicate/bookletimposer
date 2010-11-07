@@ -81,7 +81,7 @@ class PageOrientation:
 
 ########################################################################
 
-class PyPdfError(Exception):
+class PdfConvError(Exception):
     """
     The base class for all exceptions raised by PyPdfConv.
 
@@ -91,7 +91,7 @@ class PyPdfError(Exception):
 
 ########################################################################
 
-class MismachingOrientationsError(PyPdfError):
+class MismachingOrientationsError(PdfConvError):
     """
     This exception is raised if the required layout is incompatible with
     the input page orientation.
@@ -104,7 +104,7 @@ class MismachingOrientationsError(PyPdfError):
 
 ########################################################################
 
-class UnknownFormatError(PyPdfError):
+class UnknownFormatError(PdfConvError):
     """
     This exception is raised when the user tries to set an unknown page
     format.
