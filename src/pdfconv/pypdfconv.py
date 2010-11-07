@@ -48,7 +48,7 @@ Some convenience functions are also provided.
 # XXX gruge de dev
 if True:
     import sys
-    sys.path = ["/home/kjo/Documents/Dev/pyPdfConv/pypdf-git/pyPdf"] + sys.path
+    sys.path = ["/home/kjo/Dev/pyPdfConv/pypdf-git/pyPdf"] + sys.path
     print "DEBUG added custom pyPdf dir in path, which is now ", sys.path
 # XXX /gruge de dev
 
