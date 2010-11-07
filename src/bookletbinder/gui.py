@@ -169,15 +169,15 @@ class BookletBinderUI(object):
 
     def cb_bookletize_toggled(self, widget, data=None):
         if widget.get_active():
-            self.__preferences.conversion_type = ConversionType.BOOKLETIZE
+            self.__preferences.conversion_type = backend.ConversionType.BOOKLETIZE
 
     def cb_linearize_toggled(self, widget, data=None):
         if widget.get_active():
-            self.__preferences.conversion_type = ConversionType.LINEARIZE
+            self.__preferences.conversion_type = backend.ConversionType.LINEARIZE
 
     def cb_reduce_toggled(self, widget, data=None):
         if widget.get_active():
-            self.__preferences.conversion_type = ConversionType.REDUCE
+            self.__preferences.conversion_type = backend.ConversionType.REDUCE
 
     def cb_copy_pages_toggled(self, widget, data=None):
         self.__preferences.copy_pages = widget.get_active()
