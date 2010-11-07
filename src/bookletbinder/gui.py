@@ -67,7 +67,6 @@ class BookletBinderUI(object):
 
     def __create_gui(self):
         builder = gtk.Builder()
-        #builder.add_from_file("/usr/share/bookletbinder/bookletbinder.ui")
         builder.add_from_file(os.path.join(DATADIR,"bookletbinder.ui"))
         builder.connect_signals(self)
 
