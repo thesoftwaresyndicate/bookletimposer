@@ -120,8 +120,8 @@ if __name__ == "__main__":
     # Import Psyco if available
     try:
         import psyco
-        print _("psyco imported. PyPdfConv will run faster.")
+        print _("psyco imported. Bookletbinder will run faster.")
         psyco.full()
     except ImportError:
-        print _("psyco not found. You can speed pyPdfConv up by installing it.")
+        print _("psyco not found. You can speed Bookletbinder up by installing it.")
     main()
