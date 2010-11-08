@@ -33,6 +33,9 @@
 import gettext
 import os.path
 
+def debug(msg):
+    if __debug__: print msg
+
 def get_sharedir():
     if os.path.exists("/usr/local/share/bookletbinder"):
         return "/usr/local/share"
