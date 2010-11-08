@@ -252,12 +252,6 @@ class BookletBinderUI(object):
         self.__about_dialog.show()
 
     def run_conversion(self):
-        self.__main_window.set_sensitive(False)
-        self.__label_conversion_title.set_text(_("Converting %s") %
-            self.__preferences.infile_name)
-        self.__progressbar_conversion.set_fraction(0)
-        self.__label_conversion_setp.set_text("")
-        self.__progress_dialog.show()
 
         def exception_dialog(exception):
             dialog = gtk.MessageDialog(parent=self.__main_window,
@@ -266,6 +260,7 @@ class BookletBinderUI(object):
                                        buttons=gtk.BUTTONS_CLOSE,
                                        message_format=_("Conversion failed"))
             dialog.format_secondary_text(str(exception))
+
             def cb_close_dialog(widget, data=None):
                 widget.destroy()
                 self.__progress_dialog.hide()
@@ -292,16 +287,17 @@ class BookletBinderUI(object):
             self.__progressbar_conversion.set_fraction(progress)
             self.__label_conversion_setp.set_text(message)
             gtk.gdk.threads_leave()
-        converter.set_progress_callback(cb_update_progress)
 
         def cb_process_exception(exception):
             gtk.gdk.threads_enter()
             exception_dialog(exception)
             gtk.gdk.threads_leave()
             print traceback.format_exc()
+
         def cb_interrupt_callback():
             self.__progress_dialog.hide()
             self.__main_window.set_sensitive(True)
+
         def worker(exception_callback, interrupt_callback):
             try:
                 converter.run()
@@ -313,13 +309,24 @@ class BookletBinderUI(object):
             gtk.gdk.threads_enter()
             self.__progress_dialog.hide()
             gtk.gdk.threads_leave()
+
+        self.__main_window.set_sensitive(False)
+        self.__label_conversion_title.set_text(_("Converting %s") %
+            self.__preferences.infile_name)
+        self.__progressbar_conversion.set_fraction(0)
+        self.__label_conversion_setp.set_text("")
+        self.__progress_dialog.show()
+        try:
+            debug(self.__preferences)
+            converter = self.__preferences.create_converter()
+        except Exception, e:
+            exception_dialog(e)
+            raise
+        converter.set_progress_callback(cb_update_progress)
         self.__stop = threading.Event()
         converter_thread = threading.Thread(target=worker,
-                                            args=[cb_process_exception,
-                                                  cb_interrupt_callback])
-
+            args=[cb_process_exception, cb_interrupt_callback])
         converter_thread.start()
-
         self.__main_window.set_sensitive(True)
 
 if __name__ == "__main__":
