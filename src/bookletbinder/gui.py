@@ -289,7 +289,7 @@ class BookletBinderUI(object):
 
         def cb_process_exception(exception):
             gtk.gdk.threads_enter()
-            exception_dialog()
+            exception_dialog(exception)
             gtk.gdk.threads_leave()
             print traceback.format_exc()
         def cb_interrupt_callback():
