@@ -23,11 +23,11 @@
 
 ########################################################################
 #
-# util/booketbiender.py
+# bookletbinder/booketbinder.py
 #
-# This file is the main program of pyPdfConv
+# This file is the main program of bookletbinder
 #
-# It contains the CLI frontend of pyPdfConv, which can either work
+# It contains the CLI frontend of bookletbinder, which can either work
 # standalone or launch the GTK2+ frontend.
 #
 ########################################################################
