@@ -137,6 +137,7 @@ class ConverterPreferences(object):
             converter = TypedFileConverter(self._infile_name, self._outfile_name)
         else:
             converter = TypedFileConverter(self._infile_name)
+        if self._conversion_type: converter.set_conversion_type(self._conversion_type)
         if self._layout: converter.set_layout(self._layout)
         if self._paper_format: converter.set_output_format(self._paper_format)
         if self._paper_orientation:
