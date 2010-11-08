@@ -132,6 +132,13 @@ class BookletBinderUI(object):
             liststore.append([layout])
         self.__paper_orientation_combobox.set_active(0)
 
+    @staticmethod
+    def combobox_select_row(widget, row_value):
+        def func(model, path, iter, widget):
+            if model.get_value(iter, 0) == row_value:
+                widget.set_active_iter(iter)
+        widget.get_model().foreach(func, widget)
+
     def __apply_preferences(self):
         preferences = self.__preferences
         if preferences.infile_name:
@@ -147,11 +154,10 @@ class BookletBinderUI(object):
         if preferences.copy_pages:
             self.__copy_pages_radiobutton.set_active(preferences.copy_pages)
         if preferences.layout:
-            # XXX : select items
-            pass
+            self.combobox_select_row(self.__layout_combobox, preferences.layout)
         if preferences.paper_format:
-            # XXX : select items
-            pass
+            self.combobox_select_row(self.__paper_format_combobox,
+                                     preferences.paper_format)
         if preferences.paper_orientation:
             # XXX : select items
             pass
