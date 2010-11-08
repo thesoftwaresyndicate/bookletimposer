@@ -159,7 +159,7 @@ class BookletBinderUI(object):
             self.combobox_select_row(self.__paper_format_combobox,
                                      preferences.paper_format)
         if preferences.paper_orientation:
-            if preferences.paper_orientation = pypdfconv.PageOrientation.PORTRAIT:
+            if preferences.paper_orientation == pypdfconv.PageOrientation.PORTRAIT:
                 self.combobox_select_row(self.__paper_orientation_combobox,
                                          _("Portrait"))
             else:
@@ -202,7 +202,7 @@ class BookletBinderUI(object):
 
     def cb_paper_orientation_changed(self, widget, data=None):
         orientation = widget.get_model().get_value(widget.get_active_iter(), 0)
-        if orientation = _("Portrait"):
+        if orientation == _("Portrait"):
             self.__preferences.paper_orientation = pypdfconv.PageOrientation.PORTRAIT
         else:
             self.__preferences.paper_orientation = pypdfconv.PageOrientation.LANDSCAPE
