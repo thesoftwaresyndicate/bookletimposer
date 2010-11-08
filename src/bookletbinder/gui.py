@@ -193,7 +193,7 @@ class BookletBinderUI(object):
             widget.get_active_iter(), 0)
 
     def cb_paper_format_changed(self, widget, data=None):
-        self.__preferences.layout = widget.get_model().get_value(
+        self.__preferences.paper_format = widget.get_model().get_value(
             widget.get_active_iter(), 0)
 
     def cb_paper_orientation_changed(self, widget, data=None):
