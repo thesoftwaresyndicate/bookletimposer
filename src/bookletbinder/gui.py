@@ -23,9 +23,9 @@
 
 ########################################################################
 #
-# util/gui.py
+# bookletkinder/gui.py
 #
-# This file the GTK+ graphic utility.
+# This file contains the GTK+ graphic utility.
 #
 ########################################################################
 
