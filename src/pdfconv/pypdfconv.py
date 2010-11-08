@@ -99,8 +99,8 @@ class MismachingOrientationsError(PdfConvError):
     The attribute "message" contains the problematic layout.
     """
     def __str__(self):
-        _("The layout %s is incompatible with the input page orientation") \
-            % message
+        return _("The layout %s is incompatible with the input page orientation") \
+            % self.message
 
 ########################################################################
 
@@ -112,7 +112,7 @@ class UnknownFormatError(PdfConvError):
     The attribute "message" contains the problematic format.
     """
     def __str__(self):
-        _('The page format "%s" is unknown') % message
+        return _('The page format "%s" is unknown') % self.message
 
 ########################################################################
 
