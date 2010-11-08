@@ -46,8 +46,6 @@ _ = gettext.gettext
 # XXX
 VERSION = "0.01"
 
-# GÉNÉRAL
-
 def main():
     """
     This is the function that launches the program
