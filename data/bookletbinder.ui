@@ -12,13 +12,13 @@
         <child>
           <object class="GtkTable" id="table1">
             <property name="visible">True</property>
-            <property name="n_rows">7</property>
+            <property name="n_rows">6</property>
             <property name="n_columns">2</property>
             <child>
               <object class="GtkFileChooserButton" id="input_file_chooser_button">
                 <property name="visible">True</property>
-                <property name="do_overwrite_confirmation">True</property>
                 <property name="create_folders">False</property>
+                <property name="do_overwrite_confirmation">True</property>
                 <property name="title" translatable="yes">S&#xE9;lectionner un PDF &#xE0; convertir</property>
                 <signal name="file_set" handler="cb_infile_set"/>
               </object>
@@ -108,45 +108,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkFileChooserButton" id="output_file_chooser_button">
-                <property name="visible">True</property>
-                <property name="do_overwrite_confirmation">True</property>
-                <property name="preview_widget_active">False</property>
-                <property name="use_preview_label">False</property>
-                <property name="action">save</property>
-                <property name="title" translatable="yes">Choisir le fichier &#xE0; enregistrer</property>
-                <signal name="file_set" handler="cb_outfile_set"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label6">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Output file</property>
-              </object>
-              <packing>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label5">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Output paper orientation</property>
-              </object>
-              <packing>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="label4">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
@@ -166,18 +127,6 @@
               <packing>
                 <property name="top_attach">3</property>
                 <property name="bottom_attach">4</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="output_paper_orientation_combobox">
-                <property name="visible">True</property>
-                <signal name="changed" handler="cb_paper_orientation_changed"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
@@ -217,6 +166,33 @@
                 <property name="right_attach">2</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label6">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Output file</property>
+              </object>
+              <packing>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="output_file_chooser_button">
+                <property name="visible">True</property>
+                <property name="use_preview_label">False</property>
+                <property name="preview_widget_active">False</property>
+                <property name="do_overwrite_confirmation">True</property>
+                <property name="title" translatable="yes">Choisir le fichier &#xE0; enregistrer</property>
+                <signal name="file_set" handler="cb_outfile_set"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
               </packing>
             </child>
           </object>
