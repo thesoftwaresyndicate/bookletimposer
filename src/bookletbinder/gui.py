@@ -47,6 +47,12 @@ import config
 config.gettext_init()
 _ = gettext.gettext
 
+class UserInterrupt(backend.BookletBinderError):
+    """Exception raised when the user interrupted the conversion
+
+    """
+    # XXX: this is probably not the right way to do...
+
 class BookletBinderUI(object):
     """
     
@@ -225,8 +231,11 @@ class BookletBinderUI(object):
         pass
 
     def cb_progress_stop(self, widget, data=None):
-        # XXX: code me!
-        pass
+        gtk.gdk.threads_enter()
+        debug("Stop triggered")
+        self.__stop.set()
+        self.__label_conversion_setp.set_text(_("Cancel triggered, please wait..."))
+        gtk.gdk.threads_leave()
 
     # ACTIONS
     
@@ -265,6 +274,13 @@ class BookletBinderUI(object):
             raise
 
         def cb_update_progress(message, progress):
+            # there we are inside the work of the converter,
+            # so we can to stop it if the user required to cancel
+            # the operation. To achieve that we raise an exception.
+            # XXX: that's not elegant at all
+            if self.__stop.is_set():
+                debug("Stop catched")
+                raise UserInterrupt()
             gtk.gdk.threads_enter()
             self.__progressbar_conversion.set_fraction(progress)
             self.__label_conversion_setp.set_text(message)
@@ -276,16 +292,24 @@ class BookletBinderUI(object):
             exception_dialog()
             gtk.gdk.threads_leave()
             print traceback.format_exc()
-        def worker(exception_callback):
+        def cb_interrupt_callback():
+            self.__progress_dialog.hide()
+            self.__main_window.set_sensitive(True)
+        def worker(exception_callback, interrupt_callback):
             try:
                 converter.run()
+            except UserInterrupt:
+                interrupt_callback()
             except Exception, e:
                 exception_callback(e)
                 raise
             gtk.gdk.threads_enter()
             self.__progress_dialog.hide()
             gtk.gdk.threads_leave()
-        converter_thread = threading.Thread(target=worker, args=[cb_process_exception])
+        self.__stop = threading.Event()
+        converter_thread = threading.Thread(target=worker,
+                                            args=[cb_process_exception,
+                                                  cb_interrupt_callback])
 
         converter_thread.start()
 
