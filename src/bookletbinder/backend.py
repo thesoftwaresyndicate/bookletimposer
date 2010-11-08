@@ -129,6 +129,24 @@ class ConverterPreferences(object):
         assert value == None or os.path.exists(os.path.dirname(value))
         self._outfile_name = value
 
+    def __str__(self):
+        string = "ConverterPreferences object:\n"
+        if self._infile_name:
+            string += "    infile_name: %s\n" % self._infile_name
+        if self._infile_name:
+            string += "    outfile_name: %s\n" % self._outfile_name
+        if self._conversion_type:
+            string += "    conversion_type: %s\n" % self._conversion_type
+        if self._layout:
+            string += "    layout: %s\n" % self._layout
+        if self._paper_format:
+            string += "    paper_format: %s\n" % self._paper_format
+        if self._paper_orientation:
+            string += "    paper_orientation: %s\n" % self._paper_orientation
+        if self._copy_pages:
+            string += "    copy_pages: %s\n" % self._copy_pages
+        return string
+
     def create_converter(self):
         if not self._infile_name:
             raise MissingInputFileError
