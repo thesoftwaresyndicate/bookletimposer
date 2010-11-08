@@ -32,6 +32,19 @@
 import pypdfconv
 import os.path
 
+class BookletBinderError(pypdfconv.PdfConvError):
+    """The base class for all exceptions raised by BookletBinder.
+
+    The attribute "message" contains a message explaining the cause of the
+    error.
+    """
+
+class MissingInputFileError(BookletBinderError):
+    """Excpetion raised when trying to create a converter withot an input file.
+
+    An input file is required to create a converter."
+    """
+
 class ConversionType:
     """The conversion type constants"""
     BOOKLETIZE = 1
@@ -118,8 +131,7 @@ class ConverterPreferences(object):
 
     def create_converter(self):
         if not self._infile_name:
-            # Use a better exception
-            raise Exception, "Cannot create converter without an input file"
+            raise MissingInputFileError
             return None
         elif self._outfile_name:
             converter = TypedFileConverter(self._infile_name, self._outfile_name)
