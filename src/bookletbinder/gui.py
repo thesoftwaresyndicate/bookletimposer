@@ -128,7 +128,7 @@ class BookletBinderUI(object):
     def __fill_paper_orientations(self):
         liststore = self.set_liststore_for_combobox(
             self.__paper_orientation_combobox)
-        for layout in ["Portrait", "Paysage"]:
+        for layout in ["Portrait", "Landscape"]:
             liststore.append([layout])
         self.__paper_orientation_combobox.set_active(0)
 
@@ -159,8 +159,12 @@ class BookletBinderUI(object):
             self.combobox_select_row(self.__paper_format_combobox,
                                      preferences.paper_format)
         if preferences.paper_orientation:
-            # XXX : select items
-            pass
+            if preferences.paper_orientation = pypdfconv.PageOrientation.PORTRAIT:
+                self.combobox_select_row(self.__paper_orientation_combobox,
+                                         _("Portrait"))
+            else:
+                self.combobox_select_row(self.__paper_orientation_combobox,
+                                         _("Landscape"))
         if preferences.outfile_name:
             self.__file_chooser_button.set_filename(preferences.outfile_name)
 
@@ -197,9 +201,11 @@ class BookletBinderUI(object):
             widget.get_active_iter(), 0)
 
     def cb_paper_orientation_changed(self, widget, data=None):
-        #self.__preferences.layout = widget.get_model().get_value(
-        #    widget.get_active_iter())
-        pass
+        orientation = widget.get_model().get_value(widget.get_active_iter(), 0)
+        if orientation = _("Portrait"):
+            self.__preferences.paper_orientation = pypdfconv.PageOrientation.PORTRAIT
+        else:
+            self.__preferences.paper_orientation = pypdfconv.PageOrientation.LANDSCAPE
 
     def cb_outfile_set(self, widget, data=None):
         self.__preferences.outfile_name = widget.get_filename()
