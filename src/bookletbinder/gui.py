@@ -29,8 +29,6 @@
 #
 ########################################################################
 
-DATADIR="/home/kjo/Dev/pyPdfConv/pyPdfConv2/data"
-
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -40,12 +38,14 @@ gobject.threads_init()
 import os.path
 import threading
 import traceback
+import gettext
 
 import backend
 import pypdfconv
+import config
 
-# XXX: Fix these translatable strings
-_ = lambda x: x
+config.gettext_init()
+_ = gettext.gettext
 
 class BookletBinderUI(object):
     """
@@ -67,7 +67,7 @@ class BookletBinderUI(object):
 
     def __create_gui(self):
         builder = gtk.Builder()
-        builder.add_from_file(os.path.join(DATADIR,"bookletbinder.ui"))
+        builder.add_from_file(os.path.join(config.get_datadir(), "bookletbinder.ui"))
         builder.connect_signals(self)
 
         self.__main_window = builder.get_object("main_window")

@@ -32,15 +32,15 @@
 #
 ########################################################################
 
-from gui import *
-from backend import *
-#from config import *
-
 import optparse
 import gettext
 
-gettext.bindtextdomain("pypdfconv", "/tmp/pypdfconv/share/locale")
-gettext.textdomain("pypdfconv")
+# XXX: use normal imports
+from gui import *
+from backend import *
+import config
+
+config.gettext_init()
 _ = gettext.gettext
 
 # XXX
