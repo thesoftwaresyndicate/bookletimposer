@@ -105,7 +105,7 @@ def main():
     if options.conv_type:
         preferences.conversion_type = options.conv_type
     if options.output_format:
-        preferences.outfile_format = options.output_format
+        preferences.paper_format = options.output_format
     if options.pages_per_sheet:
         preferences.layout = options.pages_per_sheet
     if options.copy_pages:
