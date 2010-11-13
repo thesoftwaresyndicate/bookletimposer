@@ -78,6 +78,10 @@ def main():
         action="store_const", dest="conv_type", 
         const=backend.ConversionType.REDUCE, default=backend.ConversionType.REDUCE,
         help=_("don't do any reorganisation (will only scale and assemble pages)"))
+    parser.add_option ("-c", "--copy-pages",
+        action="store_true", dest="copy_pages",
+        default=False,
+        help=_("Copy the same group of input pages on one output page"))
     parser.add_option ("-p", "--pages-per-sheet", 
         dest="pages_per_sheet", 
         default="2x1", 
@@ -104,6 +108,8 @@ def main():
         preferences.outfile_format = options.output_format
     if options.pages_per_sheet:
         preferences.layout = options.pages_per_sheet
+    if options.copy_pages:
+        preferences.copy_pages = True
     
     if options.gui:
         ui = BookletBinderUI(preferences)
