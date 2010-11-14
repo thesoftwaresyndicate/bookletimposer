@@ -3,8 +3,8 @@
 
 ########################################################################
 # 
-# pypdfconv - Convert PDF documents between diffrents page layouts
-# Copyright (C) 2008-2009 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
+# pdfimposer - achieve some basic imposition on PDF documents
+# Copyright (C) 2008-2010 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
 # 
 # This program is  free software; you can redistribute  it and/or modify
 # it under the  terms of the GNU General Public  License as published by
