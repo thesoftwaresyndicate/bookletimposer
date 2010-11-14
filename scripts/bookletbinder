@@ -35,10 +35,14 @@
 import optparse
 import gettext
 
-# XXX: use normal imports
-from gui import *
-from backend import *
-import config
+if __debug__:
+    import sys
+    import os
+    sys.path.insert(0, os.path.join(os.getcwd(), "lib"))
+
+import bookletbinder.gui as gui
+import bookletbinder.backend as backend
+import bookletbinder.config as config
 
 config.gettext_init()
 _ = gettext.gettext
@@ -112,8 +116,8 @@ def main():
         preferences.copy_pages = True
     
     if options.gui:
-        ui = BookletBinderUI(preferences)
-        gtk.main()
+        ui = gui.BookletBinderUI(preferences)
+        gui.gtk.main()
     else:
         converter = preferences.create_converter()
         def progress_callback(message, progress):
