@@ -3,7 +3,7 @@
 
 ########################################################################
 # 
-# PyPdfConv - Utility to convert PDF files between diffrents page layouts
+# PdfImposer - Utility to convert PDF files between diffrents page layouts
 # Copyright (C) 2008-2010 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
 # 
 # This program is  free software; you can redistribute  it and/or modify
@@ -41,7 +41,7 @@ import traceback
 import gettext
 
 import backend
-import pypdfconv
+import pdfimposer
 import config
 from config import debug
 
@@ -118,7 +118,7 @@ class BookletImposerUI(object):
     def __fill_paper_formats(self):
         liststore = self.set_liststore_for_combobox(
             self.__paper_format_combobox)
-        formats = pypdfconv.AbstractConverter.page_formats.keys()
+        formats = pdfimposer.AbstractConverter.page_formats.keys()
         formats.sort()
         for format in formats:
             liststore.append([format])

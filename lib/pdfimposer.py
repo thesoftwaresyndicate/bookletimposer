@@ -23,10 +23,11 @@
 
 ########################################################################
 #
-# pypdfconv.py
+# pdfimposer.py
 #
 # This python module enables to change PDF page layout. It is the backend
-# of pypdfconv.
+# of BookletImposer, but is designed to be easily usable by from any python
+# script.
 #
 ########################################################################
 
@@ -76,7 +77,7 @@ class PageOrientation:
 
 class PdfConvError(Exception):
     """
-    The base class for all exceptions raised by PyPdfConv.
+    The base class for all exceptions raised by PdfImposer.
 
     The attribute "message" contains a message explaining the cause of the
     error.
@@ -111,7 +112,7 @@ class UnknownFormatError(PdfConvError):
 
 class AbstractConverter(object):
     """
-    The base class for all pyPdfConv converter classes.
+    The base class for all pdfimposer converter classes.
 
     It is an abstract class, with some abstract functions which should be
     overriden :
