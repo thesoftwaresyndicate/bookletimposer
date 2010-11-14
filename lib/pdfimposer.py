@@ -82,6 +82,9 @@ class PdfConvError(Exception):
     The attribute "message" contains a message explaining the cause of the
     error.
     """
+    def __init__(self, message=None):
+        Exception.__init__(self)
+        self.message = message
 
 ########################################################################
 
