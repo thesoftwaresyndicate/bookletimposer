@@ -32,6 +32,7 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
+import glib
 import gobject # >= 2.16 !
 gtk.gdk.threads_init()
 
@@ -103,8 +104,16 @@ class BookletImposerUI(object):
         self.__progressbar_conversion = builder.get_object("conversion_progressbar")
         self.__label_conversion_setp = builder.get_object("conversion_step_label")
 
+        self.__try_set_icon(self.__main_window, "bookletimposer.svg")
         self.__fill_paper_formats()
         self.__fill_layouts()
+
+    @staticmethod
+    def __try_set_icon(widget, icon):
+        try:
+            widget.set_icon_from_file(os.path.join(config.get_pixmapsdir(), icon))
+        except glib.GError:
+            debug("Icon not found")
 
     @staticmethod
     def set_liststore_for_combobox(combobox):
