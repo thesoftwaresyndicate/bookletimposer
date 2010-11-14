@@ -33,7 +33,7 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 import gobject # >= 2.16 !
-gobject.threads_init()
+gtk.gdk.threads_init()
 
 import os.path
 import threading
