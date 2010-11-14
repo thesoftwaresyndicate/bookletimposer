@@ -1,18 +1,23 @@
 File and directory contents
 ===========================
 
-* `src/` contains the source code
+* `lib/` contains the source code
 
-  * `pypdfconv.py` contains the python module which forms the backend
+  - `pdfimposer.py` contains the python module which forms the backend
+  - `bookletbinder/` contains the commandline and GTK utility 
+
+* `data/` contains data for bookletbinder
 
 * `doc/` contains some documentation
 
 * `tests/` containts some tests scripts and their data files
 
+
 Coding style
 ============
 
 Please try to follow PEP 8 "Style Guide for Python Code".
+
 
 Docstring conventions
 =====================
