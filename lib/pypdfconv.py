@@ -45,13 +45,6 @@ Some convenience functions are also provided.
 """
 # XXX: File should be ASCII
 
-# XXX gruge de dev
-if True:
-    import sys
-    sys.path = ["/home/kjo/Dev/pyPdf"] + sys.path
-    print "DEBUG added custom pyPdf dir in path, which is now ", sys.path
-# XXX /gruge de dev
-
 from abc import ABCMeta, abstractmethod
 
 import re
