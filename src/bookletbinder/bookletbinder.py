@@ -117,7 +117,7 @@ def main():
     else:
         converter = preferences.create_converter()
         def progress_callback(message, progress):
-            print(_("%i %%: %s") % (progress*100, message))
+            print(_("%i%%: %s") % (progress*100, message))
         converter.set_progress_callback(progress_callback)
         converter.run()
     return 0 
