@@ -23,11 +23,11 @@
 
 ########################################################################
 #
-# bookletbinder
+# bookletimposer
 #
-# This file is the main program of bookletbinder
+# This file is the main program of bookletimposer
 #
-# It contains the CLI frontend of bookletbinder, which can either work
+# It contains the CLI frontend of bookletimposer, which can either work
 # standalone or launch the GTK2+ frontend.
 #
 ########################################################################
@@ -40,9 +40,9 @@ if __debug__:
     import os
     sys.path.insert(0, os.path.join(os.getcwd(), "lib"))
 
-import bookletbinder.gui as gui
-import bookletbinder.backend as backend
-import bookletbinder.config as config
+import bookletimposer.gui as gui
+import bookletimposer.backend as backend
+import bookletimposer.config as config
 
 config.gettext_init()
 _ = gettext.gettext
@@ -116,7 +116,7 @@ def main():
         preferences.copy_pages = True
     
     if options.gui:
-        ui = gui.BookletBinderUI(preferences)
+        ui = gui.BookletImposerUI(preferences)
         gui.gtk.main()
     else:
         converter = preferences.create_converter()
@@ -130,8 +130,8 @@ if __name__ == "__main__":
     # Import Psyco if available
     try:
         import psyco
-        print _("psyco imported. Bookletbinder will run faster.")
+        print _("psyco imported. Bookletimposer will run faster.")
         psyco.full()
     except ImportError:
-        print _("psyco not found. You can speed Bookletbinder up by installing it.")
+        print _("psyco not found. You can speed Bookletimposer up by installing it.")
     main()
