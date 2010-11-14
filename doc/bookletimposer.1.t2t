@@ -1,0 +1,111 @@
+bookletimposer
+An utility to achieve some basic imposition on PDF documents
+2010
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source for man pages
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Configuration
+%
+%! Target :  man
+%! Encoding: utf-8
+
+
+=NAME=
+**bookletimposer** - An utility to reorganize PDF pages
+
+
+=SYNOPSIS=
+**bookletimposer** [//options//] [//input-file//]
+
+**bookletimposer** **-a** [//options//] //input-file//
+
+
+=DESCRIPTION=
+bookletimposer is an utility to achieve some basic imposition on PDF
+documents, especially designed to work on booklets. 
+
+It allows:
+
+- to transform linear documents to booklets;
+- to reduce a document to put many on one sheet (for tracts for example);
+- to transform booklets to linear documents.
+
+It is a free software released under [GPLv3
+http://www.gnu.org/licenses/gpl-3.0-standalone.html] 
+
+
+=OPTIONS=
+: **--version**
+show program's version number and exit
+
+
+: **-h**, **help**
+show an help message and exit
+
+
+: **-o** //OUTFILE//, **output=**//OUTFILE//
+sets output PDF file to //OUTFILE//
+
+
+: **-a**, **--no-gui**
+automatic converstion (don't show the user interface).
+In that mode, the input file must be defined.
+
+
+: **-i**, **--gui**
+shows the user interface (default).
+
+
+: **-b**, **--booklet**
+makes a booklet
+
+
+: **-l**, **--linearize**
+convert a booklet to single pages
+
+
+: **-n**, **--no-reorganisation**
+don't do any reorganisation (will only scale and assemble pages)
+
+
+: **-c** **--copy-pages**
+copy the same group of input pages on one output page
+
+: **-p** //PAGES_PER_SHEET//, **pages-per-sheet=**//PAGES_PER_SHEET//
+nombre de pages par feuille, au format
+VERTICALxHORIZONTAL, par exemple 2x1
+
+
+: **-f** //OUTPUT_FORMAT//, **format=**//OUTPUT_FORMAT//
+format de page de sortie, par exemple A4 ou A3R
+
+
+=EXAMPLES=
+: ``bookletimposer``
+Displays the GTK+ user interface
+
+
+: ``bookletimposer --no-gui --booklet --pages-per-sheet=2x1 --output=out.pdf in.pdf``
+Converts in.pdf into a booklet with two pages per sheet an saves the 
+result as out.pdf.
+
+
+: ``bookletimposer --no-gui --linearise --pages-per-sheet=2x1 in.pdf``
+Converts the two-pages-per-sheet booklet in.pdf into a page-by-page
+PDF. As the output file name is not defined, it will default to in-conv.pdf.
+
+
+=FILES=
+No external file is used
+
+
+=SEE ALSO=
+pdfshuffler(1)
+
+
+=KNOWN ISSUES=
+BookletImposer is under devlopment, which means that for the moment, some
+things works, some others does not... Thanks to report bugs if you find some!
