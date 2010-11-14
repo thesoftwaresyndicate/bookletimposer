@@ -39,18 +39,18 @@ def debug(msg):
 def get_sharedir():
     if __debug__ and os.path.exists("data"):
         return "data"
-    if os.path.exists("/usr/local/share/bookletbinder"):
+    if os.path.exists("/usr/local/share/bookletimposer"):
         return "/usr/local/share"
-    elif os.path.exists("/usr/share/bookletbinder"):
+    elif os.path.exists("/usr/share/bookletimposer"):
         return "/usr/share"
 
 def get_datadir():
-    return os.path.join (get_sharedir(), "bookletbinder")
+    return os.path.join (get_sharedir(), "bookletimposer")
 
 def get_pixmapsdir():
     return os.path.join (get_sharedir(), "pixmaps")
 
 def gettext_init():
-    gettext.bindtextdomain("bookletbinder", os.path.join(get_datadir(), "locale"))
-    gettext.textdomain("bookletbinder")
+    gettext.bindtextdomain("bookletimposer", os.path.join(get_datadir(), "locale"))
+    gettext.textdomain("bookletimposer")
 

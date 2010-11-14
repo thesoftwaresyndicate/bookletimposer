@@ -32,14 +32,14 @@
 import pypdfconv
 import os.path
 
-class BookletBinderError(pypdfconv.PdfConvError):
-    """The base class for all exceptions raised by BookletBinder.
+class BookletImposerError(pypdfconv.PdfConvError):
+    """The base class for all exceptions raised by BookletImposer.
 
     The attribute "message" contains a message explaining the cause of the
     error.
     """
 
-class MissingInputFileError(BookletBinderError):
+class MissingInputFileError(BookletImposerError):
     """Excpetion raised when trying to create a converter withot an input file.
 
     An input file is required to create a converter."

@@ -48,13 +48,13 @@ from config import debug
 config.gettext_init()
 _ = gettext.gettext
 
-class UserInterrupt(backend.BookletBinderError):
+class UserInterrupt(backend.BookletImposerError):
     """Exception raised when the user interrupted the conversion
 
     """
     # XXX: this is probably not the right way to do...
 
-class BookletBinderUI(object):
+class BookletImposerUI(object):
     """
     
     """
@@ -76,7 +76,7 @@ class BookletBinderUI(object):
 
     def __create_gui(self):
         builder = gtk.Builder()
-        builder.add_from_file(os.path.join(config.get_datadir(), "bookletbinder.ui"))
+        builder.add_from_file(os.path.join(config.get_datadir(), "bookletimposer.ui"))
         builder.connect_signals(self)
 
         self.__main_window = builder.get_object("main_window")
@@ -306,5 +306,5 @@ class BookletBinderUI(object):
         self.__main_window.set_sensitive(True)
 
 if __name__ == "__main__":
-    ui = BookletBinderUI()
+    ui = BookletImposerUI()
     gtk.main()
