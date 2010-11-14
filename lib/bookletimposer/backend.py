@@ -23,7 +23,7 @@
 
 ########################################################################
 #
-# util/backend.py
+# backend.py
 #
 # This file contains backend should not be part of the python module.
 #
