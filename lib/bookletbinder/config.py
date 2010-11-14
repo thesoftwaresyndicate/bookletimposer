@@ -37,12 +37,12 @@ def debug(msg):
     if __debug__: print msg
 
 def get_sharedir():
+    if __debug__ and os.path.exists("data"):
+        return "data"
     if os.path.exists("/usr/local/share/bookletbinder"):
         return "/usr/local/share"
     elif os.path.exists("/usr/share/bookletbinder"):
         return "/usr/share"
-    else:
-        return "data"
 
 def get_datadir():
     return os.path.join (get_sharedir(), "bookletbinder")
