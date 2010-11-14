@@ -3,8 +3,8 @@
 
 ########################################################################
 # 
-# PyPdfConv - Utility to convert PDF files between diffrents page layouts
-# Copyright (C) 2008-2009 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
+# BookletImposer - Utility to achieve some basic imposition on PDF documents
+# Copyright (C) 2008-2010 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
 # 
 # This program is  free software; you can redistribute  it and/or modify
 # it under the  terms of the GNU General Public  License as published by
@@ -29,10 +29,10 @@
 #
 ########################################################################
 
-import pypdfconv
+import pdfimposer
 import os.path
 
-class BookletImposerError(pypdfconv.PdfConvError):
+class BookletImposerError(pdfimposer.PdfConvError):
     """The base class for all exceptions raised by BookletImposer.
 
     The attribute "message" contains a message explaining the cause of the
@@ -163,7 +163,7 @@ class ConverterPreferences(object):
         if self._copy_pages: converter.set_copy_pages(self._copy_pages)
         return converter
 
-class TypedFileConverter(pypdfconv.FileConverter):
+class TypedFileConverter(pdfimposer.FileConverter):
     """A FileConverter that stores the conversion type.
 
     """
@@ -191,7 +191,7 @@ class TypedFileConverter(pypdfconv.FileConverter):
             set_copy_pages).
         """
         
-        pypdfconv.FileConverter.__init__(self, infile_name, outfile_name,
+        pdfimposer.FileConverter.__init__(self, infile_name, outfile_name,
                                          layout, format, copy_pages)
         self._conversion_type = conversion_type
 
