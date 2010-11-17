@@ -390,6 +390,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 </property>
     <property name="authors">Kj&#xF6; Hansi Glaz &lt;kjo@a4nancy.net.eu.org&gt;</property>
     <property name="wrap_license">True</property>
+    <signal name="close" handler="cb_dialog_close"/>
+    <signal name="response" handler="cb_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
