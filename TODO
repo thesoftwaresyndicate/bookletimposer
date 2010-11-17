@@ -1,0 +1,6 @@
+TODO
+====
+
+* pdfimposer: transform exceptions so that i18n is not necessary
+* bookletimposer.gui: use previews
+* bookletimposer.gui: add gnome-help page and implement help button
