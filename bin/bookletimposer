@@ -47,8 +47,7 @@ import bookletimposer.config as config
 config.gettext_init()
 _ = gettext.gettext
 
-# XXX
-VERSION = "0.01"
+__version__ = "0.1~beta1"
 
 def main():
     """
@@ -59,7 +58,7 @@ def main():
     
     parser = optparse.OptionParser(
         usage="%prog [options] [infile [infile2] ...]",
-        version="%prog " + VERSION)
+        version="%prog " + __version__)
     parser.add_option ("-o", "--output", dest="outfile",
         help=_("output PDF file"))
     parser.add_option ("-a", "--no-gui", 
