@@ -174,6 +174,9 @@ class BookletImposerUI(object):
     def cb_close_main_window(self, widget, event, data=None):
         self.close_application()
 
+    def cb_dialog_close(self, dialog, data=None):
+        dialog.hide()
+
     def cb_infile_set(self, widget, data=None):
         self.__preferences.infile_name = widget.get_filename()
         self.__apply_button.set_sensitive(True)
