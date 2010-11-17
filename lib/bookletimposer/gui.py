@@ -65,11 +65,9 @@ class BookletImposerUI(object):
         
         """
         if preferences:
-            debug("Recieved preferences object")
             self.__preferences = preferences
         else:
             self.__preferences = backend.ConverterPreferences()
-        debug(self.__preferences)
         self.__create_gui()
         if preferences:
             self.__apply_preferences()
@@ -184,17 +182,14 @@ class BookletImposerUI(object):
     def cb_bookletize_toggled(self, widget, data=None):
         if widget.get_active():
             self.__preferences.conversion_type = backend.ConversionType.BOOKLETIZE
-            debug("Conversion type set: bookletize")
 
     def cb_linearize_toggled(self, widget, data=None):
         if widget.get_active():
             self.__preferences.conversion_type = backend.ConversionType.LINEARIZE
-            debug("Conversion type set: linearize")
 
     def cb_reduce_toggled(self, widget, data=None):
         if widget.get_active():
             self.__preferences.conversion_type = backend.ConversionType.REDUCE
-            debug("Conversion type set: reduce")
 
     def cb_copy_pages_toggled(self, widget, data=None):
         self.__preferences.copy_pages = widget.get_active()
@@ -257,7 +252,6 @@ class BookletImposerUI(object):
             dialog.connect("response", cb_close_dialog)
             dialog.show()
         try:
-            debug(self.__preferences)
             converter = self.__preferences.create_converter()
         except Exception, e:
             exception_dialog(e)
@@ -305,7 +299,6 @@ class BookletImposerUI(object):
         self.__label_conversion_setp.set_text("")
         self.__progress_dialog.show()
         try:
-            debug(self.__preferences)
             converter = self.__preferences.create_converter()
         except Exception, e:
             exception_dialog(e)
