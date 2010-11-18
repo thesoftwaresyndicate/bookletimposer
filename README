@@ -5,9 +5,10 @@ Achieve some basic imposition on PDF documents
 What is it ?
 ============
 
-pdfimposer is a python module to achieve some basic imposition on PDF
-documents, especially designed to work on booklets. It was tested on GNU/Linux
-althought it should work on any systems with a Python interpreter. 
+pdfimposer is a python module to achieve some basic imposition on PDF documents,
+especially designed to work on booklets. It is implemented on top of pyPdf. It
+was tested on GNU/Linux althought it should work on any systems with a Python
+interpreter.
 
 BookletImposer is a commandline and GTK+ interface to pdfinmoser.
 
@@ -40,6 +41,9 @@ pdfimposer requires:
 - python (>= 2.6)
 - pyPdf (>= 1.12+pypdfconv1)
 
+As pyPdf 0.13 is not currently released (november 2010), you can get a snapshot
+of pyPdf git at [http://kjo.herbesfolles.org/bookletimposer/archive/].
+
 BookletImposer also requires:
 
 - pyGtk
@@ -47,7 +51,6 @@ BookletImposer also requires:
 In addition, the build and installation process requires:
 
 - python-distutils-extra
-- python-epydoc
 - txt2tags
 
 
