@@ -220,11 +220,9 @@ class BookletImposerUI(object):
         pass
 
     def cb_progress_stop(self, widget, data=None):
-        gtk.gdk.threads_enter()
         debug("Stop triggered")
         self.__stop.set()
         self.__label_conversion_setp.set_text(_("Cancel triggered, please wait..."))
-        gtk.gdk.threads_leave()
 
     # ACTIONS
     
