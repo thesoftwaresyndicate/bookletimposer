@@ -82,7 +82,7 @@ build_extra.build_extra.sub_commands.append(("build_man", None))
 
 setup(name='bookletimposer',
       version='0.1~beta1',
-      url="http://kjo;herbesfolles.org/pypdfconv/",
+      url="http://kjo.herbesfolles.org/bookletimposer/",
       author="Kjö Hansi Glaz",
       author_email="kjo@a4nancy.net.eu.org",
       packages=['bookletimposer',],
