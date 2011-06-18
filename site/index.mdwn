@@ -67,13 +67,7 @@ the following debian packages: `python-gtk2`, `python-distutils-extra` and
 ### pyPdf
 
 You should first install a recent version of pyPdf (≥ 1.13) which is
-not in debian yet. You could download it from 
-[pyPdf website](http://pybrary.net/pyPdf/pyPdf-1.13.tar.gz).
-
-Extract the tarball and go in the `pyPdf-1.13` directory. Then run the following
-command as root:
-
-    # ./setup.py install
+now in debian wheezy package `python-pypdf`. The package installs ok in squeeze.
 
 ### pdfimposer/BookletImposer
 
@@ -92,7 +86,7 @@ Dependencies
 pdfimposer requires:
 
 - python (≥ 2.6)
-- pyPdf (≥ 1.13)
+- [pyPdf (≥ 1.13)](http://pybrary.net/pyPdf/pyPdf-1.13.tar.gz)
 
 
 BookletImposer also requires:
