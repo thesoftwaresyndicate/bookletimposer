@@ -1,0 +1,137 @@
+% pdfimposer / BookletImposer
+%
+%
+
+*Achieve some basic imposition on PDF documents*
+
+![bookletimposer icon](img/bookletimposer.png)\ 
+
+
+About
+=====
+
+*pdfimposer* is a python module to achieve some basic imposition on PDF documents,
+especially designed to work on booklets. It is implemented on top of 
+[pyPdf](http://pybrary.net/pyPdf/). It was tested on GNU/Linux although it
+should work on any system with a Python interpreter. 
+
+*BookletImposer* is a commandline and GTK+ interface to *pdfimposer*.
+
+They are both free software released under
+[GPLv3](http://www.gnu.org/licenses/gpl-3.0-standalone.html)
+
+Features
+--------
+
+- produce a booklet out of a linear documents
+- produce a linear document out of a booklet
+- reduce a document to put many pages on every sheet
+
+BookletImposer isn't able to merge multiple PDF files. We advise you to use
+[pdfshuffler](http://sourceforge.net/projects/pdfshuffler/) if you need such a
+feature; pdfshuffler is 
+[available in Debian](http://packages.debian.org/pdfshuffler).
+
+Screenshots
+-----------
+
+![bookletimposer 0.1~beta1 main window](img/bookletimposer-main_window.png)
+
+![bookletimposer 0.1~beta1 progres dialog](img/bookletimposer-progression.png)
+
+Developpement status
+--------------------
+
+*BookletImposer* is under development and is thus not perfect yet. Some things
+works, some others do not... Thanks to report bugs if you find some!
+
+Furethermore some features still need to be implemented.
+
+
+Installation
+============
+
+Download
+--------
+
+Everything is in [the archive](archive/).
+
+
+Quick installation
+------------------
+
+You must first ensure that the dependencies are installed. They are provided by
+the following debian packages: `python-gtk2`, `python-distutils-extra` and
+`txt2tags`.
+
+### pyPdf
+
+You should first install a recent version of pyPdf (≥ 1.13) which is
+not in debian yet. You could download it from 
+[pyPdf website](http://pybrary.net/pyPdf/pyPdf-1.13.tar.gz).
+
+Extract the tarball and go in the `pyPdf-1.13` directory. Then run the following
+command as root:
+
+    # ./setup.py install
+
+### pdfimposer/BookletImposer
+
+Download the tarball from [the archive](archive/) and extract it. Go in the
+`bookletimposer-`*version* directory and run the following command:
+
+    $ ./setup.py build
+
+Then as run as root:
+
+    # ./setup.py install
+
+Dependencies
+------------
+
+pdfimposer requires:
+
+- python (≥ 2.6)
+- pyPdf (≥ 1.13)
+
+
+BookletImposer also requires:
+
+- pyGtk
+
+
+In addition, the build and installation process requires:
+
+- python-distutils-extra
+- txt2tags
+
+
+
+Documentation
+=============
+
+BookletImposer usage
+--------------------
+
+BookletImposer can be launched from the Office section of the Application menu,
+or with the command:
+
+    $ bookletimposer
+
+Help on command line options is available in the [man
+page](bookletimposer.1.html).
+
+
+Pdfimposer API documentation
+----------------------------
+
+See [generated epydoc documentation](api/).
+
+
+Older versions
+==============
+
+*pdfimposer* and *BookletImposer* are a rewrite of PyPdfConv. 
+
+PyPdfConf is not supported anymore, but can still be downloadad
+[here](http://kjo.herbesfolles.org/pypdfconv/).
