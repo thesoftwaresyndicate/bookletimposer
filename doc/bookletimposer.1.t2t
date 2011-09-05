@@ -41,11 +41,11 @@ either version 3 or (at your option) any later version.
 show program's version number and exit
 
 
-: **-h**, **help**
+: **-h**, **--help**
 show an help message and exit
 
 
-: **-o** //OUTFILE//, **output=**//OUTFILE//
+: **-o** //OUTFILE//, **--output=**//OUTFILE//
 sets output PDF file to //OUTFILE//
 
 
@@ -73,12 +73,12 @@ don't do any reorganisation (will only scale and assemble pages)
 : **-c** **--copy-pages**
 copy the same group of input pages on one output page
 
-: **-p** //PAGES_PER_SHEET//, **pages-per-sheet=**//PAGES_PER_SHEET//
+: **-p** //PAGES_PER_SHEET//, **--pages-per-sheet=**//PAGES_PER_SHEET//
 nombre de pages par feuille, au format
 VERTICALxHORIZONTAL, par exemple 2x1
 
 
-: **-f** //OUTPUT_FORMAT//, **format=**//OUTPUT_FORMAT//
+: **-f** //OUTPUT_FORMAT//, **--format=**//OUTPUT_FORMAT//
 format de page de sortie, par exemple A4 ou A3R
 
 
