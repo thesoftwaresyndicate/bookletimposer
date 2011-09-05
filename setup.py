@@ -86,6 +86,19 @@ setup(name='bookletimposer',
       author="Kjö Hansi Glaz",
       author_email="kjo@a4nancy.net.eu.org",
       license="GPLv3+",
+      description="Achieve some basic imposition on PDF documents",
+      long_description="""Bookletimposer is an utility to achieve some basic imposition on PDF
+documents, especially designed to work on booklets.
+
+Bookletimposer is implemented as a commandline and GTK+ interface to pdfimposer,
+a reusable python module built on top of pyPdf.
+
+It allows:
+
+- to transform linear documents to booklets;
+- to reduce a document to put many on one sheet (for tracts for example);
+- to transform booklets to linear documents.
+""",
       packages=['bookletimposer',],
       py_modules=['pdfimposer'],
       package_dir={'': 'lib'},
