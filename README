@@ -12,8 +12,9 @@ interpreter.
 
 BookletImposer is a commandline and GTK+ interface to pdfimposer.
 
-They are both free software released under GPLv3
-(http://www.gnu.org/licenses/gpl-3.0-standalone.html)
+They are both free software released under the GNU General Public License,
+either version 3 or (at your option) any later version. See COPYING for the
+full text of the license.
 
 
 Features
