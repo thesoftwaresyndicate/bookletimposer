@@ -43,8 +43,8 @@ Screenshots
 
 ![bookletimposer 0.1 progress dialog](img/bookletimposer-progression.png)
 
-Developpement status
---------------------
+Development status
+------------------
 
 *BookletImposer* is under development and is thus not perfect yet. Some things
 works, some others do not... Thanks to report bugs if you find some!
