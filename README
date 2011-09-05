@@ -10,7 +10,7 @@ especially designed to work on booklets. It is implemented on top of pyPdf. It
 was tested on GNU/Linux althought it should work on any systems with a Python
 interpreter.
 
-BookletImposer is a commandline and GTK+ interface to pdfinmoser.
+BookletImposer is a commandline and GTK+ interface to pdfimposer.
 
 They are both free software released under GPLv3
 (http://www.gnu.org/licenses/gpl-3.0-standalone.html)
