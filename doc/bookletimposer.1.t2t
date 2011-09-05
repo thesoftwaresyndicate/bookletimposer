@@ -97,10 +97,6 @@ Converts the two-pages-per-sheet booklet in.pdf into a page-by-page
 PDF. As the output file name is not defined, it will default to in-conv.pdf.
 
 
-=FILES=
-No external file is used
-
-
 =SEE ALSO=
 pdfshuffler(1)
 
