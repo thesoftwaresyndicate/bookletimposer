@@ -25,7 +25,8 @@
 #
 # backend.py
 #
-# This file contains backend should not be part of the python module.
+# This file contains backend that should not be part of the pdfimposer
+# python module.
 #
 ########################################################################
 
