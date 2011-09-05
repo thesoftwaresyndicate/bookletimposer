@@ -37,7 +37,7 @@ Screenshots
 
 ![bookletimposer 0.1 main window](img/bookletimposer-main_window.png)
 
-![bookletimposer 0.1 progres dialog](img/bookletimposer-progression.png)
+![bookletimposer 0.1 progress dialog](img/bookletimposer-progression.png)
 
 Developpement status
 --------------------
@@ -45,7 +45,7 @@ Developpement status
 *BookletImposer* is under development and is thus not perfect yet. Some things
 works, some others do not... Thanks to report bugs if you find some!
 
-Furethermore some features still need to be implemented.
+Furthermore some features still need to be implemented.
 
 
 Installation
@@ -61,7 +61,7 @@ Quick installation
 ------------------
 
 You must first ensure that the dependencies are installed. They are provided by
-the following debian packages: `python-gtk2`, `python-distutils-extra` and
+the following Debian packages: `python-gtk2`, `python-distutils-extra` and
 `txt2tags`.
 
 ### pyPdf
@@ -127,5 +127,5 @@ Older versions
 
 *pdfimposer* and *BookletImposer* are a rewrite of PyPdfConv. 
 
-PyPdfConf is not supported anymore, but can still be downloadad
+PyPdfConf is not supported anymore, but can still be downloaded
 [here](http://kjo.herbesfolles.org/pypdfconv/).
