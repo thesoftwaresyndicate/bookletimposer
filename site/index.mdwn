@@ -10,16 +10,19 @@
 About
 =====
 
-*pdfimposer* is a python module to achieve some basic imposition on PDF documents,
-especially designed to work on booklets. It is implemented on top of 
-[pyPdf](http://pybrary.net/pyPdf/). It was tested on GNU/Linux although it
-should work on any system with a Python interpreter. 
+*Bookletimposer* is an utility to achieve some basic imposition on PDF
+documents, especially designed to work on booklets.
 
-*BookletImposer* is a commandline and GTK+ interface to *pdfimposer*.
+*Bookletimposer* is implemented as a commandline and GTK+ interface to *pdfimposer*,
+a reusable python module built on top of [pyPdf](http://pybrary.net/pyPdf/).
 
-They are both free software released under the GNU General Public License,
-either [version 3](http://www.gnu.org/licenses/gpl-3.0-standalone.html) or (at
-your option) any later version.
+It was tested on GNU/Linux althought it may work on any systems with a Python
+interpreter.
+
+Bookletimposer and pdfimposer are both free software released under the GNU
+General Public License, either [version
+3](http://www.gnu.org/licenses/gpl-3.0-standalone.html) or (at your option) any
+later version.
 
 Features
 --------
