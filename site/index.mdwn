@@ -35,9 +35,9 @@ feature; pdfshuffler is
 Screenshots
 -----------
 
-![bookletimposer 0.1~beta1 main window](img/bookletimposer-main_window.png)
+![bookletimposer 0.1 main window](img/bookletimposer-main_window.png)
 
-![bookletimposer 0.1~beta1 progres dialog](img/bookletimposer-progression.png)
+![bookletimposer 0.1 progres dialog](img/bookletimposer-progression.png)
 
 Developpement status
 --------------------

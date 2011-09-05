@@ -47,7 +47,7 @@ import bookletimposer.config as config
 config.gettext_init()
 _ = gettext.gettext
 
-__version__ = "0.1~beta1"
+__version__ = "0.1~beta2"
 
 def main():
     """
