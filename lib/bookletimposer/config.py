@@ -4,7 +4,7 @@
 ########################################################################
 # 
 # BookletImposer - Utility to achieve some basic imposition on PDF documents
-# Copyright (C) 2008-2011 Kjö Hansi Glaz <kjo AT a4nancy DOT net DOT eu DOT org>
+# Copyright (C) 2008-2011 Kjö Hansi Glaz <kjo@a4nancy.net.eu.org>
 # 
 # This program is  free software; you can redistribute  it and/or modify
 # it under the  terms of the GNU General Public  License as published by
