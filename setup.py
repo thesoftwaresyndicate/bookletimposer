@@ -64,7 +64,7 @@ class build_man(distutils.cmd.Command):
             manpage_name = self.get_manpage_name(man_source)
             manpage_path = self.build_manpage(man_source)
             section = manpage_name[-1:]
-            installed_path = os.path.join('man', 'man%s' % section)
+            installed_path = os.path.join('share', 'man', 'man%s' % section)
             manpages_data.append((installed_path, [manpage_path]))
         data_files = self.distribution.data_files
         data_files.extend(manpages_data)
