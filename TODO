@@ -6,6 +6,3 @@ TODO
 * bookletimposer.gui: add gnome-help page and implement help button
 * bookletimposer: change the name of output PDF on choosing new input PDF if
   initial proposal have not been modified.
-* transform to -> transform into, ou plus joli :
-  - produce a booklet out of a linear document
-  - produce a linear document out of a booklet

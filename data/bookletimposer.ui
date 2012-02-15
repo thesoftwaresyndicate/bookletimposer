@@ -112,7 +112,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                         <property name="can_focus">False</property>
                         <child>
                           <object class="GtkRadioButton" id="bookletize_radiobutton">
-                            <property name="label" translatable="yes">Convert a linear document to a booklet</property>
+                            <property name="label" translatable="yes">Produce a booklet out of a linear document</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -129,7 +129,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                         </child>
                         <child>
                           <object class="GtkRadioButton" id="linearize_radiobutton">
-                            <property name="label" translatable="yes">Convert a booklet to a linear document</property>
+                            <property name="label" translatable="yes">Produce a linear document out of a booklet</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
