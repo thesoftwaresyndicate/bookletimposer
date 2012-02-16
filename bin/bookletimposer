@@ -131,8 +131,7 @@ if __name__ == "__main__":
     # Import Psyco if available
     try:
         import psyco
-        print _("psyco imported. Bookletimposer will run faster.")
         psyco.full()
     except ImportError:
-        print _("psyco not found. You can speed Bookletimposer up by installing it.")
+        print _("WARNING: psyco not found. You can speed Bookletimposer up by installing it.")
     main()
