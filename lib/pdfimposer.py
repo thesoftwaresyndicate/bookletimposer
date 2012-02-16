@@ -58,7 +58,10 @@ import pyPdf.generic
 import pyPdf.pdf
 
 # XXX: Fix these translatable strings
-_ = lambda x: x
+try:
+    _
+except NameError:
+    _ = lambda x: x
 
 __docformat__ = "restructuredtext"
 
