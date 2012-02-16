@@ -65,6 +65,7 @@ class ConverterPreferences(object):
         self.paper_format = None
         self.paper_orientation = None
         self.outfile_name = None
+        self.__outfile_name_changed = False
 
     @property
     def infile_name(self):
@@ -77,12 +78,12 @@ class ConverterPreferences(object):
         # XXX: duplicate code with pfdimposer.FileConverter.__set_infile_name
         #      but the least one is called only on FileConverer instanciation
         #      and we need the proposal before to display it in the UI
-        if not self.outfile_name:
+        if not self.__outfile_name_changed:
             result = re.search("(.+)\.\w*$", value)
             if result:
-                self.outfile_name = result.group(1) + '-conv.pdf'
+                self._outfile_name = result.group(1) + '-conv.pdf'
             else:
-                self.outfile_name = value + '-conv.pdf'
+                self._outfile_name = value + '-conv.pdf'
 
     @property
     def conversion_type(self):
@@ -138,6 +139,7 @@ class ConverterPreferences(object):
     @outfile_name.setter
     def outfile_name(self, value):
         assert value == None or os.path.exists(os.path.dirname(value))
+        self.__outfile_name_changed = True
         self._outfile_name = value
 
     def __str__(self):
