@@ -67,12 +67,14 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="spacing">10</property>
         <child>
           <object class="GtkTable" id="table1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="n_rows">6</property>
             <property name="n_columns">2</property>
+            <property name="row_spacing">10</property>
             <child>
               <object class="GtkFileChooserButton" id="input_file_chooser_button">
                 <property name="visible">True</property>
@@ -433,7 +435,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">2</property>
+        <property name="spacing">10</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
