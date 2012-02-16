@@ -31,6 +31,7 @@
 ########################################################################
 
 import gettext
+import locale
 import os.path
 
 def debug(msg):
@@ -59,5 +60,7 @@ def get_localedir():
     return os.path.join(get_sharedir(), "locale")
 
 def gettext_init():
+    locale.setlocale(locale.LC_ALL, '')
+    locale.bindtextdomain("bookletimposer", get_localedir())
     gettext.install("bookletimposer", localedir=get_localedir(), unicode=True)
 
