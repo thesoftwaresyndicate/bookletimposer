@@ -110,10 +110,12 @@ It allows:
                   ('share/doc/bookletimposer', ['README']),
                   ],
       requires = ['gtk', 'pyPdf (>0.12)'],
-      cmdclass = { "build" : build_extra.build_extra,
+      cmdclass = { "build" :            build_extra.build_extra,
                    "build_uiheaders" :  build_uiheaders,
-                   "build_i18n" :  build_i18n.build_i18n,
-                   "build_help" :  build_help.build_help,
-                   "build_icons" :  build_icons.build_icons,
-                   "build_man" :  build_man}
+                   "build_i18n" :       build_i18n.build_i18n,
+                   "build_help" :       build_help.build_help,
+                   "build_icons" :      build_icons.build_icons,
+                   "build_man" :        build_man,
+                   "clean" :            clean_i18n.clean_i18n,
+                 }
       )
