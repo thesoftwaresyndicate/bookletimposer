@@ -24,7 +24,7 @@
                 <property name="can_focus">False</property>
                 <property name="create_folders">False</property>
                 <property name="do_overwrite_confirmation">True</property>
-                <property name="title" translatable="yes">Sélectionner un PDF à convertir</property>
+                <property name="title" translatable="yes">Open input PDF file</property>
                 <signal name="file-set" handler="cb_infile_set" swapped="no"/>
               </object>
               <packing>
