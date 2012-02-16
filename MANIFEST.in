@@ -6,3 +6,4 @@ include data/bookletimposer.svg
 include data/bookletimposer.desktop
 include doc/bookletimposer.1.t2t
 recursive-include po *
+recursive-include help *

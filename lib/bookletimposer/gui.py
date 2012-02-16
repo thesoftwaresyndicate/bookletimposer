@@ -35,6 +35,7 @@ import gtk
 import glib
 import gobject # >= 2.16 !
 gtk.gdk.threads_init()
+import gio
 
 import os.path
 import threading
@@ -248,8 +249,19 @@ class BookletImposerUI(object):
         self.close_application()
     
     def cb_help_button(self, widget, data=None):
-        # XXX: code me!
-        pass
+        uri = "ghelp:bookletimposer"
+        try:
+            gtk.show_uri(screen = None, uri = uri,
+                timestamp = gtk.get_current_event_time())
+        except gio.Error, error:
+            dialog = gtk.MessageDialog(parent=self.__main_window,
+                                       flags=gtk.DIALOG_MODAL,
+                                       type=gtk.MESSAGE_ERROR,
+                                       buttons=gtk.BUTTONS_CLOSE,
+                                       message_format=_("Unable to display help: %s")
+                                                      % str(error))
+            dialog.connect("response", lambda widget, data=None: widget.destroy())
+            dialog.run()
 
     def cb_apply_button(self, widget, data=None):
         self.run_conversion()
