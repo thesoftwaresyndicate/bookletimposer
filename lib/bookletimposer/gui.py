@@ -76,6 +76,7 @@ class BookletImposerUI(object):
 
     def __create_gui(self):
         builder = gtk.Builder()
+        builder.set_translation_domain("bookletimposer")
         builder.add_from_file(os.path.join(config.get_datadir(), "bookletimposer.ui"))
         builder.connect_signals(self)
 
