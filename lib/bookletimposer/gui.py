@@ -320,8 +320,10 @@ class BookletImposerUI(object):
             print traceback.format_exc()
 
         def cb_interrupt_callback():
+            gtk.gdk.threads_enter()
             self.__progress_dialog.hide()
             self.__main_window.set_sensitive(True)
+            gtk.gdk.threads_leave()
 
         def worker(exception_callback, interrupt_callback):
             try:
