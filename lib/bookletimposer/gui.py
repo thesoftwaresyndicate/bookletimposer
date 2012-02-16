@@ -333,6 +333,7 @@ class BookletImposerUI(object):
                 raise
             gtk.gdk.threads_enter()
             self.__progress_dialog.hide()
+            self.__main_window.set_sensitive(True)
             gtk.gdk.threads_leave()
 
         self.__main_window.set_sensitive(False)
@@ -351,7 +352,6 @@ class BookletImposerUI(object):
         converter_thread = threading.Thread(target=worker,
             args=[cb_process_exception, cb_interrupt_callback])
         converter_thread.start()
-        self.__main_window.set_sensitive(True)
 
 if __name__ == "__main__":
     ui = BookletImposerUI()
