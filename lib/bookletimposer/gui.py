@@ -200,6 +200,7 @@ class BookletImposerUI(object):
 
     def cb_infile_set(self, widget, data=None):
         self.__preferences.infile_name = widget.get_filename()
+        self.__apply_preferences()
         self.__apply_button.set_sensitive(True)
 
     def cb_bookletize_toggled(self, widget, data=None):

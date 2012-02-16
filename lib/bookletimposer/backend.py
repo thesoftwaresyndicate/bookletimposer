@@ -32,6 +32,7 @@
 
 import pdfimposer
 import os.path
+import re
 
 class BookletImposerError(pdfimposer.PdfConvError):
     """The base class for all exceptions raised by BookletImposer.
@@ -73,6 +74,15 @@ class ConverterPreferences(object):
     def infile_name(self, value):
         assert value == None or os.path.isfile(value)
         self._infile_name = value
+        # XXX: duplicate code with pfdimposer.FileConverter.__set_infile_name
+        #      but the least one is called only on FileConverer instanciation
+        #      and we need the proposal before to display it in the UI
+        if not self.outfile_name:
+            result = re.search("(.+)\.\w*$", value)
+            if result:
+                self.outfile_name = result.group(1) + '-conv.pdf'
+            else:
+                self.outfile_name = value + '-conv.pdf'
 
     @property
     def conversion_type(self):
