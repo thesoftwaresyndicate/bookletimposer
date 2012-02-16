@@ -371,12 +371,12 @@
     <property name="transient_for">main_window</property>
     <property name="program_name">BookletImposer</property>
     <property name="version">0.1~beta2</property>
-    <property name="copyright" translatable="yes">Copyright © 2008-2011 kjo@a4nancy.net.eu.org</property>
+    <property name="copyright" translatable="yes">Copyright © 2008-2012 kjo@a4nancy.net.eu.org</property>
     <property name="comments" translatable="yes">Convert PDF documents between diffrents page layouts</property>
     <property name="website">http://kjo.herbesfolles.org/bookletimposer/</property>
     <property name="license" translatable="yes">
 PyPdfConv - Utility to convert PDF files between diffrents page layouts
-Copyright (C) 2008-2011 Kjö Hansi Glaz &lt;kjo&amp;a4nancy.net.eu.org&gt;
+Copyright (C) 2008-2012 Kjö Hansi Glaz &lt;kjo&amp;a4nancy.net.eu.org&gt;
 
 This program is  free software; you can redistribute  it and/or modify
 it under the  terms of the GNU General Public  License as published by

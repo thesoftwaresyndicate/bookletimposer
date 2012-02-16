@@ -4,7 +4,7 @@
 ########################################################################
 # 
 # PdfImposer - Utility to convert PDF files between diffrents page layouts
-# Copyright (C) 2008-2011 Kjö Hansi Glaz <kjo@a4nancy.net.eu.org>
+# Copyright (C) 2008-2012 Kjö Hansi Glaz <kjo@a4nancy.net.eu.org>
 # 
 # This program is  free software; you can redistribute  it and/or modify
 # it under the  terms of the GNU General Public  License as published by
