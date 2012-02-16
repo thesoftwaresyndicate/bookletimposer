@@ -55,7 +55,9 @@ def get_pixmapsdir():
 def get_helpdir():
     return os.path.join(get_sharedir(), "gnome", "help")
 
+def get_localedir():
+    return os.path.join(get_sharedir(), "locale")
+
 def gettext_init():
-    gettext.bindtextdomain("bookletimposer", os.path.join(get_datadir(), "locale"))
-    gettext.textdomain("bookletimposer")
+    gettext.install("bookletimposer", localedir=get_localedir(), unicode=True)
 
