@@ -54,10 +54,10 @@ def main():
     This is the function that launches the program
     """
     
-    infiles = [""]
+    infile = None
     
     parser = optparse.OptionParser(
-        usage="%prog [options] [infile [infile2] ...]",
+        usage="%prog [options] [infile]",
         version="%prog " + __version__)
     parser.add_option ("-o", "--output", dest="outfile",
         help=_("output PDF file"))
@@ -97,12 +97,12 @@ def main():
     (options, args) = parser.parse_args()
     
     if len(args) >= 1:
-        infiles = args
+        infile = args[0]
     
     preferences = backend.ConverterPreferences()
         
-    if infiles[0]:
-        preferences.infile_name = infiles[0]
+    if infile:
+        preferences.infile_name = infile
     if options.outfile:
         preferences.outfile_name = options.outfile
     if options.conv_type:
