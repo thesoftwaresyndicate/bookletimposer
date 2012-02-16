@@ -40,15 +40,11 @@ import gio
 import os.path
 import threading
 import traceback
-import gettext
 
 import backend
 import pdfimposer
 import config
 from config import debug
-
-config.gettext_init()
-_ = gettext.gettext
 
 class UserInterrupt(backend.BookletImposerError):
     """Exception raised when the user interrupted the conversion

@@ -58,9 +58,3 @@ def get_helpdir():
 
 def get_localedir():
     return os.path.join(get_sharedir(), "locale")
-
-def gettext_init():
-    locale.setlocale(locale.LC_ALL, '')
-    locale.bindtextdomain("bookletimposer", get_localedir())
-    gettext.install("bookletimposer", localedir=get_localedir(), unicode=True)
-
