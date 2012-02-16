@@ -88,8 +88,7 @@ class BookletImposerUI(object):
         self.__layout_combobox = builder.get_object("layout_combobox")
         self.__paper_format_combobox = \
             builder.get_object("output_paper_format_combobox")
-        self.__file_chooser_button = \
-            builder.get_object("output_file_chooser_button")
+        self.__output_file_chooser_button = self.__create_output_file_chooser_button(builder)
         self.__about_button = builder.get_object("about_button")
         self.__help_button = builder.get_object("help_button")
         self.__close_button = builder.get_object("close_button")
@@ -105,6 +104,30 @@ class BookletImposerUI(object):
         self.__try_set_icon(self.__main_window, "bookletimposer.svg")
         self.__fill_paper_formats()
         self.__fill_layouts()
+
+    def __create_output_file_chooser_button(self, builder):
+        # Emulate a FileChooserButton for saving
+        output_file_chooser_button = \
+            builder.get_object("output_file_chooser_button")
+        output_file_chooser_button.__filename = None
+
+        def output_file_chooser_button_set_filename(filename):
+            output_file_chooser_button.__filename = filename
+            output_file_chooser_file_image = \
+                builder.get_object("output_file_chooser_file_image")
+            output_file_chooser_label = \
+                builder.get_object("output_file_chooser_label")
+            output_file_chooser_label.set_text(os.path.basename(filename))
+            output_file_chooser_file_image.set_visible(True)
+        output_file_chooser_button.set_filename = \
+            output_file_chooser_button_set_filename
+
+        def output_file_chooser_button_get_filename():
+            return self.__output_file_chooser_button.__filename
+        output_file_chooser_button.get_filename = \
+            output_file_chooser_button_get_filename
+
+        return output_file_chooser_button
 
     @staticmethod
     def __try_set_icon(widget, icon):
@@ -165,7 +188,7 @@ class BookletImposerUI(object):
             self.combobox_select_row(self.__paper_format_combobox,
                                      preferences.paper_format)
         if preferences.outfile_name:
-            self.__file_chooser_button.set_filename(preferences.outfile_name)
+            self.__output_file_chooser_button.set_filename(preferences.outfile_name)
 
     # CALLBACKS
 
@@ -202,8 +225,20 @@ class BookletImposerUI(object):
         self.__preferences.paper_format = widget.get_model().get_value(
             widget.get_active_iter(), 0)
 
-    def cb_outfile_set(self, widget, data=None):
-        self.__preferences.outfile_name = widget.get_filename()
+    def cb_outfile_clicked(self, widget, data=None):
+        fcdialog = gtk.FileChooserDialog(
+            title=_("Choose file to save"),
+            parent=self.__main_window,
+            action=gtk.FILE_CHOOSER_ACTION_SAVE,
+            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                     gtk.STOCK_OK, gtk.RESPONSE_OK))
+        if widget.get_filename():
+            fcdialog.set_filename(widget.get_filename())
+        if fcdialog.run() == gtk.RESPONSE_OK:
+            if fcdialog.get_filename():
+                widget.set_filename(fcdialog.get_filename())
+                self.__preferences.outfile_name = fcdialog.get_filename()
+        fcdialog.destroy()
 
     def cb_about_button(self, widget, data=None):
         self.show_about_dialog()
