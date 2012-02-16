@@ -37,8 +37,6 @@ def debug(msg):
     if __debug__: print msg
 
 def get_sharedir():
-    if __debug__ and os.path.exists("data"):
-        return "data"
     if os.path.exists(os.path.join("/", "usr", "local", "share",
             "bookletimposer")):
         return os.path.join("/", "usr", "local", "share")
@@ -46,7 +44,10 @@ def get_sharedir():
         return os.path.join("/", "usr", "share")
 
 def get_datadir():
-    return os.path.join(get_sharedir(), "bookletimposer")
+    if __debug__ and os.path.exists("data"):
+        return "data"
+    else:
+        return os.path.join(get_sharedir(), "bookletimposer")
 
 def get_pixmapsdir():
     return os.path.join(get_sharedir(), "pixmaps")
