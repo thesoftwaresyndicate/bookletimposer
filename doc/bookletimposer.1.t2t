@@ -59,7 +59,7 @@ shows the user interface (default).
 
 
 : **-b**, **--booklet**
-makes a booklet
+makes a booklet (default)
 
 
 : **-l**, **--linearize**
