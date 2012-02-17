@@ -71,7 +71,7 @@ produce a linear document out of a booklet.
 don't reorganize (will only scale and assemble pages).
 
 
-: **-c** **--copy-pages**
+: **-c**, **--copy-pages**
 copy the same group of input pages on one output page.
 
 : **-p** //PAGES_PER_SHEET//, **--pages-per-sheet=**//PAGES_PER_SHEET//
