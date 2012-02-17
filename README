@@ -69,7 +69,8 @@ Then as root:
 pdfimposer API documentation
 ============================
 
-See generated epydoc documentation.
+See generated epydoc documentation (available at
+<https://kjo.herbesfolles.org/bookletimposer/api/>)
 
 
 BookletImposer usage

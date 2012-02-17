@@ -100,6 +100,8 @@ PDF. As the output file name is not defined, it will default to in-conv.pdf.
 =SEE ALSO=
 pdfshuffler(1)
 
+BookletImposer source code and documentation can be found on the web at
+<https://kjo.herbesfolles.org/bookletimposer/>
 
 =KNOWN ISSUES=
 BookletImposer is under development, which means that for the moment, some
