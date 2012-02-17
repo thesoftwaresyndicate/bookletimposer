@@ -39,15 +39,15 @@ version 3 or (at your option) any later version.
 
 =OPTIONS=
 : **--version**
-show program's version number and exit
+show program's version number and exit.
 
 
 : **-h**, **--help**
-show an help message and exit
+show an help message and exit.
 
 
 : **-o** //OUTFILE//, **--output=**//OUTFILE//
-sets output PDF file to //OUTFILE//
+set output PDF file to //OUTFILE//.
 
 
 : **-a**, **--no-gui**
@@ -56,36 +56,35 @@ In that mode, the input file must be defined.
 
 
 : **-i**, **--gui**
-shows the user interface (default).
+show the user interface (default).
 
 
 : **-b**, **--booklet**
-makes a booklet (default)
+produce a booklet out of a linear document (default).
 
 
 : **-l**, **--linearize**
-convert a booklet to single pages
+produce a linear document out of a booklet.
 
 
 : **-n**, **--no-reorganisation**
-don't do any reorganisation (will only scale and assemble pages)
+don't reorganize (will only scale and assemble pages).
 
 
 : **-c** **--copy-pages**
-copy the same group of input pages on one output page
+copy the same group of input pages on one output page.
 
 : **-p** //PAGES_PER_SHEET//, **--pages-per-sheet=**//PAGES_PER_SHEET//
-nombre de pages par feuille, au format
-VERTICALxHORIZONTAL, par exemple 2x1
+number of pages per sheet, in the format HORIZONTALxVERTICAL, e.g. 2x1.
 
 
 : **-f** //OUTPUT_FORMAT//, **--format=**//OUTPUT_FORMAT//
-format de page de sortie, par exemple A4 ou A3R
+output page format, e.g. A4 or A3R.
 
 
 =EXAMPLES=
 : ``bookletimposer``
-Displays the GTK+ user interface
+Displays the GTK+ user interface.
 
 
 : ``bookletimposer --no-gui --booklet --pages-per-sheet=2x1 --output=out.pdf in.pdf``
