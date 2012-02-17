@@ -162,14 +162,16 @@ class ConverterPreferences(object):
             string += "    copy_pages: %s\n" % self._copy_pages
         return string
 
-    def create_converter(self):
+    def create_converter(self, overwrite_outfile_callback=None):
         if not self._infile_name:
             raise MissingInputFileError
             return None
         elif self._outfile_name:
-            converter = TypedFileConverter(self._infile_name, self._outfile_name)
+            converter = TypedFileConverter(self._infile_name, self._outfile_name,
+                overwrite_outfile_callback=overwrite_outfile_callback)
         else:
-            converter = TypedFileConverter(self._infile_name)
+            converter = TypedFileConverter(self._infile_name,
+                overwrite_outfile_callback=overwrite_outfile_callback)
         if self._conversion_type: converter.set_conversion_type(self._conversion_type)
         if self._layout: converter.set_layout(self._layout)
         if self._paper_format: converter.set_output_format(self._paper_format)
@@ -188,7 +190,9 @@ class TypedFileConverter(pdfimposer.FileConverter):
                  conversion_type=ConversionType.BOOKLETIZE,
                  layout='2x1',
                  format='A4',
-                 copy_pages=False):
+                 copy_pages=False,
+                 overwrite_outfile_callback=None):
+
         """Create a TypedFileConverter.
 
         :Parameters:
@@ -207,7 +211,7 @@ class TypedFileConverter(pdfimposer.FileConverter):
         """
         
         pdfimposer.FileConverter.__init__(self, infile_name, outfile_name,
-                                         layout, format, copy_pages)
+                                         layout, format, copy_pages, overwrite_outfile_callback)
         self._conversion_type = conversion_type
 
     # CONVERSION FUNCTIONS

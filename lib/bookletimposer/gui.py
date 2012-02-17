@@ -41,6 +41,8 @@ import os.path
 import threading
 import traceback
 
+import pdfimposer # We need its exceptions
+
 import backend
 import pdfimposer
 import config
@@ -294,11 +296,20 @@ class BookletImposerUI(object):
                 return False
             dialog.connect("response", cb_close_dialog)
             dialog.show()
-        try:
-            converter = self.__preferences.create_converter()
-        except Exception, e:
-            exception_dialog(e)
-            raise
+
+        def cb_overwrite_outfile(filename):
+            dialog = gtk.MessageDialog(parent=self.__main_window,
+                                       flags=gtk.DIALOG_MODAL,
+                                       type=gtk.MESSAGE_QUESTION,
+                                       buttons=gtk.BUTTONS_YES_NO,
+                                       message_format=_("A file named %s already exist.") % filename)
+            dialog.format_secondary_text(_("Do you want to replace it?"))
+            resp = dialog.run()
+            dialog.destroy()
+            if resp == gtk.RESPONSE_YES:
+                return True
+            else:
+                return False
 
         def cb_update_progress(message, progress):
             # there we are inside the work of the converter,
@@ -337,16 +348,19 @@ class BookletImposerUI(object):
 
 
         self.__main_window.set_sensitive(False)
+        try:
+            converter = self.__preferences.create_converter(cb_overwrite_outfile)
+        except pdfimposer.UserInterruptError:
+            self.__main_window.set_sensitive(True)
+            return
+        except Exception, e:
+            exception_dialog(e)
+            raise
         self.__label_conversion_title.set_text(_("Converting %s") %
             self.__preferences.infile_name)
         self.__progressbar_conversion.set_fraction(0)
         self.__label_conversion_setp.set_text("")
         self.__progress_dialog.show()
-        try:
-            converter = self.__preferences.create_converter()
-        except Exception, e:
-            exception_dialog(e)
-            raise
         converter.set_progress_callback(cb_update_progress)
         self.__stop = threading.Event()
         converter_thread = threading.Thread(target=worker)
