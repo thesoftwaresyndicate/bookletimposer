@@ -27,9 +27,9 @@ later version.
 Features
 --------
 
-- produce a booklet out of a linear documents
-- produce a linear document out of a booklet
-- reduce a document to put many pages on every sheet
+- produce a booklet out of a linear document;
+- produce a linear document out of a booklet;
+- reduce a document to put many pages on every sheet.
 
 BookletImposer isn't able to merge multiple PDF files. We advise you to use
 [pdfshuffler](http://sourceforge.net/projects/pdfshuffler/) if you need such a
@@ -116,6 +116,8 @@ or with the command:
 
     $ bookletimposer
 
+[User documentation](help/).
+
 Help on command line options is available in the [man
 page](bookletimposer.1.html).
 
@@ -124,6 +126,16 @@ Pdfimposer API documentation
 ----------------------------
 
 See [generated epydoc documentation](api/).
+
+
+Contribute
+==========
+
+Clone the [git
+repository](http://codecoop.org/projects/bookletimposer/repository) and submit
+patches.
+
+    $ git clone git://git.codecoop.org/bookletimposer.git
 
 
 Older versions
