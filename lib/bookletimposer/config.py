@@ -43,6 +43,8 @@ def get_sharedir():
         return os.path.join("/", "usr", "local", "share")
     elif os.path.exists(os.path.join("/", "usr", "share", "bookletimposer")):
         return os.path.join("/", "usr", "share")
+    else:
+        return ""
 
 def get_datadir():
     if __debug__ and os.path.exists("data"):
