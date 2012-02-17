@@ -40,6 +40,8 @@ if __debug__:
     import os
     sys.path.insert(0, os.path.join(os.getcwd(), "lib"))
 
+import pdfimposer # We need its exceptions
+
 import bookletimposer.gui as gui
 import bookletimposer.backend as backend
 import bookletimposer.config as config
@@ -92,6 +94,10 @@ def main():
         dest="output_format", 
         default=None,
         help=_("output page format, e.g. A4 or A3R"))
+    parser.add_option ("-k", "--keep",
+        action="store_false", dest="overwrite",
+        default=True,
+        help=_("do not overwrite output file if it exists"))
     
     (options, args) = parser.parse_args()
     
@@ -120,7 +126,12 @@ def main():
         if not preferences.infile_name:
             print _("ERROR: In automatic mode, you must provide a file to process.")
             return
-        converter = preferences.create_converter()
+        def overwrite_callback(filename):
+            return options.overwrite
+        try:
+            converter = preferences.create_converter(overwrite_callback)
+        except pdfimposer.UserInterruptError:
+            return
         def progress_callback(message, progress):
             print(_("%i%%: %s") % (progress*100, message))
         converter.set_progress_callback(progress_callback)

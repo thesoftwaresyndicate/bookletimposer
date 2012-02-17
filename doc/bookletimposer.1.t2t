@@ -82,6 +82,10 @@ number of pages per sheet, in the format HORIZONTALxVERTICAL, e.g. 2x1.
 output page format, e.g. A4 or A3R.
 
 
+: **-k**, **--keep**
+do not overwrite output file if it exists.
+
+
 =EXAMPLES=
 : ``bookletimposer``
 Displays the GTK+ user interface.
