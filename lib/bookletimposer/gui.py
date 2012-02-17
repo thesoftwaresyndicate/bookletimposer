@@ -287,14 +287,10 @@ class BookletImposerUI(object):
                                        buttons=gtk.BUTTONS_CLOSE,
                                        message_format=_("Conversion failed"))
             dialog.format_secondary_text(str(exception))
-
-            def cb_close_dialog(widget, data=None):
-                widget.destroy()
-                self.__progress_dialog.hide()
-                self.__main_window.set_sensitive(True)
-                return False
-            dialog.connect("response", cb_close_dialog)
-            dialog.show()
+            dialog.run()
+            dialog.destroy()
+            self.__progress_dialog.hide()
+            self.__main_window.set_sensitive(True)
 
         def cb_overwrite_outfile(filename):
             dialog = gtk.MessageDialog(parent=self.__main_window,
