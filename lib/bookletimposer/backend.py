@@ -138,7 +138,9 @@ class ConverterPreferences(object):
 
     @outfile_name.setter
     def outfile_name(self, value):
-        assert value == None or os.path.exists(os.path.dirname(value))
+        assert value == None or \
+            not os.path.dirname(value) or \
+            os.path.exists(os.path.dirname(value))
         self.__outfile_name_changed = True
         self._outfile_name = value
 
