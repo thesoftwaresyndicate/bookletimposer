@@ -5,5 +5,7 @@ include data/bookletimposer.ui
 include data/bookletimposer.svg
 include data/bookletimposer.desktop
 include doc/bookletimposer.1.t2t
-recursive-include po *
+include po/POTFILES.in
+include po/bookletimposer.pot
+recursive-include po *.po
 recursive-include help *
