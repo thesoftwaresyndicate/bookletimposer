@@ -47,7 +47,7 @@ Development status
 ------------------
 
 *BookletImposer* is under development and is thus not perfect yet. Some things
-works, some others do not... Thanks to report bugs if you find some!
+work, some others do not... Thanks to report bugs if you find some!
 
 Furthermore some features still need to be implemented.
 
