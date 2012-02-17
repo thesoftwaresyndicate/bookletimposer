@@ -115,9 +115,7 @@ def main():
     
     if options.gui:
         ui = gui.BookletImposerUI(preferences)
-        gui.gtk.gdk.threads_enter()
         gui.gtk.main()
-        gui.gtk.gdk.threads_leave()
     else:
         if not preferences.infile_name:
             print _("ERROR: In automatic mode, you must provide a file to process.")

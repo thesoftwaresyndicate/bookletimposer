@@ -34,7 +34,7 @@ pygtk.require('2.0')
 import gtk
 import glib
 import gobject # >= 2.16 !
-gtk.gdk.threads_init()
+gobject.threads_init()
 import gio
 
 import os.path
@@ -308,35 +308,33 @@ class BookletImposerUI(object):
             if self.__stop.is_set():
                 debug("Stop catched")
                 raise UserInterrupt()
-            gtk.gdk.threads_enter()
+            gobject.idle_add(idle_cb_update_progress, message, progress)
+
+        def idle_cb_update_progress(message, progress):
             self.__progressbar_conversion.set_fraction(progress)
             self.__label_conversion_setp.set_text(message)
-            gtk.gdk.threads_leave()
+            return False
 
-        def cb_process_exception(exception):
-            gtk.gdk.threads_enter()
+        def idle_cb_process_exception(exception):
             exception_dialog(exception)
-            gtk.gdk.threads_leave()
-            print traceback.format_exc()
+            return False
 
-        def cb_interrupt_callback():
-            gtk.gdk.threads_enter()
+        def idle_cb_finish_callback():
             self.__progress_dialog.hide()
             self.__main_window.set_sensitive(True)
-            gtk.gdk.threads_leave()
+            return False
 
-        def worker(exception_callback, interrupt_callback):
+        def worker():
             try:
                 converter.run()
             except UserInterrupt:
-                interrupt_callback()
+                gobject.idle_add(idle_cb_finish_callback)
             except Exception, e:
-                exception_callback(e)
+                gobject.idle_add(idle_cb_exception_callback, e)
+                print traceback.format_exc()
                 raise
-            gtk.gdk.threads_enter()
-            self.__progress_dialog.hide()
-            self.__main_window.set_sensitive(True)
-            gtk.gdk.threads_leave()
+            gobject.idle_add(idle_cb_finish_callback)
+
 
         self.__main_window.set_sensitive(False)
         self.__label_conversion_title.set_text(_("Converting %s") %
@@ -351,8 +349,7 @@ class BookletImposerUI(object):
             raise
         converter.set_progress_callback(cb_update_progress)
         self.__stop = threading.Event()
-        converter_thread = threading.Thread(target=worker,
-            args=[cb_process_exception, cb_interrupt_callback])
+        converter_thread = threading.Thread(target=worker)
         converter_thread.start()
 
 if __name__ == "__main__":
