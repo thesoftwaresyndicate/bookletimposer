@@ -267,7 +267,6 @@ class BookletImposerUI(object):
         pass
 
     def cb_progress_stop(self, widget, data=None):
-        debug("Stop triggered")
         self.__stop.set()
         self.__label_conversion_setp.set_text(_("Cancel triggered, please wait..."))
 
@@ -317,7 +316,6 @@ class BookletImposerUI(object):
             # the operation. To achieve that we raise an exception.
             # XXX: that's not elegant at all
             if self.__stop.is_set():
-                debug("Stop catched")
                 raise UserInterrupt()
             gobject.idle_add(idle_cb_update_progress, message, progress)
 
