@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-02-16 16:25+0100\n"
-"PO-Revision-Date: 2012-02-16 16:27+0100\n"
+"PO-Revision-Date: 2012-02-17 14:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -58,7 +58,7 @@ msgstr "format de papier de sortie, par exemple A4 ou A3R"
 
 #: ../bin/bookletimposer:121
 msgid "ERROR: In automatic mode, you must provide a file to process."
-msgstr "ERREUR; en mode automatique, vous devez spécifier un fichier à convertir."
+msgstr "ERREUR : en mode automatique, vous devez spécifier un fichier à convertir."
 
 #: ../bin/bookletimposer:125
 #, c-format
