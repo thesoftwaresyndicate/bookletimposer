@@ -116,6 +116,16 @@ class UnknownFormatError(PdfConvError):
 
 ########################################################################
 
+
+class UserInterruptError(PdfConvError):
+    """
+    This exception is raised when the user interrupts the conversion.
+    """
+    def __str__(self):
+        return _('User interruption') % self.message
+
+########################################################################
+
 class AbstractConverter(object):
     """
     The base class for all pdfimposer converter classes.
@@ -797,13 +807,13 @@ class FileConverter(StreamConverter):
     """
     This class performs conversions on true files.
     """
-
     def __init__(self,
                  infile_name,
                  outfile_name=None,
                  layout='2x1',
                  format='A4',
-                 copy_pages=False):
+                 copy_pages=False,
+                 overwrite_outfile_callback=None):
         """
         Create a FileConverter.
 
@@ -818,6 +828,12 @@ class FileConverter(StreamConverter):
           - `copy_pages`: Wether the same group of input pages shoud be copied
             to fill the corresponding output page or not (see
             set_copy_pages).
+          - `overwrite_outfile_callback`: A callback function which is called
+            if outfile_name already exists when trying to open it. Its
+            signature must be : take a string for the outfile_name as an argument;
+            return False not to overwrite the file. If ommited, existing file
+            would be overwritten without confirmation.
+
         """
         # sets [input, output]_stream to None so we can test their presence
         # in __del__
@@ -834,9 +850,19 @@ class FileConverter(StreamConverter):
         # can create it from infile_name
         self.__set_infile_name(infile_name)
 
+        # Setup callback to ask for confirmation before overwriting outfile
+        if overwrite_outfile_callback:
+            assert(type(overwrite_outfile_callback) is types.FunctionType)
+        else:
+            overwrite_outfile_callback = lambda filename: True
+
         # Now initialize a streamConverter
         self._input_stream = open(self.get_infile_name(), 'rb')
-        self._output_stream = open(self.get_outfile_name(), 'wb')
+        outfile_name = self.get_outfile_name()
+        if (os.path.exists(outfile_name) and not
+                overwrite_outfile_callback(os.path.abspath(outfile_name))):
+            raise UserInterruptError()
+        self._output_stream = open(outfile_name, 'wb')
         StreamConverter.__init__(self, self._input_stream, self._output_stream,
                                  layout, format, copy_pages)
 
