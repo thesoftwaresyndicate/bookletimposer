@@ -1,5 +1,21 @@
-pandoc -o site/index.html -s site/index.mdwn
-txt2tags --target=html --outfile=site/bookletimposer.1.html doc/bookletimposer.1.t2t 
-docbook2html -o site/help help/C/bookletimposer.xml
-epydoc --docformat=restructuredtext --output=site/api/ --inheritance=included --no-private --no-frames --verbose lib/pdfimposer.py
-ln -s ../../help/C/figures site/help/figures
+#!/bin/sh
+pandoc --output site/index.html \
+    --css style.css \
+    --standalone \
+    site/index.mdwn
+txt2tags --target=html \
+    --outfile=site/bookletimposer.1.html \
+    --style=style.css \
+    --css-sugar \
+    doc/bookletimposer.1.t2t
+xsltproc -o site/help.html \
+    --stringparam html.stylesheet style.css \
+    /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl \
+    help/C/bookletimposer.xml
+epydoc --docformat=restructuredtext \
+    --output=site/api/ \
+    --inheritance=included \
+    --no-private \
+    --no-frames \
+    lib/pdfimposer.py
+cp -r help/C/figures site/figures
