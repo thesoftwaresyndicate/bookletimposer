@@ -1,0 +1,57 @@
+body
+{
+font-family: sans-serif;
+margin: 0 50px;
+}
+
+a
+{
+color: #7D0030;
+}
+
+a:visited
+{
+color: #50011F; 
+}
+
+a:hover, a:active
+{
+color: #D00050;
+}
+
+p
+{
+clear: both;
+}
+
+h1
+{
+clear: both;
+border-bottom: 5px dotted #828282;
+color: #7D0030; 
+}
+
+h2
+{
+clear: both;
+color: #7D0030; 
+border-bottom: 1px dotted #828282;
+}
+
+dt
+{
+color: #7D0030; 
+}
+
+div.figure
+{
+text-align: center;
+font-style: italic;
+float:left;
+margin: 0 50px 50px 50px;
+}
+
+table, tbody, th, tr, td
+{
+border: 0;
+}
