@@ -2,6 +2,7 @@
 pandoc --output site/index.html \
     --css style.css \
     --standalone \
+    --table-of-contents \
     site/index.mdwn
 txt2tags --target=html \
     --outfile=site/bookletimposer.1.html \
