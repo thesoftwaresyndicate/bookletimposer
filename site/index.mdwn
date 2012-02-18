@@ -111,12 +111,7 @@ Documentation
 BookletImposer usage
 --------------------
 
-BookletImposer can be launched from the Office section of the Application menu,
-or with the command:
-
-    $ bookletimposer
-
-[User documentation](help/).
+Help on graphical utility in available in the [Bookletimposer manual](help.html).
 
 Help on command line options is available in the [man
 page](bookletimposer.1.html).
