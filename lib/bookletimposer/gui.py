@@ -29,13 +29,13 @@
 #
 ########################################################################
 
-import pygtk
-pygtk.require('2.0')
-import gtk
-import glib
-import gobject # >= 2.16 !
-gobject.threads_init()
-import gio
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import GObject
+GObject.threads_init()
+from gi.repository import Gio
 
 import os.path
 import threading
@@ -73,7 +73,7 @@ class BookletImposerUI(object):
         self.__main_window.show()
 
     def __create_gui(self):
-        builder = gtk.Builder()
+        builder = Gtk.Builder()
         builder.set_translation_domain("bookletimposer")
         builder.add_from_file(os.path.join(config.get_datadir(), "bookletimposer.ui"))
         builder.connect_signals(self)
@@ -133,14 +133,14 @@ class BookletImposerUI(object):
     def __try_set_icon(widget, icon):
         try:
             widget.set_icon_from_file(os.path.join(config.get_pixmapsdir(), icon))
-        except glib.GError:
+        except GObject.GError:
             debug("Icon not found")
 
     @staticmethod
     def set_liststore_for_combobox(combobox):
-        liststore = gtk.ListStore(gobject.TYPE_STRING)
+        liststore = Gtk.ListStore(GObject.TYPE_STRING)
         combobox.set_model(liststore)
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         combobox.pack_start(cell, True)
         combobox.add_attribute(cell, 'text', 0)
         return liststore
@@ -226,15 +226,15 @@ class BookletImposerUI(object):
             widget.get_active_iter(), 0)
 
     def cb_outfile_clicked(self, widget, data=None):
-        fcdialog = gtk.FileChooserDialog(
+        fcdialog = Gtk.FileChooserDialog(
             title=_("Choose file to save"),
             parent=self.__main_window,
-            action=gtk.FILE_CHOOSER_ACTION_SAVE,
-            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                     gtk.STOCK_OK, gtk.RESPONSE_OK))
+            action=Gtk.FileChooserAction.SAVE,
+            buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                     Gtk.STOCK_OK, Gtk.ResponseType.OK))
         if widget.get_filename():
             fcdialog.set_filename(widget.get_filename())
-        if fcdialog.run() == gtk.RESPONSE_OK:
+        if fcdialog.run() == Gtk.ResponseType.OK:
             if fcdialog.get_filename():
                 widget.set_filename(fcdialog.get_filename())
                 self.__preferences.outfile_name = fcdialog.get_filename()
@@ -249,13 +249,13 @@ class BookletImposerUI(object):
     def cb_help_button(self, widget, data=None):
         uri = "ghelp:bookletimposer"
         try:
-            gtk.show_uri(screen = None, uri = uri,
-                timestamp = gtk.get_current_event_time())
-        except gio.Error, error:
-            dialog = gtk.MessageDialog(parent=self.__main_window,
-                                       flags=gtk.DIALOG_MODAL,
-                                       type=gtk.MESSAGE_ERROR,
-                                       buttons=gtk.BUTTONS_CLOSE,
+            Gtk.show_uri(screen = None, uri = uri,
+                timestamp = Gtk.get_current_event_time())
+        except Gio.Error, error:
+            dialog = Gtk.MessageDialog(parent=self.__main_window,
+                                       flags=Gtk.DialogFlags.MODAL,
+                                       type=Gtk.MessageType.ERROR,
+                                       buttons=Gtk.ButtonsType.CLOSE,
                                        message_format=_("Unable to display help: %s")
                                                       % str(error))
             dialog.connect("response", lambda widget, data=None: widget.destroy())
@@ -272,7 +272,7 @@ class BookletImposerUI(object):
     # ACTIONS
     
     def close_application(self):
-        gtk.main_quit()
+        Gtk.main_quit()
 
     def show_about_dialog(self):
         self.__about_dialog.show()
@@ -280,10 +280,10 @@ class BookletImposerUI(object):
     def run_conversion(self):
 
         def exception_dialog(exception):
-            dialog = gtk.MessageDialog(parent=self.__main_window,
-                                       flags=gtk.DIALOG_MODAL,
-                                       type=gtk.MESSAGE_ERROR,
-                                       buttons=gtk.BUTTONS_CLOSE,
+            dialog = Gtk.MessageDialog(parent=self.__main_window,
+                                       flags=Gtk.DialogFlags.MODAL,
+                                       type=Gtk.MessageType.ERROR,
+                                       buttons=Gtk.ButtonsType.CLOSE,
                                        message_format=_("Conversion failed"))
             dialog.format_secondary_text(str(exception))
             dialog.run()
@@ -292,15 +292,15 @@ class BookletImposerUI(object):
             self.__main_window.set_sensitive(True)
 
         def cb_overwrite_outfile(filename):
-            dialog = gtk.MessageDialog(parent=self.__main_window,
-                                       flags=gtk.DIALOG_MODAL,
-                                       type=gtk.MESSAGE_QUESTION,
-                                       buttons=gtk.BUTTONS_YES_NO,
+            dialog = Gtk.MessageDialog(parent=self.__main_window,
+                                       flags=Gtk.DialogFlags.MODAL,
+                                       type=Gtk.MessageType.QUESTION,
+                                       buttons=Gtk.ButtonsType.YES_NO,
                                        message_format=_("A file named %s already exist.") % filename)
             dialog.format_secondary_text(_("Do you want to replace it?"))
             resp = dialog.run()
             dialog.destroy()
-            if resp == gtk.RESPONSE_YES:
+            if resp == Gtk.ResponseType.YES:
                 return True
             else:
                 return False
@@ -312,7 +312,7 @@ class BookletImposerUI(object):
             # XXX: that's not elegant at all
             if self.__stop.is_set():
                 raise UserInterrupt()
-            gobject.idle_add(idle_cb_update_progress, message, progress)
+            GObject.idle_add(idle_cb_update_progress, message, progress)
 
         def idle_cb_update_progress(message, progress):
             self.__progressbar_conversion.set_fraction(progress)
@@ -332,12 +332,12 @@ class BookletImposerUI(object):
             try:
                 converter.run()
             except UserInterrupt:
-                gobject.idle_add(idle_cb_finish_callback)
+                GObject.idle_add(idle_cb_finish_callback)
             except Exception, e:
-                gobject.idle_add(idle_cb_process_exception, e)
+                GObject.idle_add(idle_cb_process_exception, e)
                 print traceback.format_exc()
                 raise
-            gobject.idle_add(idle_cb_finish_callback)
+            GObject.idle_add(idle_cb_finish_callback)
 
 
         self.__main_window.set_sensitive(False)
@@ -361,4 +361,4 @@ class BookletImposerUI(object):
 
 if __name__ == "__main__":
     ui = BookletImposerUI()
-    gtk.main()
+    Gtk.main()
