@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
-  <!-- interface-naming-policy project-wide -->
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkAboutDialog" id="about_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">normal</property>
+    <property name="transient_for">main_window</property>
+    <property name="program_name">BookletImposer</property>
+    <property name="version">0.1</property>
+    <property name="copyright" translatable="yes">Copyright © 2008-2012 kjo@a4nancy.net.eu.org</property>
+    <property name="comments" translatable="yes">Convert PDF documents between diffrents page layouts</property>
+    <property name="website">http://kjo.herbesfolles.org/bookletimposer/</property>
+    <property name="license" translatable="yes">
+PyPdfConv - Utility to convert PDF files between diffrents page layouts
+Copyright (C) 2008-2012 Kjö Hansi Glaz &lt;kjo&amp;a4nancy.net.eu.org&gt;
+
+This program is  free software; you can redistribute  it and/or modify
+it under the  terms of the GNU General Public  License as published by
+the Free Software Foundation; either  version 3 of the License, or (at
+your option) any later version.
+
+This program  is distributed in the  hope that it will  be useful, but
+WITHOUT   ANY  WARRANTY;   without  even   the  implied   warranty  of
+MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+</property>
+    <property name="authors">Kjö Hansi Glaz &lt;kjo@a4nancy.net.eu.org&gt;</property>
+    <property name="wrap_license">True</property>
+    <signal name="close" handler="cb_dialog_close" swapped="no"/>
+    <signal name="response" handler="cb_dialog_close" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="border_width">6</property>
@@ -62,6 +118,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="cb_bookletize_toggled" swapped="no"/>
@@ -79,6 +136,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
                             <property name="group">bookletize_radiobutton</property>
                             <signal name="toggled" handler="cb_linearize_toggled" swapped="no"/>
@@ -96,6 +154,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
                             <property name="group">bookletize_radiobutton</property>
                             <signal name="toggled" handler="cb_reduce_toggled" swapped="no"/>
@@ -182,6 +241,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="cb_copy_pages_toggled" swapped="no"/>
               </object>
@@ -209,6 +269,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="xalign">0</property>
                 <signal name="clicked" handler="cb_outfile_clicked" swapped="no"/>
                 <child>
@@ -294,6 +355,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="cb_about_button" swapped="no"/>
               </object>
@@ -310,6 +372,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="cb_help_button" swapped="no"/>
               </object>
@@ -326,6 +389,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="cb_close_button" swapped="no"/>
               </object>
@@ -343,6 +407,7 @@
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="cb_apply_button" swapped="no"/>
               </object>
@@ -362,63 +427,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkAboutDialog" id="about_dialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">normal</property>
-    <property name="transient_for">main_window</property>
-    <property name="program_name">BookletImposer</property>
-    <property name="version">0.1</property>
-    <property name="copyright" translatable="yes">Copyright © 2008-2012 kjo@a4nancy.net.eu.org</property>
-    <property name="comments" translatable="yes">Convert PDF documents between diffrents page layouts</property>
-    <property name="website">http://kjo.herbesfolles.org/bookletimposer/</property>
-    <property name="license" translatable="yes">
-PyPdfConv - Utility to convert PDF files between diffrents page layouts
-Copyright (C) 2008-2012 Kjö Hansi Glaz &lt;kjo&amp;a4nancy.net.eu.org&gt;
-
-This program is  free software; you can redistribute  it and/or modify
-it under the  terms of the GNU General Public  License as published by
-the Free Software Foundation; either  version 3 of the License, or (at
-your option) any later version.
-
-This program  is distributed in the  hope that it will  be useful, but
-WITHOUT   ANY  WARRANTY;   without  even   the  implied   warranty  of
-MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU
-General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-</property>
-    <property name="authors">Kjö Hansi Glaz &lt;kjo@a4nancy.net.eu.org&gt;</property>
-    <property name="wrap_license">True</property>
-    <signal name="close" handler="cb_dialog_close" swapped="no"/>
-    <signal name="response" handler="cb_dialog_close" swapped="no"/>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkDialog" id="progress_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -432,12 +440,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
     <property name="deletable">False</property>
     <property name="transient_for">main_window</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">10</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -451,6 +459,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="cb_progress_stop" swapped="no"/>
               </object>
