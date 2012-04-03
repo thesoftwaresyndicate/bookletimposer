@@ -335,7 +335,7 @@ class BookletImposerUI(object):
             except UserInterrupt:
                 gobject.idle_add(idle_cb_finish_callback)
             except Exception, e:
-                gobject.idle_add(idle_cb_exception_callback, e)
+                gobject.idle_add(idle_cb_process_exception, e)
                 print traceback.format_exc()
                 raise
             gobject.idle_add(idle_cb_finish_callback)
