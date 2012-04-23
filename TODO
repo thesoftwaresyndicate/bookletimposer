@@ -1,5 +1,13 @@
 TODO
 ====
 
+* bookletimposer.gui: "apply" active with no input file selected:
+  - select an input file
+  - return to input file selection dialog
+  - press esc
+  - "apply" is still active but trigger an error
+* bookletimposer.gui: do not use same mnemonics for "À propos" and "Appliquer"
+* pdfimposer: psyco is not maintained anymore. get rid of psyco warning
+* bookletimposer.gui: add a keyboard shortcut to quit (e.g. CTRL-q, ESC)
 * pdfimposer: transform exceptions so that i18n is not necessary
 * bookletimposer.gui: use previews
