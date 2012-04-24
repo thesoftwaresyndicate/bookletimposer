@@ -401,7 +401,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
             </child>
             <child>
               <object class="GtkButton" id="apply_button">
-                <property name="label">gtk-apply</property>
+                <property name="label">gtk-convert</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
