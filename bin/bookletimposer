@@ -139,10 +139,4 @@ def main():
     return 0 
     
 if __name__ == "__main__":
-    # Import Psyco if available
-    try:
-        import psyco
-        psyco.full()
-    except ImportError:
-        print _("WARNING: psyco not found. You can speed Bookletimposer up by installing it.")
     main()

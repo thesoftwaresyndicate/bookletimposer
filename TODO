@@ -10,7 +10,7 @@ TODO
   case if the user press "Cancel" button, but "file-set" is not called.
   This seems to be a GTK bug with no easy workaround.
 * bookletimposer.gui: do not use same mnemonics for "À propos" and "Appliquer"
-* pdfimposer: psyco is not maintained anymore. get rid of psyco warning
 * bookletimposer.gui: add a keyboard shortcut to quit (e.g. CTRL-q, ESC)
 * pdfimposer: transform exceptions so that i18n is not necessary
 * bookletimposer.gui: use previews
+* try to run with pypy as psyco is deprecated and thus dropped
