@@ -32,6 +32,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import GObject
 GObject.threads_init()
@@ -104,6 +105,15 @@ class BookletImposerUI(object):
         self.__try_set_icon(self.__main_window, "bookletimposer.svg")
         self.__fill_paper_formats()
         self.__fill_layouts()
+        self.__add_keybindings()
+
+    def __add_keybindings(self):
+        accelgroup = Gtk.AccelGroup()
+        accelgroup.connect(Gdk.KEY_Escape, 0, Gtk.AccelFlags.VISIBLE,
+            lambda group, accelerable, key, mod: self.close_application())
+        accelgroup.connect(Gdk.KEY_q, Gdk.ModifierType.CONTROL_MASK, Gtk.AccelFlags.VISIBLE,
+            lambda group, accelerable, key, mod: self.close_application())
+        self.__main_window.add_accel_group(accelgroup)
 
     def __create_output_file_chooser_button(self, builder):
         # Emulate a FileChooserButton for saving
