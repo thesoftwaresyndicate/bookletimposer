@@ -55,7 +55,7 @@ class UserInterrupt(backend.BookletImposerError):
     # XXX: this is probably not the right way to do...
 
 class BookletImposerUI(object):
-    """
+    """BookletImposer graphical user interface
     
     """
     
