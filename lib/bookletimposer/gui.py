@@ -80,6 +80,7 @@ class BookletImposerUI(object):
         builder.connect_signals(self)
 
         self.__main_window = builder.get_object("main_window")
+        self.__preferences_table = builder.get_object("preferences_table")
         self.__input_file_chooser_button = \
             builder.get_object("input_file_chooser_button")
         self.__bookeltize_radiobutton = builder.get_object("bookletize_radiobutton")
@@ -90,17 +91,13 @@ class BookletImposerUI(object):
         self.__paper_format_combobox = \
             builder.get_object("output_paper_format_combobox")
         self.__output_file_chooser_button = self.__create_output_file_chooser_button(builder)
+        self.__progressbar_conversion = builder.get_object("conversion_progressbar")
         self.__about_button = builder.get_object("about_button")
         self.__help_button = builder.get_object("help_button")
-        self.__close_button = builder.get_object("close_button")
         self.__apply_button = builder.get_object("apply_button")
+        self.__stop_button = builder.get_object("stop_button")
 
         self.__about_dialog = builder.get_object("about_dialog")
-
-        self.__progress_dialog = builder.get_object("progress_dialog")
-        self.__label_conversion_title = builder.get_object("conversion_title_label")
-        self.__progressbar_conversion = builder.get_object("conversion_progressbar")
-        self.__label_conversion_setp = builder.get_object("conversion_step_label")
 
         self.__try_set_icon(self.__main_window, "bookletimposer.svg")
         self.__fill_paper_formats()
@@ -277,7 +274,7 @@ class BookletImposerUI(object):
 
     def cb_progress_stop(self, widget, data=None):
         self.__stop.set()
-        self.__label_conversion_setp.set_text(_("Cancel triggered, please wait..."))
+        self.__progressbar_conversion.set_text(_("Cancel triggered, please wait..."))
 
     # ACTIONS
     
@@ -298,8 +295,22 @@ class BookletImposerUI(object):
             dialog.format_secondary_text(str(exception))
             dialog.run()
             dialog.destroy()
-            self.__progress_dialog.hide()
-            self.__main_window.set_sensitive(True)
+            stop_conversion_mode()
+
+        def start_conversion_mode():
+            self.__preferences_table.set_sensitive(False)
+            self.__progressbar_conversion.set_visible(True)
+            self.__progressbar_conversion.set_fraction(0)
+            self.__progressbar_conversion.set_text("")
+            self.__stop_button.set_visible(True)
+            self.__stop_button.show()
+            self.__apply_button.set_visible(False)
+
+        def stop_conversion_mode():
+            self.__preferences_table.set_sensitive(True)
+            self.__progressbar_conversion.set_visible(False)
+            self.__apply_button.set_visible(True)
+            self.__stop_button.set_visible(False)
 
         def cb_overwrite_outfile(filename):
             dialog = Gtk.MessageDialog(parent=self.__main_window,
@@ -321,12 +332,13 @@ class BookletImposerUI(object):
             # the operation. To achieve that we raise an exception.
             # XXX: that's not elegant at all
             if self.__stop.is_set():
+                self.__progressbar_conversion.set_text(_("Conversion cancelled"))
                 raise UserInterrupt()
             GObject.idle_add(idle_cb_update_progress, message, progress)
 
         def idle_cb_update_progress(message, progress):
             self.__progressbar_conversion.set_fraction(progress)
-            self.__label_conversion_setp.set_text(message)
+            self.__progressbar_conversion.set_text(message)
             return False
 
         def idle_cb_process_exception(exception):
@@ -334,8 +346,7 @@ class BookletImposerUI(object):
             return False
 
         def idle_cb_finish_callback():
-            self.__progress_dialog.hide()
-            self.__main_window.set_sensitive(True)
+            stop_conversion_mode()
             return False
 
         def worker():
@@ -350,20 +361,15 @@ class BookletImposerUI(object):
             GObject.idle_add(idle_cb_finish_callback)
 
 
-        self.__main_window.set_sensitive(False)
+        start_conversion_mode()
         try:
             converter = self.__preferences.create_converter(cb_overwrite_outfile)
         except pdfimposer.UserInterruptError:
-            self.__main_window.set_sensitive(True)
+            stop_conversion_mode()
             return
         except Exception, e:
             exception_dialog(e)
             raise
-        self.__label_conversion_title.set_text(_("Converting %s") %
-            self.__preferences.infile_name)
-        self.__progressbar_conversion.set_fraction(0)
-        self.__label_conversion_setp.set_text("")
-        self.__progress_dialog.show()
         converter.set_progress_callback(cb_update_progress)
         self.__stop = threading.Event()
         converter_thread = threading.Thread(target=worker)

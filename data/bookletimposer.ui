@@ -38,6 +38,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
       <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog-action_area2">
@@ -68,7 +69,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
         <property name="can_focus">False</property>
         <property name="spacing">10</property>
         <child>
-          <object class="GtkTable" id="table1">
+          <object class="GtkTable" id="preferences_table">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="n_rows">6</property>
@@ -86,6 +87,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -95,6 +97,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Input file</property>
               </object>
+              <packing>
+                <property name="y_options">GTK_FILL</property>
+              </packing>
             </child>
             <child>
               <object class="GtkFrame" id="frame1">
@@ -124,7 +129,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                             <signal name="toggled" handler="cb_bookletize_toggled" swapped="no"/>
                           </object>
                           <packing>
-                            <property name="expand">True</property>
+                            <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
@@ -142,7 +147,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                             <signal name="toggled" handler="cb_linearize_toggled" swapped="no"/>
                           </object>
                           <packing>
-                            <property name="expand">True</property>
+                            <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
@@ -160,7 +165,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                             <signal name="toggled" handler="cb_reduce_toggled" swapped="no"/>
                           </object>
                           <packing>
-                            <property name="expand">True</property>
+                            <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
@@ -182,6 +187,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="right_attach">2</property>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -194,6 +200,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="top_attach">4</property>
                 <property name="bottom_attach">5</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -206,6 +213,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="top_attach">3</property>
                 <property name="bottom_attach">4</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -219,6 +227,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="right_attach">2</property>
                 <property name="top_attach">4</property>
                 <property name="bottom_attach">5</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -232,6 +241,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="right_attach">2</property>
                 <property name="top_attach">3</property>
                 <property name="bottom_attach">4</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -249,6 +259,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="right_attach">2</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -261,6 +272,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="top_attach">5</property>
                 <property name="bottom_attach">6</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
             <child>
@@ -335,19 +347,34 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="right_attach">2</property>
                 <property name="top_attach">5</property>
                 <property name="bottom_attach">6</property>
+                <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkProgressBar" id="conversion_progressbar">
+            <property name="sensitive">False</property>
+            <property name="can_focus">False</property>
+            <property name="show_text">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkHButtonBox" id="hbuttonbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="spacing">6</property>
+            <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="about_button">
                 <property name="label">gtk-about</property>
@@ -363,6 +390,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">0</property>
+                <property name="secondary">True</property>
               </packing>
             </child>
             <child>
@@ -380,6 +408,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
+                <property name="secondary">True</property>
               </packing>
             </child>
             <child>
@@ -400,46 +429,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="position">2</property>
               </packing>
             </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkDialog" id="progress_dialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">normal</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="skip_pager_hint">True</property>
-    <property name="urgency_hint">True</property>
-    <property name="deletable">False</property>
-    <property name="transient_for">main_window</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">10</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
             <child>
               <object class="GtkButton" id="stop_button">
                 <property name="label">gtk-stop</property>
                 <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
@@ -449,7 +442,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -457,60 +450,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkVBox" id="vbox3">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkLabel" id="conversion_title_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">No conversion</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkProgressBar" id="conversion_progressbar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="show_text">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="conversion_step_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">No step</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">stop_button</action-widget>
-    </action-widgets>
   </object>
 </interface>
