@@ -4,8 +4,11 @@ TODO
 * bookletimposer.gui: "apply" active with no input file selected:
   - select an input file
   - return to input file selection dialog
-  - press esc
+  - press Esc
   - "apply" is still active but trigger an error
+  When getting Esc press, the UI is updated with "(None)" which is *not* the
+  case if the user press "Cancel" button, but "file-set" is not called.
+  This seems to be a GTK bug with no easy workaround.
 * bookletimposer.gui: do not use same mnemonics for "À propos" and "Appliquer"
 * pdfimposer: psyco is not maintained anymore. get rid of psyco warning
 * bookletimposer.gui: add a keyboard shortcut to quit (e.g. CTRL-q, ESC)
