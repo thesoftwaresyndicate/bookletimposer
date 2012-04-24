@@ -81,7 +81,7 @@ build_extra.build_extra.sub_commands.insert(0, ("build_uiheaders", None))
 build_extra.build_extra.sub_commands.append(("build_man", None))
 
 setup(name='bookletimposer',
-      version='0.1',
+      version='0.2~beta1',
       url="http://kjo.herbesfolles.org/bookletimposer/",
       author="Kjö Hansi Glaz",
       author_email="kjo@a4nancy.net.eu.org",
