@@ -105,6 +105,9 @@ It allows:
       scripts=['bin/bookletimposer',],
       data_files=[
                   ('share/bookletimposer', ["data/bookletimposer.ui"]),
+                  ('share/bookletimposer', ["data/booklet.png"]),
+                  ('share/bookletimposer', ["data/reduce.png"]),
+                  ('share/bookletimposer', ["data/linearise.png"]),
                   ('share/pixmaps', ['data/bookletimposer.svg']),
                   ('share/applications', ['data/bookletimposer.desktop']),
                   ('share/doc/bookletimposer', ['README']),
