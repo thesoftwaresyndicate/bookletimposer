@@ -99,7 +99,6 @@ class BookletImposerUI(object):
 
         self.__about_dialog = builder.get_object("about_dialog")
 
-        self.__try_set_icon(self.__main_window, "bookletimposer.svg")
         self.__fill_paper_formats()
         self.__fill_layouts()
         self.__add_keybindings()
@@ -135,13 +134,6 @@ class BookletImposerUI(object):
             output_file_chooser_button_get_filename
 
         return output_file_chooser_button
-
-    @staticmethod
-    def __try_set_icon(widget, icon):
-        try:
-            widget.set_icon_from_file(os.path.join(config.get_pixmapsdir(), icon))
-        except GObject.GError:
-            debug("Icon not found")
 
     @staticmethod
     def set_liststore_for_combobox(combobox):

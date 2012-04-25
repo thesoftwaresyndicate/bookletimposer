@@ -52,9 +52,6 @@ def get_datadir():
     else:
         return os.path.join(get_sharedir(), "bookletimposer")
 
-def get_pixmapsdir():
-    return os.path.join(get_sharedir(), "pixmaps")
-
 def get_helpdir():
     return os.path.join(get_sharedir(), "gnome", "help")
 
