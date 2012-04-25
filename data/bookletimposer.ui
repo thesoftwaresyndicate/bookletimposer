@@ -61,20 +61,20 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
-    <property name="border_width">6</property>
+    <property name="border_width">12</property>
     <signal name="delete-event" handler="cb_close_main_window" swapped="no"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">10</property>
+        <property name="spacing">12</property>
         <child>
           <object class="GtkTable" id="preferences_table">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="n_rows">6</property>
             <property name="n_columns">2</property>
-            <property name="row_spacing">10</property>
+            <property name="row_spacing">12</property>
             <child>
               <object class="GtkFileChooserButton" id="input_file_chooser_button">
                 <property name="visible">True</property>
@@ -116,6 +116,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                       <object class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="margin_top">6</property>
+                        <property name="spacing">6</property>
                         <child>
                           <object class="GtkRadioButton" id="bookletize_radiobutton">
                             <property name="label" translatable="yes">Produce a booklet out of a linear document</property>
