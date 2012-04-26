@@ -1,6 +1,7 @@
 TODO
 ====
 
+* pdfimposer: add blank pages so that the booklet always work
 * bookletimposer.gui: "apply" active with no input file selected:
   - select an input file
   - return to input file selection dialog
