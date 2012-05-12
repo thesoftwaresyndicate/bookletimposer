@@ -338,7 +338,7 @@ out of a booklet</property>
                         <child>
                           <object class="GtkRadioButton" id="reduce_radiobutton">
                             <property name="label" translatable="yes">Put _multiple input pages 
-on one output page</property>
+on one output sheet</property>
                             <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
