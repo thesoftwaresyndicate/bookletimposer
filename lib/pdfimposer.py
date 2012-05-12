@@ -750,7 +750,7 @@ class StreamConverter(AbstractConverter):
                 self.get_output_height())
             for vert_pos in range(0, self.get_pages_in_height()):
                 for horiz_pos in range(0, self.get_pages_in_width()):
-                    if sequence[current_page] is not None:
+                    if current_page < len(sequence) and sequence[current_page] is not None:
                         page.mergeScaledTranslatedPage(
                             self._inpdf.getPage(sequence[current_page]),
                             self.get_reduction_factor(), 
