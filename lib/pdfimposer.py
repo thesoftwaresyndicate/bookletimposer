@@ -680,7 +680,7 @@ class StreamConverter(AbstractConverter):
 
         # Arranges the pages in booklet order
         sequence = []
-        while pages :
+        while pages:
             append_and_copy(sequence, [pages.pop(), pages.pop(0)])
             append_and_copy(sequence, [pages.pop(0), pages.pop()])
 
