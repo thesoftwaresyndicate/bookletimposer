@@ -496,7 +496,7 @@ class AbstractConverter(object):
         Return the orientation of the output paper.
 
         WARNING: in the current implementation, the orientation of the
-        output paper may be automatically adjusted, even if ti was set
+        output paper may be automatically adjusted, even if it was set
         manually.
 
         :Returns:
@@ -628,7 +628,7 @@ class StreamConverter(AbstractConverter):
 
     def __fix_page_orientation_for_booklet(self):
         """
-        Adapt the output page orientation
+        Adapt the output page orientation to impose
         """
         def __is_two_times(op1, op2):
             if op1 == 2 * op2:
@@ -639,6 +639,9 @@ class StreamConverter(AbstractConverter):
         #self.__fix_page_orientation(lambda op1, op2: [False, True][op1 == 2 * op2])
 
     def __fix_page_orientation_for_linearize(self):
+        """
+        Adapt the output page orientation to linearize
+        """
         def __is_half(op1, op2):
             if op2 == 2 * op1:
                 return True
@@ -649,7 +652,12 @@ class StreamConverter(AbstractConverter):
 
     def __get_sequence_for_booklet(self):
         """
-        XXX: Documentation
+        Calculates the page sequence to impose a booklet.
+
+        :Returns:
+            A list of page numbers representing sequence of pages to
+            impose a booklet. The list might contain None where blank
+            pages should be added.
         """
         n_pages = self.get_page_count()
         pages = range(0, n_pages)
@@ -667,10 +675,9 @@ class StreamConverter(AbstractConverter):
         for missing_page in range(0, n_missing_pages):
             pages.append(None)
 
-        # XXX: Document this
         def append_and_copy(list, pages):
             """
-            XXX: Doc
+            Append pages to the list and copy them if needed
             """
             if self.get_copy_pages():
                 for i in range(self.get_pages_in_sheet() / 2):
@@ -688,7 +695,11 @@ class StreamConverter(AbstractConverter):
 
     def __get_sequence_for_linearize(self, booklet=True):
         """
-        XXX: Doc
+        Calculates the page sequence to lineraize a booklet.
+
+        :Returns:
+            A list of page numbers representing sequence of pages to
+            be extracted to linearize a booklet.
         """
         # XXX: booklet argument is not useful ?
 
@@ -714,7 +725,12 @@ class StreamConverter(AbstractConverter):
 
     def __get_sequence_for_reduce(self):
         """
-        XXX: Doc
+        Calculates the page sequence to linearly impose reduced pages.
+
+        :Returns:
+            A list of page numbers representing sequence of pages to
+            impose reduced pages. The list might contain None where blank
+            pages should be added.
         """
         if self.get_copy_pages():
             sequence = []
@@ -730,11 +746,26 @@ class StreamConverter(AbstractConverter):
         return sequence
 
     def __write_output_stream(self, outpdf):
+        """
+        Writes output to the stream.
+
+        :Parameters:
+          - `outpdf`: the object to write to the stream. This object must have a
+            write() method.
+        """
         self.get_progress_callback()(_("writing converted file"), 1)
         outpdf.write(self._output_stream)
         self.get_progress_callback()(_("done"), 1)
 
     def __do_reduce(self, sequence):
+        """
+        Do actual imposition job.
+
+        :Parameters:
+          - `sequence`: a list of page numbers repersenting the sequence of
+            pages to impose. None means blank page.
+
+        """
         self.__fix_page_orientation_for_booklet()
         outpdf = pyPdf.PdfFileWriter()
 
@@ -885,6 +916,13 @@ class FileConverter(StreamConverter):
     # ===========================
 
     def __set_infile_name(self, name):
+        """
+        Sets the name of the input PDF file. Also set the name of output PDF
+        file if not already set.
+
+        :Parameters:
+            `name:`: the name of the input PDF file.
+        """
         self.__infile_name = name
 
         if not self.__outfile_name:
@@ -904,6 +942,12 @@ class FileConverter(StreamConverter):
         return self.__infile_name
 
     def __set_outfile_name(self, name):
+        """
+        Sets the name of the output PDF file.
+
+        :Parameters:
+            `name:`: the name of the output PDF file.
+        """
         self.__outfile_name = name
 
     def get_outfile_name(self):
