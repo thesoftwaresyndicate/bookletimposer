@@ -507,7 +507,6 @@ class AbstractConverter(object):
         elif self.get_output_height() < self.get_output_width():
             return PageOrientation.LANDSCAPE
         else:
-            #XXX: is square
             return None
 
     # CONVERSION FUNCTIONS
@@ -609,14 +608,13 @@ class StreamConverter(AbstractConverter):
             if self.get_input_orientation() == PageOrientation.PORTRAIT:
                 if self._get_output_orientation() == PageOrientation.PORTRAIT:
                     self._set_output_orientation(PageOrientation.LANDSCAPE)
-            else: #if self.get_input_orientation() == PageOrientation.LANDSCAPE:
+            else:
                 raise MismachingOrientationsError(self.get_layout())
         elif cmp(self.get_pages_in_height(), self.get_pages_in_width()):
             if self.get_input_orientation() == PageOrientation.LANDSCAPE:
                 if self._get_output_orientation() == PageOrientation.LANDSCAPE:
                     self._set_output_orientation(PageOrientation.PORTRAIT)
             else:
-                # XXX: Localized error message
                 raise MismachingOrientationsError(self.get_layout())
         else:
             if self.get_input_orientation() == PageOrientation.LANDSCAPE:
@@ -636,7 +634,6 @@ class StreamConverter(AbstractConverter):
             else:
                 return False
         self.__fix_page_orientation(__is_two_times)
-        #self.__fix_page_orientation(lambda op1, op2: [False, True][op1 == 2 * op2])
 
     def __fix_page_orientation_for_linearize(self):
         """
@@ -648,7 +645,6 @@ class StreamConverter(AbstractConverter):
             else:
                 return False
         self.__fix_page_orientation(__is_half)
-        #self.__fix_page_orientation(lambda op1, op2: [False, True][op2 == 2 * op1])
 
     def __get_sequence_for_booklet(self):
         """
@@ -666,10 +662,8 @@ class StreamConverter(AbstractConverter):
         if (n_pages % 4) == 0:
             n_missing_pages = 0
         else:
-            #n_missing_pages = (4 - (n_pages % 4)) / self.get_pages_in_sheet()
             n_missing_pages = 4 - (n_pages % 4)
-            # XXX: afficher un warning (autre callback ?)
-            # si le nombre de pages n'est pas divisible par 4 ?
+            # XXX: print a warning if input page number not diviable by 4?
 
         # Add reference to the missing empty pages to the pages sequence
         for missing_page in range(0, n_missing_pages):
@@ -701,7 +695,7 @@ class StreamConverter(AbstractConverter):
             A list of page numbers representing sequence of pages to
             be extracted to linearize a booklet.
         """
-        # XXX: booklet argument is not useful ?
+        # XXX: is booklet argument useful?
 
         def append_and_remove_copies(list, pages):
             sequence.extend(pages)
@@ -766,6 +760,7 @@ class StreamConverter(AbstractConverter):
             pages to impose. None means blank page.
 
         """
+        # XXX: Translated progress messages
         self.__fix_page_orientation_for_booklet()
         outpdf = pyPdf.PdfFileWriter()
 
@@ -796,7 +791,6 @@ class StreamConverter(AbstractConverter):
         self.__write_output_stream(outpdf)
 
     def bookletize(self):
-        # XXX: Translated progress messages
         self.__do_reduce(self.__get_sequence_for_booklet())
 
     def reduce(self):
@@ -804,7 +798,7 @@ class StreamConverter(AbstractConverter):
 
     def linearize(self, booklet=True):
         # XXX: Translated progress messages
-        # XXX: Mauvais facteur de zoom quand 2x1 p. ex
+        # XXX: Wrong zoom factor e.g. when layout is 2x1
 
         self.__fix_page_orientation_for_linearize()
         sequence = self.__get_sequence_for_linearize()
@@ -960,7 +954,7 @@ class FileConverter(StreamConverter):
         return self.__outfile_name
 
 
-# Convenience fucntions
+# Convenience functions
 # =====================
 
 def bookletize_on_stream(input_stream, 
