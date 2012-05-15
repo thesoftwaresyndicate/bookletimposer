@@ -55,25 +55,32 @@ Furthermore some features still need to be implemented.
 Installation
 ============
 
-Download
+Packages
 --------
+
+BookletImposer is [available in
+Debian](http://packages.debian.org/bookletimposer/).
+
+Building from sources
+---------------------
+
+### Download
 
 Everything is in [the archive](archive/).
 
 
-Quick installation
-------------------
+### Quick installation
 
 You must first ensure that the dependencies are installed. They are provided by
 the following Debian packages: `python-gtk2`, `python-distutils-extra` and
 `pandoc`.
 
-### pyPdf
+#### pyPdf
 
 You should first install a recent version of pyPdf (≥ 1.13) which is
 now in debian wheezy package `python-pypdf`. The package installs ok in squeeze.
 
-### pdfimposer/BookletImposer
+#### pdfimposer/BookletImposer
 
 Download the tarball from [the archive](archive/) and extract it. Go in the
 `bookletimposer-`*version* directory and run the following command:
