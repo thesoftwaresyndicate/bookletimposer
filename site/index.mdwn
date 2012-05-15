@@ -66,7 +66,7 @@ Quick installation
 
 You must first ensure that the dependencies are installed. They are provided by
 the following Debian packages: `python-gtk2`, `python-distutils-extra` and
-`txt2tags`.
+`pandoc`.
 
 ### pyPdf
 
@@ -101,7 +101,7 @@ BookletImposer also requires:
 In addition, the build and installation process requires:
 
 - python-distutils-extra
-- txt2tags
+- pandoc
 
 
 

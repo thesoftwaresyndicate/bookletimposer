@@ -52,7 +52,7 @@ BookletImposer also requires:
 In addition, the build and installation process requires:
 
 - python-distutils-extra
-- txt2tags
+- pandoc
 
 
 Quick installation

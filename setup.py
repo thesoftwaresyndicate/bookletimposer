@@ -23,7 +23,7 @@ class build_uiheaders(distutils.cmd.Command):
                          uifile])
 
 class build_man(distutils.cmd.Command):
-    description = 'build man page from t2t'
+    description = 'build man page from markdown'
     user_options= [
         ('build-dir=', 'd', "directory to build to"),
         ('man-sources=', None, 'list of man sources in the source tree')
@@ -39,21 +39,21 @@ class build_man(distutils.cmd.Command):
         if self.build_dir is None:
             self.build_dir=os.path.join(self.build_base, 'man')
         if self.man_sources is None:
-            self.man_sources = glob.glob('doc/*.1.t2t')
+            self.man_sources = glob.glob('doc/*.1.mdwn')
 
     def create_manbuilddir(self):
         if not os.path.exists(self.build_dir):
             os.makedirs(self.build_dir)
 
     def get_manpage_name(self, mansource):
-        return re.sub('.t2t$', '', os.path.basename(mansource))
+        return re.sub('.mdwn$', '', os.path.basename(mansource))
 
     def get_manpage_path(self, mansource):
         return os.path.join(self.build_dir, self.get_manpage_name(mansource))
 
     def build_manpage(self, mansource_path):
         manpage_path = self.get_manpage_path(mansource_path)
-        self.spawn(['txt2tags', '-o', manpage_path, mansource_path])
+        self.spawn(['pandoc', '-t', 'man', '-o', manpage_path, mansource_path])
         return manpage_path
 
     def run(self):

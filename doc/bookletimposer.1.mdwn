@@ -1,29 +1,25 @@
-bookletimposer
-An utility to achieve some basic imposition on PDF documents
-2012
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Source for man pages
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Configuration
-%
-%! Target :  man
-%! Encoding: utf-8
+% BOOKLETIMPOSER(1) bookletimposer user manual
+% Kjö Hansi Glaz <kjo@a4nancy.net.eu.org>
+% 2012
 
 
-=NAME=
+NAME
+====
+
 **bookletimposer** - An utility to reorganize PDF pages
 
 
-=SYNOPSIS=
-**bookletimposer** [//options//] [//input-file//]
+SYNOPSIS
+========
 
-**bookletimposer** **-a** [//options//] //input-file//
+**bookletimposer** [*options*] [*input-file*]
+
+**bookletimposer** **-a** [*options*] *input-file*
 
 
-=DESCRIPTION=
+DESCRIPTION
+===========
+
 bookletimposer is an utility to achieve some basic imposition on PDF
 documents, especially designed to work on booklets. 
 
@@ -37,77 +33,115 @@ It is a free software released under the GNU General Public License, either
 version 3 or (at your option) any later version.
 
 
-=OPTIONS=
-: **--version**
+OPTIONS
+=======
+
+`--version`
+-----------
+
 show program's version number and exit.
 
 
-: **-h**, **--help**
+`-h`, `--help`
+--------------
+
 show an help message and exit.
 
 
-: **-o** //OUTFILE//, **--output=**//OUTFILE//
-set output PDF file to //OUTFILE//.
+`-o` *OUTFILE*, `--output=`*OUTFILE*
+----------------------------------------
+
+set output PDF file to *OUTFILE*.
 
 
-: **-a**, **--no-gui**
+`-a`, `--no-gui`
+----------------
+
 automatic converstion (don't show the user interface).
 In that mode, the input file must be defined.
 
 
-: **-i**, **--gui**
+`-i`, `--gui`
+-------------
+
 show the user interface (default).
 
 
-: **-b**, **--booklet**
+`-b`, `--booklet`
+-----------------
+
 produce a booklet out of a linear document (default).
 
 
-: **-l**, **--linearize**
+`-l`, `--linearize`
+-------------------
+
 produce a linear document out of a booklet.
 
 
-: **-n**, **--no-reorganisation**
+`-n`, `--no-reorganisation`
+---------------------------
+
 don't reorganize (will only scale and assemble pages).
 
 
-: **-c**, **--copy-pages**
+`-c`, `--copy-pages`
+--------------------
+
 copy the same group of input pages on one output page.
 
-: **-p** //PAGES_PER_SHEET//, **--pages-per-sheet=**//PAGES_PER_SHEET//
+`-p` *PAGES_PER_SHEET*, `--pages-per-sheet=`*PAGES_PER_SHEET*
+-----------------------------------------------------------------
+
 number of pages per sheet, in the format HORIZONTALxVERTICAL, e.g. 2x1.
 
 
-: **-f** //OUTPUT_FORMAT//, **--format=**//OUTPUT_FORMAT//
+`-f` *OUTPUT_FORMAT*, `--format=`*OUTPUT_FORMAT*
+----------------------------------------------------
+
 output page format, e.g. A4 or A3R.
 
 
-: **-k**, **--keep**
+`-k`, `--keep`
+--------------
+
 do not overwrite output file if it exists.
 
 
-=EXAMPLES=
-: ``bookletimposer``
+EXAMPLES
+========
+
+`bookletimposer`
+----------------
+
 Displays the GTK+ user interface.
 
 
-: ``bookletimposer --no-gui --booklet --pages-per-sheet=2x1 --output=out.pdf in.pdf``
+`bookletimposer --no-gui --booklet --pages-per-sheet=2x1 --output=out.pdf in.pdf`
+---------------------------------------------------------------------------------
+
 Converts in.pdf into a booklet with two pages per sheet an saves the 
 result as out.pdf.
 
 
-: ``bookletimposer --no-gui --linearise --pages-per-sheet=2x1 in.pdf``
+`bookletimposer --no-gui --linearise --pages-per-sheet=2x1 in.pdf`
+------------------------------------------------------------------
+
 Converts the two-pages-per-sheet booklet in.pdf into a page-by-page
 PDF. As the output file name is not defined, it will default to in-conv.pdf.
 
 
-=SEE ALSO=
+SEE ALSO
+========
+
 pdfshuffler(1)
 
 BookletImposer source code and documentation can be found on the web at
 <https://kjo.herbesfolles.org/bookletimposer/>
 
-=KNOWN ISSUES=
+KNOWN ISSUES
+============
+
 BookletImposer is under development, which means that for the moment, some
 things work, some others do not... Thanks to report bugs to
 <kjo@a4nancy.net.eu.org> if you find some!

@@ -4,11 +4,11 @@ pandoc --output site/index.html \
     --standalone \
     --table-of-contents \
     site/index.mdwn
-txt2tags --target=html \
-    --outfile=site/bookletimposer.1.html \
-    --style=style.css \
-    --css-sugar \
-    doc/bookletimposer.1.t2t
+pandoc --output=site/bookletimposer.1.html \
+    --css style.css \
+    --include-before-body site/inc_title.html \
+    --standalone \
+    doc/bookletimposer.1.mdwn
 xsltproc -o site/help.html \
     --stringparam html.stylesheet style.css \
     /usr/share/xml/docbook/stylesheet/nwalsh/xhtml/docbook.xsl \
