@@ -77,8 +77,7 @@ Everything is in [the archive](archive/).
 You must first ensure that the dependencies are installed. They are provided by
 the following Debian packages: 
 
-    `python-gi python-distutils-extra python-pypdf pandoc
-
+    `python-gi gir1.2-gtk-3.0 gir1.2-glib-2.0 python-distutils-extra python-pypdf pandoc`
 
 ### Build pdfimposer/BookletImposer
 
@@ -102,8 +101,9 @@ pdfimposer requires:
 
 BookletImposer also requires:
 
-- gtk+ ≥ 3.0
 - PyGObject
+- gtk+ (≥ 3.0)
+- glib
 
 In addition, the build and installation process requires:
 

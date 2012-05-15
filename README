@@ -47,8 +47,9 @@ pdfimposer requires:
 
 BookletImposer also requires:
 
-- gtk+ (>= 3.0)
 - PyGObject
+- gtk+ (>= 3.0)
+- glib
 
 In addition, the build and installation process requires:
 
