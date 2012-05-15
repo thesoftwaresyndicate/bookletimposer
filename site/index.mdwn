@@ -43,6 +43,14 @@ Screenshots
 
 ![bookletimposer 0.1 progress dialog](img/bookletimposer-progression.png)
 
+News
+----
+
+Please read the [changelog](changelog.html) to know more about latest releases
+and throw an eye on the [git
+repository](http://codecoop.org/projects/bookletimposer/repository) te see
+what's going on.
+
 Development status
 ------------------
 

@@ -4,6 +4,12 @@ pandoc --output site/index.html \
     --standalone \
     --table-of-contents \
     site/index.mdwn
+# generate changelog page
+pandoc --output site/changelog.html \
+    --include-before-body site/inc_title.html \
+    --css style.css \
+    --standalone \
+    CHANGELOG
 pandoc --output=site/bookletimposer.1.html \
     --css style.css \
     --include-before-body site/inc_title.html \
