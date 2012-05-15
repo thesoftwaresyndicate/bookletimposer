@@ -72,19 +72,15 @@ Building from sources
 
 Everything is in [the archive](archive/).
 
-
-### Quick installation
+### Install dependancies
 
 You must first ensure that the dependencies are installed. They are provided by
-the following Debian packages: `python-gtk2`, `python-distutils-extra` and
-`pandoc`.
+the following Debian packages: 
 
-#### pyPdf
+    `python-gi python-distutils-extra python-pypdf pandoc
 
-You should first install a recent version of pyPdf (≥ 1.13) which is
-now in debian wheezy package `python-pypdf`. The package installs ok in squeeze.
 
-#### pdfimposer/BookletImposer
+### Build pdfimposer/BookletImposer
 
 Download the tarball from [the archive](archive/) and extract it. Go in the
 `bookletimposer-`*version* directory and run the following command:
@@ -106,8 +102,8 @@ pdfimposer requires:
 
 BookletImposer also requires:
 
-- pyGtk
-
+- gtk+ ≥ 3.0
+- PyGObject
 
 In addition, the build and installation process requires:
 
