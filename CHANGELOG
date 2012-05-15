@@ -11,7 +11,7 @@ Changelog
 
 ### bookletimposer
 
-- use gtk+3 and pygi instead of pygtk
+- use gtk+3, glib and pygi instead of pygtk
 - some Gnome HIG compliance:
     - use big buttons with icons for conversion type
     - remove close button
@@ -20,6 +20,7 @@ Changelog
 - don't try to import deprecated psyco
 - use convert button instead of apply; this fixes the "same menmonics" bug
 - help: simplify legal notice
+- man: convert to markdown converted by pandoc
 
 0.1
 ---
