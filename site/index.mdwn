@@ -141,9 +141,9 @@ See [generated epydoc documentation](api/).
 Contribute
 ==========
 
-Clone the [git
+Please clone the [git
 repository](http://codecoop.org/projects/bookletimposer/repository) and submit
-patches.
+patches to <kjo@a4nancy.net.eu.org>.
 
     $ git clone git://git.codecoop.org/bookletimposer.git
 
