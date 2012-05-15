@@ -1,7 +1,3 @@
-% BookletImposer / pdfimposer
-%
-%
-
 *Achieve some basic imposition on PDF documents*
 
 ![bookletimposer icon](img/bookletimposer.png)\ 
