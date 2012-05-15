@@ -9,7 +9,7 @@
     <property name="type_hint">normal</property>
     <property name="transient_for">main_window</property>
     <property name="program_name">BookletImposer</property>
-    <property name="version">0.2~beta1</property>
+    <property name="version">0.2~beta2</property>
     <property name="copyright" translatable="yes">Copyright © 2008-2012 kjo@a4nancy.net.eu.org</property>
     <property name="comments" translatable="yes">Convert PDF documents between diffrents page layouts</property>
     <property name="website">http://kjo.herbesfolles.org/bookletimposer/</property>

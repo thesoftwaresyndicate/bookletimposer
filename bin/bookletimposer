@@ -48,7 +48,7 @@ import bookletimposer.config as config
 
 gettext.install("bookletimposer", localedir=config.get_localedir(), unicode=True)
 
-__version__ = "0.2~beta1"
+__version__ = "0.2~beta2"
 
 def main():
     """
