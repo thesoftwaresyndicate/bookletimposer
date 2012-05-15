@@ -295,7 +295,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                                   <object class="GtkImage" id="boolketize_image">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="pixbuf">booklet.png</property>
+                                    <property name="pixel_size">180</property>
+                                    <property name="icon_name">booklet</property>
                                     <property name="icon-size">6</property>
                                   </object>
                                   <packing>
@@ -350,7 +351,8 @@ out of a linear document</property>
                                   <object class="GtkImage" id="linearize_image">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="pixbuf">linearise.png</property>
+                                    <property name="pixel_size">180</property>
+                                    <property name="icon_name">linearise</property>
                                     <property name="icon-size">6</property>
                                   </object>
                                   <packing>
@@ -405,7 +407,8 @@ out of a bookletlabel</property>
                                   <object class="GtkImage" id="reduce_image">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="pixbuf">reduce.png</property>
+                                    <property name="pixel_size">180</property>
+                                    <property name="icon_name">reduce</property>
                                     <property name="icon-size">6</property>
                                   </object>
                                   <packing>

@@ -74,6 +74,8 @@ class BookletImposerUI(object):
         self.__main_window.show()
 
     def __create_gui(self):
+        Gtk.IconTheme.get_default().append_search_path(config.get_datadir())
+
         builder = Gtk.Builder()
         builder.set_translation_domain("bookletimposer")
         builder.add_from_file(os.path.join(config.get_datadir(), "bookletimposer.ui"))
