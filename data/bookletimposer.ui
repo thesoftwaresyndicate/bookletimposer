@@ -424,6 +424,7 @@ out of a booklet</property>
                                     <property name="label" translatable="yes">Put _multiple input pages 
 on one output sheet</property>
                                     <property name="use_underline">True</property>
+                                    <property name="justify">center</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
