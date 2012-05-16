@@ -176,7 +176,7 @@ class ConverterPreferences(object):
         if self._layout: converter.set_layout(self._layout)
         if self._paper_format: converter.set_output_format(self._paper_format)
         if self._paper_orientation:
-            converter.set_output_orientation(self._paper_orientation)
+            converter._set_output_orientation(self._paper_orientation)
         if self._copy_pages: converter.set_copy_pages(self._copy_pages)
         return converter
 
