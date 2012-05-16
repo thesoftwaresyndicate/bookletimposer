@@ -713,7 +713,7 @@ class StreamConverter(AbstractConverter):
                 # XXX: Print a warning
                 pass
         else:
-            sequence = range(0, npages * self.get_pages_in_sheet())
+            sequence = range(0, self.get_page_count() * self.get_pages_in_sheet())
         return sequence
 
     def __get_sequence_for_reduce(self):
