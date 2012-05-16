@@ -7,6 +7,8 @@ Changelog
 ### pdfimposer
 
 - fix crash when using numerous pages per sheet with few input pages
+- fix unexistant variable in StreamConverter.__get_sequence_for_linearize
+- fix baseclass call in AbstractConverter.get_output_format
 - document private methode and cleanup code comments
 
 ### bookletimposer
@@ -21,6 +23,7 @@ Changelog
 - use convert button instead of apply; this fixes the "same menmonics" bug
 - help: simplify legal notice
 - man: convert to markdown converted by pandoc
+- fix calling unexistant method in ConverterPreferences.create_converter
 
 0.1
 ---
