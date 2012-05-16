@@ -53,7 +53,7 @@ class build_man(distutils.cmd.Command):
 
     def build_manpage(self, mansource_path):
         manpage_path = self.get_manpage_path(mansource_path)
-        self.spawn(['pandoc', '-t', 'man', '-o', manpage_path, mansource_path])
+        self.spawn(['pandoc', '-s', '-t', 'man', '-o', manpage_path, mansource_path])
         return manpage_path
 
     def run(self):
