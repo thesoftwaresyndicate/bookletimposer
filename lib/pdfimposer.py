@@ -416,7 +416,7 @@ class AbstractConverter(object):
             (e.g. A3, A4, A5).
         """
         for output_format in AbstractConverter.page_formats.keys():
-            if AbstractPdfConv.page_formats[output_format] == \
+            if AbstractConverter.page_formats[output_format] == \
                 (self.get_output_width, self.get_output_height):
                 return output_format
 
