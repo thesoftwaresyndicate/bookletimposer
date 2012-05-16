@@ -366,7 +366,7 @@ out of a linear document</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Produce a _linear document 
-out of a bookletlabel</property>
+out of a booklet</property>
                                     <property name="use_underline">True</property>
                                     <property name="justify">center</property>
                                   </object>
@@ -422,7 +422,7 @@ out of a bookletlabel</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Put _multiple input pages 
-on one output sheetlabel</property>
+on one output sheet</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                   <packing>
