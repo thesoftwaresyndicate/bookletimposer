@@ -63,7 +63,7 @@ Packages
 --------
 
 BookletImposer is [available in
-Debian](http://packages.debian.org/bookletimposer/).
+Debian](http://packages.debian.org/bookletimposer).
 
 Building from sources
 ---------------------
