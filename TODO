@@ -1,7 +1,17 @@
 TODO
 ====
 
+* add unit tests
+  - converting resulting PDF (like tests/test-8p.pdf) to text and check order
+  - pyPdf.PdfFileReader.getPage(i).extractText()
+* add support for US paper sizes
+  "We use Statement (5.5" X 8.5"), Letter (8.5" X 11"), and Tabloid (11" X 17")
+  sizes. Each of these are progressively exactly twice the size of the previous
+  size.  So we take two 5.5" X 8.5" pages and put them on one 11" X 8.5" piece
+  of paper. Then we can also take two 8.5" X 11" pages and put them on one 17"
+  X 11" piece of paper. It is very similar to the A5, A4, and A3 paper sizes."
 * pdfimposer: add blank pages so that the booklet always work
+  → cannot reproduce, more info needed
 * bookletimposer.gui: "apply" active with no input file selected:
   - select an input file
   - return to input file selection dialog
