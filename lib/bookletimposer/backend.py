@@ -33,6 +33,7 @@
 import pdfimposer
 import os.path
 import re
+import types
 
 class BookletImposerError(pdfimposer.PdfConvError):
     """The base class for all exceptions raised by BookletImposer.
@@ -111,8 +112,16 @@ class ConverterPreferences(object):
 
     @layout.setter
     def layout(self, value):
-        # XXX : verify value
-        self._layout = value
+        if isinstance(value, types.StringType):
+            self._layout = value.split('x')
+        elif (isinstance(value, (types.TupleType, types.ListType))
+             and (len(value) == 2)):
+            # XXX : verify value
+            self._layout = value
+        elif value == None:
+            self._layout = None
+        else:
+            raise ValueError
 
     @property
     def paper_format(self):
