@@ -89,7 +89,8 @@ class BookletImposerUI(object):
         self.__linearize_radiobutton = builder.get_object("linearize_radiobutton")
         self.__reduce_radiobutton =  builder.get_object("reduce_radiobutton")
         self.__copy_pages_radiobutton = builder.get_object("copy_pages_radiobutton")
-        self.__layout_combobox = builder.get_object("layout_combobox")
+        self.__pages_in_width_spinbutton = builder.get_object("pages_in_width_spinbutton")
+        self.__pages_in_height_spinbutton = builder.get_object("pages_in_height_spinbutton")
         self.__paper_format_combobox = \
             builder.get_object("output_paper_format_combobox")
         self.__output_file_chooser_button = self.__create_output_file_chooser_button(builder)
@@ -102,7 +103,6 @@ class BookletImposerUI(object):
         self.__about_dialog = builder.get_object("about_dialog")
 
         self.__fill_paper_formats()
-        self.__fill_layouts()
         self.__add_keybindings()
 
     def __add_keybindings(self):
@@ -155,13 +155,6 @@ class BookletImposerUI(object):
             liststore.append([format])
         self.__paper_format_combobox.set_active(1)
 
-    def __fill_layouts(self):
-        liststore = self.set_liststore_for_combobox(
-            self.__layout_combobox)
-        for layout in ["2x1", "2x2", "2x4", "4x4"]:
-            liststore.append([layout])
-        self.__layout_combobox.set_active(0)
-
     @staticmethod
     def combobox_select_row(widget, row_value):
         def func(model, path, iter, widget):
@@ -184,7 +177,8 @@ class BookletImposerUI(object):
         if preferences.copy_pages:
             self.__copy_pages_radiobutton.set_active(preferences.copy_pages)
         if preferences.layout:
-            self.combobox_select_row(self.__layout_combobox, preferences.layout)
+            self.__pages_in_width_spinbutton.set_value(preferences.pages_in_width)
+            self.__pages_in_height_spinbutton.set_value(preferences.pages_in_height)
         if preferences.paper_format:
             self.combobox_select_row(self.__paper_format_combobox,
                                      preferences.paper_format)
@@ -218,9 +212,11 @@ class BookletImposerUI(object):
     def cb_copy_pages_toggled(self, widget, data=None):
         self.__preferences.copy_pages = widget.get_active()
 
-    def cb_layout_changed(self, widget, data=None):
-        self.__preferences.layout = widget.get_model().get_value(
-            widget.get_active_iter(), 0)
+    def cb_pages_in_width_changed(self, widget, data=None):
+        self.__preferences.pages_in_width = widget.get_value_as_int()
+
+    def cb_pages_in_height_changed(self, widget, data=None):
+        self.__preferences.pages_in_height = widget.get_value_as_int()
 
     def cb_paper_format_changed(self, widget, data=None):
         self.__preferences.paper_format = widget.get_model().get_value(

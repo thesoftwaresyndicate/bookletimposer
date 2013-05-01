@@ -59,6 +59,20 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
       </object>
     </child>
   </object>
+  <object class="GtkAdjustment" id="pages_in_height_adjustment">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="pages_in_width_adjustment">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">2</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
@@ -73,7 +87,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
           <object class="GtkTable" id="preferences_table">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="n_rows">6</property>
+            <property name="n_rows">7</property>
             <property name="n_columns">2</property>
             <property name="column_spacing">6</property>
             <property name="row_spacing">12</property>
@@ -87,8 +101,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="mnemonic_widget">output_paper_format_combobox</property>
               </object>
               <packing>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
@@ -97,9 +111,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">La_yout</property>
+                <property name="label" translatable="yes">Number of pages in _width</property>
                 <property name="use_underline">True</property>
-                <property name="mnemonic_widget">layout_combobox</property>
+                <property name="mnemonic_widget">pages_in_width_spinbutton</property>
               </object>
               <packing>
                 <property name="top_attach">3</property>
@@ -116,22 +130,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
-                <property name="y_options">GTK_FILL</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="layout_combobox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <signal name="changed" handler="cb_layout_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
@@ -145,8 +145,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                 <property name="mnemonic_widget">output_file_chooser_button</property>
               </object>
               <packing>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
@@ -220,8 +220,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
@@ -282,6 +282,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
                             <property name="receives_default">False</property>
                             <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
+                            <property name="xalign">0.5</property>
                             <property name="image_position">top</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">False</property>
@@ -489,6 +490,55 @@ on one output sheet</property>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
                 <property name="y_options">GTK_FILL</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Number of pages in _height</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">pages_in_height_spinbutton</property>
+              </object>
+              <packing>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="pages_in_width_spinbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="adjustment">pages_in_width_adjustment</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="value-changed" handler="cb_pages_in_width_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="pages_in_height_spinbutton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">●</property>
+                <property name="progress_pulse_step">0.10000000149011612</property>
+                <property name="adjustment">pages_in_height_adjustment</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="value-changed" handler="cb_pages_in_height_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
               </packing>
             </child>
           </object>
