@@ -360,12 +360,18 @@ class AbstractConverter(object):
         Set the layout of input pages on one output page.
 
         :Parameters:
-          - `layout` A string of the form WxH, where W is the number of input
-            pages to put on the width of the output page and H is
-            the number of input pages to put in the height of an
-            output page.
+          - `layout` A string of the form WxH, or a tuple or list of the form
+            (W, H), where W is the number of input pages to put on the width of
+            the output page and H is the number of input pages to put in the
+            height of an output page.
         """
-        pages_in_width, pages_in_height = layout.split('x')
+        if isinstance(layout, types.StringType):
+            pages_in_width, pages_in_height = layout.split('x')
+        elif (isinstance(layout, (types.TupleType, types.ListType))
+            and (len(layout) == 2)):
+            pages_in_width, pages_in_height = layout
+        else:
+            raise ValueError
         self.set_pages_in_width(int(pages_in_width))
         self.set_pages_in_height(int(pages_in_height))
 
