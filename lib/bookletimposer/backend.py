@@ -124,6 +124,22 @@ class ConverterPreferences(object):
             raise ValueError
 
     @property
+    def pages_in_width(self):
+        return int(self._layout[0])
+
+    @pages_in_width.setter
+    def pages_in_width(self, value):
+        self._layout[0] = int(value)
+
+    @property
+    def pages_in_height(self):
+        return int(self._layout[1])
+
+    @pages_in_height.setter
+    def pages_in_height(self, value):
+        self._layout[1] = int(value)
+
+    @property
     def paper_format(self):
         return self._paper_format
 
