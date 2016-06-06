@@ -112,7 +112,7 @@ It allows:
                   ('share/applications', ['data/bookletimposer.desktop']),
                   ('share/doc/bookletimposer', ['README']),
                   ],
-      requires = ['gtk', 'pyPdf (>0.12)'],
+      requires = ['gtk', 'PyPDF2'],
       cmdclass = { "build" :            build_extra.build_extra,
                    "build_uiheaders" :  build_uiheaders,
                    "build_i18n" :       build_i18n.build_i18n,
