@@ -132,10 +132,10 @@ Contribute
 ==========
 
 Please clone the [git
-repository](http://codecoop.org/projects/bookletimposer/repository) and submit
+repository](https://git.codecoop.org/kjo/bookletimposer) and submit
 patches to <kjo@a4nancy.net.eu.org>.
 
-    $ git clone git://git.codecoop.org/bookletimposer.git
+    $ git clone https://git.codecoop.org/kjo/bookletimposer.git
 
 
 Older versions
