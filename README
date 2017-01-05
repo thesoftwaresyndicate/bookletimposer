@@ -56,6 +56,11 @@ In addition, the build and installation process requires:
 - python-distutils-extra
 - pandoc
 
+And to build the website:
+
+- python-epydoc
+- xsltproc
+- docbook-xsl
 
 Quick installation
 ==================
