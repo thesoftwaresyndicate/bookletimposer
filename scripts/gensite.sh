@@ -1,6 +1,7 @@
 #!/bin/sh
 mkdir -p build/site
-echo copying images
+echo copying CSS and images
+cp site/style.css build/site/
 cp site/img build/site/ -r
 echo generate main page
 pandoc --output build/site/index.html \
