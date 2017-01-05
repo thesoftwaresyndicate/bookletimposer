@@ -244,7 +244,7 @@ class BookletImposerUI(object):
         self.close_application()
     
     def cb_help_button(self, widget, data=None):
-        uri = "ghelp:bookletimposer"
+        uri = "help:bookletimposer"
         try:
             Gtk.show_uri(screen = None, uri = uri,
                 timestamp = Gtk.get_current_event_time())

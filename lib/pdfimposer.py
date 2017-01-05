@@ -53,9 +53,7 @@ import sys
 import os
 import types
 
-import pyPdf
-import pyPdf.generic
-import pyPdf.pdf
+import PyPDF2 as pyPdf
 
 # XXX: Fix these translatable strings
 try:

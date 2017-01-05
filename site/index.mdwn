@@ -10,7 +10,7 @@ About
 documents, especially designed to work on booklets.
 
 *Bookletimposer* is implemented as a commandline and GTK+ interface to *pdfimposer*,
-a reusable python module built on top of [pyPdf](http://pybrary.net/pyPdf/).
+a reusable python module built on top of [pyPdf2](https://mstamy2.github.io/PyPDF2/).
 
 It was tested on GNU/Linux althought it may work on any systems with a Python
 interpreter.
@@ -35,16 +35,14 @@ feature; pdfshuffler is
 Screenshots
 -----------
 
-![bookletimposer 0.1 main window](img/bookletimposer-main_window.png)
-
-![bookletimposer 0.1 progress dialog](img/bookletimposer-progression.png)
+![bookletimposer main window](img/bookletimposer-main_window.png)
 
 News
 ----
 
 Please read the [changelog](changelog.html) to know more about latest releases
 and throw an eye on the [git
-repository](http://codecoop.org/projects/bookletimposer/repository) te see
+repository](https://git.codecoop.org/kjo/bookletimposer) te see
 what's going on.
 
 Development status
@@ -77,7 +75,7 @@ Everything is in [the archive](archive/).
 You must first ensure that the dependencies are installed. They are provided by
 the following Debian packages: 
 
-    `python-gi gir1.2-gtk-3.0 gir1.2-glib-2.0 python-distutils-extra python-pypdf pandoc`
+    `python-gi gir1.2-gtk-3.0 gir1.2-glib-2.0 python-distutils-extra python-pypdf2 pandoc`
 
 ### Build pdfimposer/BookletImposer
 
@@ -96,7 +94,7 @@ Dependencies
 pdfimposer requires:
 
 - python (≥ 2.6)
-- [pyPdf (≥ 1.13)](http://pybrary.net/pyPdf/pyPdf-1.13.tar.gz)
+- [pyPdf2 (≥ 1.23)](https://github.com/mstamy2/PyPDF2/releases)
 
 
 BookletImposer also requires:
