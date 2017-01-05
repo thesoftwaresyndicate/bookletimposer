@@ -36,4 +36,3 @@ import config
 locale.setlocale(locale.LC_ALL, '')
 locale.bindtextdomain("bookletimposer", config.get_localedir())
 gettext.install("bookletimposer", localedir=config.get_localedir(), unicode=True)
-print(locale.getlocale())
