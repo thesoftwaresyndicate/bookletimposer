@@ -61,11 +61,12 @@ class ConverterPreferences(object):
     def __init__(self):
         self._infile_name = None
         self._conversion_type = None
-        self.copy_pages = None
-        self.layout = None
-        self.paper_format = None
-        self.paper_orientation = None
-        self.outfile_name = None
+        self._copy_pages = None
+        self._layout = None
+        self._two_sided_flip = None
+        self._paper_format = None
+        self._paper_orientation = None
+        self._outfile_name = None
         self.__outfile_name_changed = False
 
     @property
@@ -169,6 +170,15 @@ class ConverterPreferences(object):
         self.__outfile_name_changed = True
         self._outfile_name = value
 
+    @property
+    def two_sided_flip(self):
+        return self._two_sided_flip
+
+    @two_sided_flip.setter
+    def two_sided_flip(self, value):
+        # XXX : verify value
+        self._two_sided_flip = value
+
     def __str__(self):
         string = "ConverterPreferences object:\n"
         if self._infile_name:
@@ -183,6 +193,8 @@ class ConverterPreferences(object):
             string += "    paper_format: %s\n" % self._paper_format
         if self._paper_orientation:
             string += "    paper_orientation: %s\n" % self._paper_orientation
+        if self._two_sided_flip:
+            string += "    two_sided_flip: %s\n" % self._two_sided_flip
         if self._copy_pages:
             string += "    copy_pages: %s\n" % self._copy_pages
         return string
@@ -202,6 +214,8 @@ class ConverterPreferences(object):
         if self._paper_format: converter.set_output_format(self._paper_format)
         if self._paper_orientation:
             converter._set_output_orientation(self._paper_orientation)
+        if self._two_sided_flip:
+            converter.set_two_sided_flip(self._two_sided_flip)
         if self._copy_pages: converter.set_copy_pages(self._copy_pages)
         return converter
 
@@ -215,6 +229,7 @@ class TypedFileConverter(pdfimposer.FileConverter):
                  conversion_type=ConversionType.BOOKLETIZE,
                  layout='2x1',
                  format='A4',
+                 flip=pdfimposer.TwoSidedFlip.SHORT_EDGE,
                  copy_pages=False,
                  overwrite_outfile_callback=None):
 
@@ -230,13 +245,16 @@ class TypedFileConverter(pdfimposer.FileConverter):
           - `layout`: The layout of input pages on one output page (see
             set_layout).
           - `format`: The format of the output paper (see set_output_format).
+          - `flip`: Whether the output paper will be flipped on the short edge
+              (default) or the long edge when printing (see set_two_sided_flip).
           - `copy_pages`: Wether the same group of input pages shoud be copied
             to fill the corresponding output page or not (see
             set_copy_pages).
         """
         
         pdfimposer.FileConverter.__init__(self, infile_name, outfile_name,
-                                         layout, format, copy_pages, overwrite_outfile_callback)
+                                         layout, format, flip, copy_pages,
+                                         overwrite_outfile_callback)
         self._conversion_type = conversion_type
 
     # CONVERSION FUNCTIONS

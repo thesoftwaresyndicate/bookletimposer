@@ -74,6 +74,13 @@ class PageOrientation:
     LANDSCAPE = True
     """The lanscape orientation"""
 
+class TwoSidedFlip:
+    """Which paper edge will the flip occur on when printing?"""
+    SHORT_EDGE = "short-edge flip"
+    """Pages will be flipped on the short edge"""
+    LONG_EDGE = "long-edge flip"
+    """Pages will be flipped on the long edge"""
+
 ########################################################################
 
 class PdfConvError(Exception):
@@ -153,6 +160,7 @@ class AbstractConverter(object):
     def __init__(self, 
                  layout='2x1',
                  format='A4',
+                 flip=TwoSidedFlip.SHORT_EDGE,
                  copy_pages=False):
         """
         Create an AbstractConverter instance.
@@ -162,6 +170,9 @@ class AbstractConverter(object):
             (see set_layout).
           - `format` The format of the output paper (see
             set_output_format).
+          - `flip` Render the output booklet for two-sided printing with
+            flipping on the short (default) or long edge. Long-edge flip
+            will result in even-numbered output pages being upside-down.
           - `copy_pages` Wether the same group of input pages
             shoud be copied to fill the corresponding output page or not
             (see set_copy_pages).
@@ -173,6 +184,7 @@ class AbstractConverter(object):
         self.set_layout(layout)
         self.set_output_format(format)
         self.set_copy_pages(copy_pages)
+        self.set_two_sided_flip(flip)
 
         def default_progress_callback(msg, prog):
             print "%s (%i%%)" % (msg, prog*100)
@@ -306,6 +318,29 @@ class AbstractConverter(object):
             return the conversion progress.
         """
         return self.__progress_callback
+
+    def set_two_sided_flip(self, flip):
+        """
+        Set the edge which the paper will be flipped on when printed. Defaults
+        to TwoSidedFlip.SHORT_EDGE, where all the output pages are the right
+        way up. If your printer can only flip over the long edge, set this to
+        TwoSidedFlip.LONG_EDGE. The imposer will rotate all even output pages
+        180° to compensate.
+
+        :Parameters:
+          - `flip` Either TwoSidedFlip.SHORT_EDGE or TwoSidedFlip.LONG_EDGE.
+        """
+        assert(flip in (TwoSidedFlip.SHORT_EDGE, TwoSidedFlip.LONG_EDGE))
+        self.__two_sided_flip = flip
+
+    def get_two_sided_flip(self):
+        """
+        Get the edge which the paper will be flipped on when printed.
+
+        :Returns:
+            Either TwoSidedFlip.SHORT_EDGE or TwoSidedFlip.LONG_EDGE.
+        """
+        return self.__two_sided_flip
 
     # SOME GETTERS THAT CALCULATE THE VALUE THEY RETURN FROM OTHER VALUES
     # ===================================================================
@@ -558,6 +593,7 @@ class StreamConverter(AbstractConverter):
                  output_stream,
                  layout='2x1',
                  format='A4',
+                 flip=TwoSidedFlip.SHORT_EDGE,
                  copy_pages=False):
         """
         Create a StreamConverter.
@@ -575,8 +611,9 @@ class StreamConverter(AbstractConverter):
             set_copy_pages).
         """
 
-        AbstractConverter.__init__(self, layout, format, 
-                                   copy_pages)
+        AbstractConverter.__init__(self, layout, format,
+                                   flip, copy_pages)
+
 
         
 
@@ -771,6 +808,7 @@ class StreamConverter(AbstractConverter):
         outpdf = pyPdf.PdfFileWriter()
 
         current_page = 0
+        output_page = 0
         while current_page < len(sequence):
             self.get_progress_callback()(
                 _("creating page %i") %
@@ -793,7 +831,10 @@ class StreamConverter(AbstractConverter):
                                 self.get_pages_in_height())
                             )
                     current_page += 1
+            if self.get_two_sided_flip() == TwoSidedFlip.LONG_EDGE and output_page % 2:
+                page.rotateClockwise(180)
             page.compressContentStreams()
+            output_page += 1
         self.__write_output_stream(outpdf)
 
     def bookletize(self):
@@ -843,6 +884,7 @@ class FileConverter(StreamConverter):
                  outfile_name=None,
                  layout='2x1',
                  format='A4',
+                 flip=TwoSidedFlip.SHORT_EDGE,
                  copy_pages=False,
                  overwrite_outfile_callback=None):
         """
@@ -895,7 +937,7 @@ class FileConverter(StreamConverter):
             raise UserInterruptError()
         self._output_stream = open(outfile_name, 'wb')
         StreamConverter.__init__(self, self._input_stream, self._output_stream,
-                                 layout, format, copy_pages)
+                                 layout, format, flip, copy_pages)
 
     def __del__(self):
         if self._input_stream:
@@ -967,6 +1009,7 @@ def bookletize_on_stream(input_stream,
                          output_stream,
                          layout='2x1',
                          format='A4',
+                         flip=TwoSidedFlip.SHORT_EDGE,
                          copy_pages=False):
     """
     Convert a linear document to a booklet.
@@ -984,17 +1027,20 @@ def bookletize_on_stream(input_stream,
       - `layout` The layout of input pages on one output page (see
         set_layout).
       - `format` The format of the output paper (see set_output_format).
+      - `flip` Whether the output paper will be flipped on the short edge
+        (default) or the long edge when printing (see set_two_sided_flip).
       - `copy_pages` Wether the same group of input pages shoud be copied
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(layout, format, copy_pages,
+    StreamConverter(layout, format, flip, copy_pages,
                     input_stream, output_stream()).bookletize()
 
 def bookletize_on_file(input_file, 
                        output_file=None,
                        layout='2x1',
                        format='A4',
+                       flip=TwoSidedFlip.SHORT_EDGE,
                        copy_pages=False):
     """
     Convert a linear PDF file to a booklet.
@@ -1012,12 +1058,14 @@ def bookletize_on_file(input_file,
       - `layout` The layout of input pages on one output page (see
         set_layout).
       - `format` The format of the output paper (see set_output_format).
+      - `flip` Whether the output paper will be flipped on the short edge
+        (default) or the long edge when printing (see set_two_sided_flip).
       - `copy_pages` Wether the same group of input pages shoud be copied
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
     FileConverter(input_file, output_file, layout, format,
-                  copy_pages).bookletize()
+                  flip, copy_pages).bookletize()
 
 def linearize_on_stream(input_stream, 
                         output_stream,
@@ -1045,7 +1093,7 @@ def linearize_on_stream(input_stream,
         set_copy_pages).
     """
     StreamConverter(input_stream, output_stream, layout,
-                    format, copy_pages).linearize()
+                    format, TwoSidedFlip.SHORT_EDGE, copy_pages).linearize()
 
 def linearize_on_file(input_file, 
                       output_file=None,
@@ -1073,12 +1121,13 @@ def linearize_on_file(input_file,
         set_copy_pages).
     """
     FileConverter(input_file, output_file, layout, format,
-                  copy_pages).linearize()
+                  flip, TwoSidedFlip.SHORT_EDGE, copy_pages).linearize()
 
 def reduce_on_stream(input_stream, 
                      output_stream,
                      layout='2x1',
                      format='A4',
+                     flip=TwoSidedFlip.SHORT_EDGE,
                      copy_pages=False):
     """
     Put multiple input pages on one output page.
@@ -1093,17 +1142,20 @@ def reduce_on_stream(input_stream,
       - `layout` The layout of input pages on one output page (see
         set_layout).
       - `format` The format of the output paper (see set_output_format).
+      - `flip` Whether the output paper will be flipped on the short edge
+        (default) or the long edge when printing (see set_two_sided_flip).
       - `copy_pages` Wether the same group of input pages shoud be copied
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
-    StreamConverter(input_stream, output_stream, layout, format, 
-                    copy_pages).reduce()
+    StreamConverter(input_stream, output_stream, layout, format,
+                    flip, copy_pages).reduce()
 
 def reduce_on_file(input_file, 
                    output_file=None,
                    layout='2x1',
                    format='A4',
+                   flip=TwoSidedFlip.SHORT_EDGE,
                    copy_pages=False):
     """
     Put multiple input pages on one output page.
@@ -1118,9 +1170,11 @@ def reduce_on_file(input_file,
       - `layout` The layout of input pages on one output page (see
         set_layout).
       - `format` The format of the output paper (see set_output_format).
+      - `flip` Whether the output paper will be flipped on the short edge
+        (default) or the long edge when printing (see set_two_sided_flip).
       - `copy_pages` Wether the same group of input pages shoud be copied
         to fill the corresponding output page or not (see
         set_copy_pages).
     """
     FileConverter(input_file, output_file, layout, format,
-                  copy_pages).reduce()
+                  flip, copy_pages).reduce()

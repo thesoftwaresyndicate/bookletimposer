@@ -93,6 +93,8 @@ class BookletImposerUI(object):
         self.__pages_in_height_spinbutton = builder.get_object("pages_in_height_spinbutton")
         self.__paper_format_combobox = \
             builder.get_object("output_paper_format_combobox")
+        self.__two_sided_flip_combobox = \
+            builder.get_object("two_sided_flip_combobox")
         self.__output_file_chooser_button = self.__create_output_file_chooser_button(builder)
         self.__progressbar_conversion = builder.get_object("conversion_progressbar")
         self.__about_button = builder.get_object("about_button")
@@ -103,6 +105,7 @@ class BookletImposerUI(object):
         self.__about_dialog = builder.get_object("about_dialog")
 
         self.__fill_paper_formats()
+        self.__fill_two_sided_flip_options()
         self.__add_keybindings()
 
     def __add_keybindings(self):
@@ -155,6 +158,13 @@ class BookletImposerUI(object):
             liststore.append([format])
         self.__paper_format_combobox.set_active(1)
 
+    def __fill_two_sided_flip_options(self):
+        liststore = self.set_liststore_for_combobox(
+            self.__two_sided_flip_combobox)
+        liststore.append([pdfimposer.TwoSidedFlip.SHORT_EDGE])
+        liststore.append([pdfimposer.TwoSidedFlip.LONG_EDGE])
+        self.__two_sided_flip_combobox.set_active(0)
+
     @staticmethod
     def combobox_select_row(widget, row_value):
         def func(model, path, iter, widget):
@@ -179,6 +189,9 @@ class BookletImposerUI(object):
         if preferences.layout:
             self.__pages_in_width_spinbutton.set_value(preferences.pages_in_width)
             self.__pages_in_height_spinbutton.set_value(preferences.pages_in_height)
+        if preferences.two_sided_flip:
+            self.combobox_select_row(self.__two_sided_flip_combobox,
+                                     preferences.two_sided_flip)
         if preferences.paper_format:
             self.combobox_select_row(self.__paper_format_combobox,
                                      preferences.paper_format)
@@ -220,6 +233,10 @@ class BookletImposerUI(object):
 
     def cb_paper_format_changed(self, widget, data=None):
         self.__preferences.paper_format = widget.get_model().get_value(
+            widget.get_active_iter(), 0)
+
+    def cb_two_sided_flip_changed(self, widget, data=None):
+        self.__preferences.two_sided_flip = widget.get_model().get_value(
             widget.get_active_iter(), 0)
 
     def cb_outfile_clicked(self, widget, data=None):
