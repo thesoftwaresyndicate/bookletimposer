@@ -32,14 +32,20 @@
 
 import gettext
 import locale
+import os
 import os.path
 
+if "DEBUG" in os.environ:
+    debug=True
+else:
+    debug=False
+
 def debug(msg):
-    if __debug__: print msg
+    if debug: print msg
 
 def get_sharedir():
-    if os.path.exists(os.path.join("/", "usr", "local", "share",
-            "bookletimposer")):
+    if debug and os.path.exists(os.path.join("/", "usr", "local", "share",
+                                             "bookletimposer")):
         return os.path.join("/", "usr", "local", "share")
     elif os.path.exists(os.path.join("/", "usr", "share", "bookletimposer")):
         return os.path.join("/", "usr", "share")
@@ -47,7 +53,7 @@ def get_sharedir():
         return ""
 
 def get_datadir():
-    if __debug__ and os.path.exists("data"):
+    if debug and os.path.exists("data"):
         return "data"
     else:
         return os.path.join(get_sharedir(), "bookletimposer")
