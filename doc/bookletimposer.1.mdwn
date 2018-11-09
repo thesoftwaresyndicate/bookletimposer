@@ -142,6 +142,5 @@ BookletImposer source code and documentation can be found on the web at
 KNOWN ISSUES
 ============
 
-BookletImposer is under development, which means that for the moment, some
-things work, some others do not... Thanks to report bugs to
+BookletImposer should be quite stable. Thanks to report bugs to
 <kjo@a4nancy.net.eu.org> if you find some!
