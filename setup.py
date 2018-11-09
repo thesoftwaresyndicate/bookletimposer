@@ -96,7 +96,7 @@ a reusable python module built on top of pyPdf.
 It allows:
 
 - to transform linear documents to booklets;
-- to reduce a document to put many on one sheet (for tracts for example);
+- to reduce a document to put many on one sheet (for handouts for example);
 - to transform booklets to linear documents.
 """,
       packages=['bookletimposer',],

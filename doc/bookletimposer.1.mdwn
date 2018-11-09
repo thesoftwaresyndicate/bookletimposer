@@ -26,7 +26,7 @@ documents, especially designed to work on booklets.
 It allows:
 
 - to transform linear documents to booklets;
-- to reduce a document to put many on one sheet (for tracts for example);
+- to reduce a document to put many on one sheet (for handouts for example);
 - to transform booklets to linear documents.
 
 It is a free software released under the GNU General Public License, either
