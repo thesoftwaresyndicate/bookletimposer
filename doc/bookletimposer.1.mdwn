@@ -57,7 +57,7 @@ set output PDF file to *OUTFILE*.
 `-a`, `--no-gui`
 ----------------
 
-automatic converstion (don't show the user interface).
+automatic conversion (don't show the user interface).
 In that mode, the input file must be defined.
 
 

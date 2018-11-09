@@ -64,7 +64,7 @@ def main():
     parser.add_option ("-a", "--no-gui", 
         action="store_false", dest="gui",
         default=True,
-        help=_("automatic converstion (don't show the user interface). At least input file must be defined"))
+        help=_("automatic conversion (don't show the user interface). At least input file must be defined"))
     parser.add_option ("-i", "--gui", 
         action="store_true", dest="gui",
         default=True,
