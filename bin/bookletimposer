@@ -42,7 +42,6 @@ if __debug__:
 
 import pdfimposer # We need its exceptions
 
-import bookletimposer.gui as gui
 import bookletimposer.backend as backend
 import bookletimposer.config as config
 
@@ -120,6 +119,7 @@ def main():
         preferences.copy_pages = True
     
     if options.gui:
+        import bookletimposer.gui as gui
         ui = gui.BookletImposerUI(preferences)
         gui.Gtk.main()
     else:
