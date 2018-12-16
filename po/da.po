@@ -1,0 +1,233 @@
+# Danish translation for bookletimposer
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the bookletimposer package.
+# scootergrisen, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: bookletimposer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-16 12:50+0200\n"
+"PO-Revision-Date: 2018-12-12 12:50+0200\n"
+"Last-Translator: scootergrisen\n"
+"Language-Team: Danish\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../bin/bookletimposer:64
+msgid "output PDF file"
+msgstr "output PDF-fil"
+
+#: ../bin/bookletimposer:68
+msgid ""
+"automatic conversion (don't show the user interface). At least input file "
+"must be defined"
+msgstr ""
+"automatisk konvertering (vis ikke brugerfladen). Som det mindste skal der "
+"være angivet en inputfil"
+
+#: ../bin/bookletimposer:72
+msgid "shows the user interface (default)."
+msgstr "viser brugerfladen (standard)."
+
+#: ../bin/bookletimposer:76
+msgid "makes a booklet"
+msgstr "skaber en booklet"
+
+#: ../bin/bookletimposer:80
+msgid "convert a booklet to single pages"
+msgstr "konverterer en booklet til enkelte sider"
+
+#: ../bin/bookletimposer:84
+msgid "don't do any reorganisation (will only scale and assemble pages)"
+msgstr "foretag ikke genorganisering (vil kun skalere og samle sider)"
+
+#: ../bin/bookletimposer:88
+msgid "Copy the same group of input pages on one output page"
+msgstr "Kopiér den samme gruppe inputsider på én outputside"
+
+#: ../bin/bookletimposer:92
+msgid "number of pages per sheet, in the format HORIZONTALxVERTICAL, e.g. 2x1"
+msgstr "antal sider pr. ark, i formatet VANDRETxLODRET, f.eks. 2x1"
+
+#: ../bin/bookletimposer:96
+msgid "output page format, e.g. A4 or A3R"
+msgstr "output sideformat, f.eks. A4 eller A3R"
+
+#: ../bin/bookletimposer:100
+msgid "do not overwrite output file if it exists"
+msgstr "overskriv ikke outputfil hvis den findes"
+
+#: ../bin/bookletimposer:127
+msgid "ERROR: In automatic mode, you must provide a file to process."
+msgstr "FEJL: I automatisk tilstand, skal du give en fil for at behandle."
+
+#: ../bin/bookletimposer:136
+#, c-format
+msgid "%i%%: %s"
+msgstr "%i%%: %s"
+
+#: ../lib/pdfimposer.py:102
+#, python-format
+msgid "The layout %s is incompatible with the input page orientation"
+msgstr "Layoutet %s er inkompatibelt med inputsideorienteringen"
+
+#: ../lib/pdfimposer.py:115
+#, python-format
+msgid "The page format \"%s\" is unknown"
+msgstr "Sideformatet \"%s\" er ukendt"
+
+#: ../lib/pdfimposer.py:125
+msgid "User interruption"
+msgstr "Brugerafbrydelse"
+
+#: ../lib/pdfimposer.py:749
+msgid "writing converted file"
+msgstr "skriver konverteret fil"
+
+#: ../lib/pdfimposer.py:751
+msgid "done"
+msgstr "færdig"
+
+#: ../lib/pdfimposer.py:769
+#, python-format
+msgid "creating page %i"
+msgstr "opretter side %i"
+
+#: ../lib/pdfimposer.py:812
+#, python-format
+msgid "extracting page %i"
+msgstr "udtrækker side %i"
+
+#: ../lib/bookletimposer/gui.py:231
+msgid "Choose file to save"
+msgstr "Vælg fil som skal gemmes"
+
+#: ../lib/bookletimposer/gui.py:260
+#, python-format
+msgid "Unable to display help: %s"
+msgstr "Kan ikke vise hjælp: %s"
+
+#: ../lib/bookletimposer/gui.py:271
+msgid "Cancel triggered, please wait..."
+msgstr "Annullering udløst, vent venligst..."
+
+#: ../lib/bookletimposer/gui.py:288
+msgid "Conversion failed"
+msgstr "Konvertering mislykkedes"
+
+#: ../lib/bookletimposer/gui.py:314
+#, python-format
+msgid "A file named %s already exist."
+msgstr "En fil ved navn %s findes allerede."
+
+#: ../lib/bookletimposer/gui.py:315
+msgid "Do you want to replace it?"
+msgstr "Vil du erstatte den?"
+
+#: ../lib/bookletimposer/gui.py:329
+msgid "Conversion cancelled"
+msgstr "Konvertering annulleret"
+
+#: ../data/bookletimposer.ui.h:1
+msgid "Copyright © 2008-2012 kjo@a4nancy.net.eu.org"
+msgstr "Ophavsret © 2008-2012 kjo@a4nancy.net.eu.org"
+
+#: ../data/bookletimposer.ui.h:2
+msgid "Convert PDF documents between diffrents page layouts"
+msgstr "Konverter PDF-dokumenter mellem forskellige sidelayouts"
+
+#: ../data/bookletimposer.ui.h:3
+msgid ""
+"\n"
+"PyPdfConv - Utility to convert PDF files between diffrents page layouts\n"
+"Copyright (C) 2008-2012 Kjö Hansi Glaz <kjo&a4nancy.net.eu.org>\n"
+"\n"
+"This program is  free software; you can redistribute  it and/or modify\n"
+"it under the  terms of the GNU General Public  License as published by\n"
+"the Free Software Foundation; either  version 3 of the License, or (at\n"
+"your option) any later version.\n"
+"\n"
+"This program  is distributed in the  hope that it will  be useful, but\n"
+"WITHOUT   ANY  WARRANTY;   without  even   the  implied   warranty  of\n"
+"MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU\n"
+"General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+msgstr ""
+"\n"
+"PyPdfConv - Redskab til at konvertere PDF-filer mellem forskellige "
+"sidelayouts\n"
+"Ophavsret (C) 2008-2012 Kjö Hansi Glaz <kjo&a4nancy.net.eu.org>\n"
+"\n"
+"Dette program er fri software: du kan videredistribuere det og/eller\n"
+"modificere det under vilkårene i GNU General Public License som udgivet af\n"
+"Free Software Foundation, enten version 3 af Licensen, eller\n"
+"(efter eget valg) enhver senere version.\n"
+"\n"
+"Dette program er distribueret i håbet om at det vil være nyttigt,\n"
+"men UDEN NOGEN GARANTI; uden selv den underforstået garanti vedrørende\n"
+"SALGBARHED eller EGNETHED TIL ET BESTEMT FORMÅL. Se\n"
+"GNU General Public License for flere detaljer.\n"
+"\n"
+"Du skulle have modtaget en kopi af GNU General Public License\n"
+"sammen med dette program. Hvis ikke, se <http://www.gnu.org/licenses/>.\n"
+
+#: ../data/bookletimposer.ui.h:20
+msgid "Output _paper format"
+msgstr "_Papirformat for output"
+
+#: ../data/bookletimposer.ui.h:21
+msgid "La_yout"
+msgstr "La_yout"
+
+#: ../data/bookletimposer.ui.h:22
+msgid "_Output file"
+msgstr "_Outputfil"
+
+#: ../data/bookletimposer.ui.h:23
+msgid "(None)"
+msgstr "(Ingen)"
+
+#: ../data/bookletimposer.ui.h:24
+msgid "_Copy the same group of input pages on one output page"
+msgstr "_Kopiér den samme gruppe inputsider på én outputside"
+
+#: ../data/bookletimposer.ui.h:25
+msgid ""
+"Produce a _booklet\n"
+"out of a linear document"
+msgstr ""
+"Skab en _booklet\n"
+"fra et lineært dokument"
+
+#: ../data/bookletimposer.ui.h:27
+msgid ""
+"Produce a _linear document \n"
+"out of a booklet"
+msgstr ""
+"Skab et _lineært dokument\n"
+"fra en booklet"
+
+#: ../data/bookletimposer.ui.h:29
+msgid ""
+"Put _multiple input pages \n"
+"on one output sheet"
+msgstr ""
+"Læg _flere inputsider \n"
+"på ét outputark"
+
+#: ../data/bookletimposer.ui.h:31
+msgid "Conversion type"
+msgstr "Konverteringstype"
+
+#: ../data/bookletimposer.ui.h:32
+msgid "_Input file"
+msgstr "_Inputfil"
+
+#: ../data/bookletimposer.ui.h:33
+msgid "Open input PDF file"
+msgstr "Åbn input PDF-fil"
