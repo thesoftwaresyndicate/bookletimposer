@@ -1,5 +1,5 @@
-BookletImposer / pdfimposer
-Achieve some basic imposition on PDF documents
+% BookletImposer / pdfimposer
+% Achieve some basic imposition on PDF documents
 
 
 What is it ?
