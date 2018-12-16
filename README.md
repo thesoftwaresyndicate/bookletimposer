@@ -30,8 +30,8 @@ Features
 Development state
 =================
 
-BookletImposer should be quite stable. Thanks to report bugs to
-<kjo@a4nancy.net.eu.org> if you find some!
+BookletImposer should be quite stable. Thanks to report bugs on
+<https://git.codecoop.org/kjo/bookletimposer/issues>!
 
 Dependencies
 ============

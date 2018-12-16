@@ -110,7 +110,7 @@ It allows:
                   ('share/bookletimposer', ["data/linearise.png"]),
                   ('share/pixmaps', ['data/bookletimposer.svg']),
                   ('share/applications', ['data/bookletimposer.desktop']),
-                  ('share/doc/bookletimposer', ['README']),
+                  ('share/doc/bookletimposer', ['README.md']),
                   ],
       requires = ['gtk', 'PyPDF2'],
       cmdclass = { "build" :            build_extra.build_extra,

@@ -1,5 +1,5 @@
 include COPYING
-include README
+include README.md
 include CHANGELOG
 include data/bookletimposer.ui
 include data/bookletimposer.svg
