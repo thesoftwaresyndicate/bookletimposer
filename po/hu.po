@@ -1,0 +1,234 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gyuris Gellért <gellert.gyuris@ujevangelizacio.hu>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bookletimposer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-16 12:50+0200\n"
+"PO-Revision-Date: 2019-06-26 14:31+0200\n"
+"Last-Translator: Gyuris Gellért <gellert.gyuris@ujevangelizacio.hu>\n"
+"Language-Team: hungarian <>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 3.32.0\n"
+
+#: ../bin/bookletimposer:64
+msgid "output PDF file"
+msgstr "kimeneti PDF-fájl"
+
+#: ../bin/bookletimposer:68
+msgid ""
+"automatic conversion (don't show the user interface). At least input file "
+"must be defined"
+msgstr ""
+"automatikus átalakítás (felhasználói felület alkalmazása nélkül), melyhez "
+"legalább a bemeneti állományt meg kell határozni"
+
+#: ../bin/bookletimposer:72
+msgid "shows the user interface (default)."
+msgstr "felhasználói felület megjelenítése (alapértelmezett)"
+
+#: ../bin/bookletimposer:76
+msgid "makes a booklet"
+msgstr "füzet készítése"
+
+#: ../bin/bookletimposer:80
+msgid "convert a booklet to single pages"
+msgstr "füzet átalakítása önálló oldalakká"
+
+#: ../bin/bookletimposer:84
+msgid "don't do any reorganisation (will only scale and assemble pages)"
+msgstr ""
+"minden átszervezés mellőzése (csak átméretezés és oldalak összeállítása)"
+
+#: ../bin/bookletimposer:88
+msgid "Copy the same group of input pages on one output page"
+msgstr "bemeneti oldalak ugyanazon csoportjának másolása egy kimeneti oldalra"
+
+#: ../bin/bookletimposer:92
+msgid "number of pages per sheet, in the format HORIZONTALxVERTICAL, e.g. 2x1"
+msgstr "oldalak laponkénti száma, VÍZSZINTESxFÜGGŐLEGES formátumban, pl. 2×1"
+
+#: ../bin/bookletimposer:96
+msgid "output page format, e.g. A4 or A3R"
+msgstr "kimeneti oldal formátuma, pl. A4 vagy A3R"
+
+#: ../bin/bookletimposer:100
+msgid "do not overwrite output file if it exists"
+msgstr "kimeneti fájl felülírásának tiltása, ha már létezik"
+
+#: ../bin/bookletimposer:127
+msgid "ERROR: In automatic mode, you must provide a file to process."
+msgstr "HIBA: automatikus módban meg kell adni egy feldolgozandó fájlt."
+
+#: ../bin/bookletimposer:136
+#, c-format
+msgid "%i%%: %s"
+msgstr "%i%%: %s"
+
+#: ../lib/pdfimposer.py:102
+#, python-format
+msgid "The layout %s is incompatible with the input page orientation"
+msgstr "Ez az elrendezés nem kompatibilis a bemeneti lap tájolásával: %s"
+
+#: ../lib/pdfimposer.py:115
+#, python-format
+msgid "The page format \"%s\" is unknown"
+msgstr "Az oldalformátum nem értelmezhető: %s"
+
+#: ../lib/pdfimposer.py:125
+msgid "User interruption"
+msgstr "Felhasználói megszakítás"
+
+#: ../lib/pdfimposer.py:749
+msgid "writing converted file"
+msgstr "átalakított fájl írása"
+
+#: ../lib/pdfimposer.py:751
+msgid "done"
+msgstr "kész"
+
+#: ../lib/pdfimposer.py:769
+#, python-format
+msgid "creating page %i"
+msgstr "oldal létrehozása: %i"
+
+#: ../lib/pdfimposer.py:812
+#, python-format
+msgid "extracting page %i"
+msgstr "oldal kicsomagolása: %i"
+
+#: ../lib/bookletimposer/gui.py:231
+msgid "Choose file to save"
+msgstr "Mentési fájl kijelölése"
+
+#: ../lib/bookletimposer/gui.py:260
+#, python-format
+msgid "Unable to display help: %s"
+msgstr "A súgó nem jeleníthető meg: %s"
+
+#: ../lib/bookletimposer/gui.py:271
+msgid "Cancel triggered, please wait..."
+msgstr "Megszakítás, türelem…"
+
+#: ../lib/bookletimposer/gui.py:288
+msgid "Conversion failed"
+msgstr "Az átalakítás sikertelen"
+
+#: ../lib/bookletimposer/gui.py:314
+#, python-format
+msgid "A file named %s already exist."
+msgstr "A fájl már létezik: %s."
+
+#: ../lib/bookletimposer/gui.py:315
+msgid "Do you want to replace it?"
+msgstr "Felülírható?"
+
+#: ../lib/bookletimposer/gui.py:329
+msgid "Conversion cancelled"
+msgstr "Átalakítás megszakítva"
+
+#: ../data/bookletimposer.ui.h:1
+msgid "Copyright © 2008-2012 kjo@a4nancy.net.eu.org"
+msgstr "Szerzői jogok © 2008-2012 kjo@a4nancy.net.eu.org"
+
+#: ../data/bookletimposer.ui.h:2
+msgid "Convert PDF documents between diffrents page layouts"
+msgstr "PDF-dokumentumok átalakítása többféle oldalrendezés között"
+
+#: ../data/bookletimposer.ui.h:3
+msgid ""
+"\n"
+"PyPdfConv - Utility to convert PDF files between diffrents page layouts\n"
+"Copyright (C) 2008-2012 Kjö Hansi Glaz <kjo&a4nancy.net.eu.org>\n"
+"\n"
+"This program is  free software; you can redistribute  it and/or modify\n"
+"it under the  terms of the GNU General Public  License as published by\n"
+"the Free Software Foundation; either  version 3 of the License, or (at\n"
+"your option) any later version.\n"
+"\n"
+"This program  is distributed in the  hope that it will  be useful, but\n"
+"WITHOUT   ANY  WARRANTY;   without  even   the  implied   warranty  of\n"
+"MERCHANTABILITY  or FITNESS  FOR A  PARTICULAR PURPOSE.   See  the GNU\n"
+"General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+msgstr ""
+"\n"
+"PyPdfConv – Eszköz PDF-fájlok több oldalelrendezés közötti konvertálásához.\n"
+"Szerzői jogok (C) 2008–2012 Kjö Hansi Glaz <kjo&a4nancy.net.eu.org>\n"
+"\n"
+"Ez egy szabad szoftver; terjeszthető, illetve módosítható a GNU Általános "
+"Nyilvános Licencben leírtak szerint ‒ 3., vagy bármely szabadon választható "
+"következő verzió ‒, melyet a Szabad Szoftver Alapítvány ad ki.\n"
+"\n"
+"Ez a program abban a reményben kerül közreadásra, hogy hasznos lesz, de "
+"minden egyéb GARANCIA NÉLKÜL, az eladhatóságra vagy valamely célra való "
+"alkalmazhatóságra való származtatott garanciát is beleértve. A további "
+"részleteket lásd a GNU Általános Nyilvános Licencben.\n"
+"\n"
+"A programmal együtt meg kellett volna kapnia a GNU Általános Nyilvános "
+"Licenc másolatát. Ha nem, ennek elérhetősége: <http://www.gnu.org/licenses/"
+">.\n"
+
+#: ../data/bookletimposer.ui.h:20
+msgid "Output _paper format"
+msgstr "Kimeneti _lapformátum"
+
+#: ../data/bookletimposer.ui.h:21
+msgid "La_yout"
+msgstr "_Elrendezés"
+
+#: ../data/bookletimposer.ui.h:22
+msgid "_Output file"
+msgstr "_Kimeneti fájl"
+
+#: ../data/bookletimposer.ui.h:23
+msgid "(None)"
+msgstr "(Nincs)"
+
+#: ../data/bookletimposer.ui.h:24
+msgid "_Copy the same group of input pages on one output page"
+msgstr "Bemeneti oldalak _ugyanazon csoportjának másolása egy kimeneti oldalra"
+
+#: ../data/bookletimposer.ui.h:25
+msgid ""
+"Produce a _booklet\n"
+"out of a linear document"
+msgstr ""
+"_Füzet létrehozása \n"
+"egy folyamatos dokumentumból"
+
+#: ../data/bookletimposer.ui.h:27
+msgid ""
+"Produce a _linear document \n"
+"out of a booklet"
+msgstr ""
+"F_olyamatos dokumentum \n"
+"létrehozása egy füzetből"
+
+#: ../data/bookletimposer.ui.h:29
+msgid ""
+"Put _multiple input pages \n"
+"on one output sheet"
+msgstr ""
+"_Több bemeneti oldal \n"
+"elhelyezése egyetlen lapon"
+
+#: ../data/bookletimposer.ui.h:31
+msgid "Conversion type"
+msgstr "Átalakítás típusa"
+
+#: ../data/bookletimposer.ui.h:32
+msgid "_Input file"
+msgstr "_Bemeneti fájl"
+
+#: ../data/bookletimposer.ui.h:33
+msgid "Open input PDF file"
+msgstr "Bemeneti fájl megnyitása"
